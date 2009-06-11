@@ -1,0 +1,32 @@
+2009-03-08 23:10:42 Warning: Warning (2): dir(../../source) [<a href='http://php.net/function.dir'>function.dir</a>]: failed to open dir: No such file or directory in [APP/views/main_tree/tree_view.ctp, line 29]
+2009-04-14 19:47:44 Warning: Warning (2): pg_query() [<a href='http://php.net/function.pg-query'>function.pg-query</a>]: Query failed: ERROR:  column SystemMenu.order by order asc does not exist
+LINE 1: SELECT &quot;SystemMenu&quot;.&quot;order by order asc&quot; AS &quot;SystemMenu__ord...
+               ^ in [CORE/cake/libs/model/datasources/dbo/dbo_postgres.php, line 148]
+2009-04-14 19:47:44 Warning: Warning (512): <span style = "color:Red;text-align:left"><b>SQL Error:</b> ERROR:  column SystemMenu.order by order asc does not exist
+LINE 1: SELECT "SystemMenu"."order by order asc" AS "SystemMenu__ord...
+               ^</span> in [CORE/cake/libs/model/datasources/dbo_source.php, line 514]
+2009-04-14 19:47:44 Warning: Warning (2): Invalid argument supplied for foreach() in [APP/controllers/main_tree_controller.php, line 45]
+2009-06-06 09:21:29 Warning: Warning (2): pg_query() [<a href='http://php.net/function.pg-query'>function.pg-query</a>]: Query failed: ERROR:  syntax error at end of input
+LINE 1: SET search_path TO 
+                           ^ in [CORE/cake/libs/model/datasources/dbo/dbo_postgres.php, line 148]
+2009-06-06 09:33:03 Warning: Warning (2): pg_query() [<a href='http://php.net/function.pg-query'>function.pg-query</a>]: Query failed: ERROR:  syntax error at end of input
+LINE 1: SET search_path TO 
+                           ^ in [CORE/cake/libs/model/datasources/dbo/dbo_postgres.php, line 148]
+2009-06-06 09:33:15 Warning: Warning (2): pg_query() [<a href='http://php.net/function.pg-query'>function.pg-query</a>]: Query failed: ERROR:  syntax error at end of input
+LINE 1: SET search_path TO 
+                           ^ in [CORE/cake/libs/model/datasources/dbo/dbo_postgres.php, line 148]
+2009-06-06 09:33:17 Warning: Warning (2): pg_query() [<a href='http://php.net/function.pg-query'>function.pg-query</a>]: Query failed: ERROR:  syntax error at end of input
+LINE 1: SET search_path TO 
+                           ^ in [CORE/cake/libs/model/datasources/dbo/dbo_postgres.php, line 148]
+2009-06-06 09:33:27 Warning: Warning (2): pg_query() [<a href='http://php.net/function.pg-query'>function.pg-query</a>]: Query failed: ERROR:  syntax error at end of input
+LINE 1: SET search_path TO 
+                           ^ in [CORE/cake/libs/model/datasources/dbo/dbo_postgres.php, line 148]
+2009-06-06 10:29:43 Warning: Warning (2): pg_query() [<a href='http://php.net/function.pg-query'>function.pg-query</a>]: Query failed: ERROR:  syntax error at end of input
+LINE 1: SET search_path TO 
+                           ^ in [CORE/cake/libs/model/datasources/dbo/dbo_postgres.php, line 148]
+2009-06-06 10:29:44 Warning: Warning (2): pg_query() [<a href='http://php.net/function.pg-query'>function.pg-query</a>]: Query failed: ERROR:  syntax error at end of input
+LINE 1: SET search_path TO 
+                           ^ in [CORE/cake/libs/model/datasources/dbo/dbo_postgres.php, line 148]
+2009-06-06 10:31:27 Warning: Warning (2): pg_query() [<a href='http://php.net/function.pg-query'>function.pg-query</a>]: Query failed: ERROR:  syntax error at end of input
+LINE 1: SET search_path TO 
+                           ^ in [CORE/cake/libs/model/datasources/dbo/dbo_postgres.php, line 148]
