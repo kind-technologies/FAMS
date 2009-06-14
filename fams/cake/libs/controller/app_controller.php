@@ -36,5 +36,6 @@
  * @subpackage    cake.cake.libs.controller
  */
 class AppController extends Controller {
+
 }
 ?>
