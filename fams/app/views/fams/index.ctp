@@ -1,7 +1,10 @@
 <div id="div_00">
 	<div id="div_01">
-		<div style="float:left;margin-left:20px">
+		<div style="float:left;margin-left:20px;">
 			<img src="/img/fams-logo-small.png" />
+		</div>
+		<div style="float:right;margin-right:20px;">
+			<?=$html->link('logout', '/users/logout');?>
 		</div>
 	</div>
 	<div id="div_02">
