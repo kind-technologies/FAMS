@@ -53,8 +53,8 @@ Ext.onReady(function(){
 			<img src="/img/fams-logo-small.png" />
 		</div>
 	</div>
-	<div id="div_02">
-
+	<div id="error_message" style="position: absolute;top: 100px;left: 300px;">
+		<?php $session->flash('auth'); ?>
 	</div>
 	<div id="div_03" style="top: 200px;width:300px;left:450px">
 	</div>
