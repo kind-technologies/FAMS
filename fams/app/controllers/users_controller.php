@@ -12,7 +12,7 @@ class UsersController extends AppController {
 	*  for login, so you can leave this function blank.
 	*/
 	function login() {
-		
+		//debug($this->Auth);
 	}
 
 	function logout() {
