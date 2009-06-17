@@ -36,6 +36,6 @@
  * @subpackage    cake.cake.libs.controller
  */
 class AppController extends Controller {
-
+	var $helpers = array('Html', 'Javascript'); 
 }
 ?>
