@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Started on 2009-06-15 23:05:28 IST
+-- Started on 2009-06-17 21:37:57 IST
 
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = off;
@@ -92,9 +92,9 @@ CREATE TABLE aros_acos (
 CREATE TABLE system_menus (
     id integer NOT NULL,
     parent_id smallint,
-    title character varying(15),
+    title character varying(25),
     description character varying(50),
-    program_name character varying(30),
+    program_name character varying(50),
     "order" smallint
 );
 
@@ -236,7 +236,7 @@ ALTER SEQUENCE system_menu_id_seq OWNED BY system_menus.id;
 -- Name: system_menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('system_menu_id_seq', 7, true);
+SELECT pg_catalog.setval('system_menu_id_seq', 19, true);
 
 
 --
@@ -356,9 +356,21 @@ COPY system_menus (id, parent_id, title, description, program_name, "order") FRO
 2	0	Execution	Execution	\N	2
 3	0	Monitoring	Monitoring	\N	3
 4	0	Controlling	Controlling	\N	4
-6	1	Org. Setup	Org. Setup	\N	2
-7	6	Branches	Branches	planning/company_branches	3
-5	1	Employees	Employees	planning/employees	1
+5	1	Employees	Employees	/planning/employees	1
+6	1	Org. Setup	Org. Setup	/planning/organization_setup	2
+7	1	Asset Categories	Asset Categories	/planning/asset_categories	3
+8	1	Asset Suppliers	Asset Suppliers	/planning/asset_suppliers	4
+9	2	Asset Registry	Asset Registry	/execution/asset_registry	1
+10	2	Asset Allocation	Asset Allocation	/execution/asset_allocation	2
+11	2	Asset Complaints	Asset Complaints	/execution/asset_complaints	3
+12	2	Asset Requests	Asset Requests	/execution/asset_requests	4
+13	3	Asset Browser	Asset Browser	/monitoring/asset_browser	1
+14	3	Transaction Reports	Transaction Reports	/monitoring/transaction_reports	2
+15	3	Complaints	Complaints	/monitoring/complaints	3
+16	3	Requests	Requests	/monitoring/requests	4
+17	4	Change Custodian	Change Custodian	/controlling/change_custodian	1
+18	4	Change Location	Change Location	/controlling/change_location	2
+19	4	Disposals	Disposals	/controlling/disposals	3
 \.
 
 
@@ -444,7 +456,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2009-06-15 23:05:28 IST
+-- Completed on 2009-06-17 21:37:58 IST
 
 --
 -- PostgreSQL database dump complete
