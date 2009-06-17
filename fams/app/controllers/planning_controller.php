@@ -13,6 +13,7 @@ class PlanningController extends AppController {
 	function organization_setup() {
 
 	}
+
 	function asset_categories() {
 
 	}
