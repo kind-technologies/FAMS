@@ -55,6 +55,7 @@ class MainTreeController extends AppController {
 			foreach($sub_menu_data as $child) :
 				$tree_data .= '		{
 										id: ' . $child['SystemMenu']['id'] . ',
+										program_name: \''. $child['SystemMenu']['program_name'] .'\',
 										text: \''. $child['SystemMenu']['title'] .'\',
 										leaf: true
 									},
