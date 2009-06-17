@@ -22,6 +22,15 @@ Ext.onReady(function(){
         }
     });
 
+	tree.on('click', function(node, e){
+		//If program node is selected
+		if(node.attributes.program_name != null) {
+			//Get iframe to load program
+			_form_window = window.parent.document.getElementById('form_frame');
+			_form_window.src = node.attributes.program_name;
+		}
+	});
+
     // render the tree
     tree.render();
     tree.getRootNode().expand();
