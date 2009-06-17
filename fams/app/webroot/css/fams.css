@@ -220,13 +220,10 @@ img {
 }
 
 #error_message {
-    position: absolute;
-    top: 35px;
-    left: 30px;
     width : 745px;
     height : 15px;
     background-color : #f9f9ef;
-    color : 000000;
+    color : #ff0000;
     text-align : center;
     padding : 3px;
     font-family:Serif, Verdana, Arial, Helvetica, sans-serif", comic Sans MS";
