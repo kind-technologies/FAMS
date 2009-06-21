@@ -11,8 +11,15 @@ class UsersController extends AppController {
 	*  The AuthComponent provides the needed functionality
 	*  for login, so you can leave this function blank.
 	*/
+	
+	function beforeFilter() {
+		$this->Auth->autoRedirect = FALSE;
+	}
+	
 	function login() {
-		
+		if($this->Auth->isAuthorized()){
+			$this->redirect('/fams/index');
+		}
 	}
 
 	function logout() {
