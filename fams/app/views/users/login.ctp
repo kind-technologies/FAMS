@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script type="text/javascript" language="javascript1.2">
 Ext.onReady(function(){
 
     Ext.QuickTips.init();
@@ -8,13 +8,14 @@ Ext.onReady(function(){
 
     var bd = Ext.getBody();
 	var loginDiv = Ext.get('div_03');
+	
     
     var login = new Ext.FormPanel({
         labelWidth: 75, // label settings here cascade unless overridden
         url:'/users/login',
         frame:true,
         title: 'Sign in to FAMS',
-        bodyStyle:'padding:5px 5px 0',
+        bodyStyle:'padding:5px 5px 0;',
         width: 370,
         defaults: {width: 230},
         defaultType: 'textfield',
@@ -43,7 +44,12 @@ Ext.onReady(function(){
         }]
     });
 
+
+    //loginDiv.style.left = left+"px";
+    
     login.render(loginDiv);
+    
+
 });
 </script>
 
@@ -60,7 +66,15 @@ Ext.onReady(function(){
 		
 	</div>
 	<?php } ?>
-	<div id="div_03" style="top: 200px;width:300px;left:450px">
+	<div id="div_03" style="top: 250px;width:300px;">
 	</div>
 </div>
 
+<script type="text/javascript" language="javascript1.2">
+	loginDiv = document.getElementById("div_03");
+    w = screen.availWidth - 50;
+    left = (w/2) - 150;    
+    left = left+"px";
+    loginDiv.style.left=left;
+
+</script>
