@@ -53,21 +53,23 @@ class MainTreeController extends AppController {
 															null, 'order asc');
 
 			foreach($sub_menu_data as $child) :
-				$tree_data .= '		{
+				$tree_data .= '{
 										id: ' . $child['SystemMenu']['id'] . ',
 										program_name: \''. $child['SystemMenu']['program_name'] .'\',
 										text: \''. $child['SystemMenu']['title'] .'\',
 										leaf: true
-									},
-							  ';
+									},';
 			endforeach;	
 
-			$tree_data .= '
-							]
+			$tree_data = rtrim($tree_data, ',');
+
+			$tree_data .= ']
 						},';
 
 		endforeach;
 
+		$tree_data = rtrim($tree_data, ',');
+		
 		$tree_data .= ']';
 
 
