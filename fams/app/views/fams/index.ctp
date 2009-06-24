@@ -16,11 +16,11 @@
 			</tr>
 		</table>
 		<div style="position:relative;float:left;">
-			<iframe id="tree_frame" style="width:230px;height:728px;background-color: #b2c8e2;margin-left:5px" frameborder="0" src="/main_tree"></iframe>
+			<iframe id="tree_frame" scrolling="auto" style="width:230px;height:530px;background-color: #b2c8e2;margin-left:5px" frameborder="0" src="/main_tree"></iframe>
 		</div>
 	</div>
 	<div id="div_03">
-		<iframe id="form_frame" style="width:100%;height:752px;background-color: #d3e1f1;" frameborder="0" src="/fams/home"></iframe>
+		<iframe id="form_frame" style="width:100%;height:550px;background-color: #d3e1f1;" frameborder="0" src="/fams/home"></iframe>
 	</div>
 </div>	
 
