@@ -18,7 +18,7 @@ body{
 #div_00{
     background-color: #b2c8e2; /*#D1C6AE;*/
     position: static;
-    height : 900px
+    height : 630px
 }
 
 #div_01{
@@ -48,7 +48,7 @@ body{
     position: absolute;
     top: 73px;
     left: 240px;
-    width:1035px;
+    width:765px;
    /* height: 100%;*/
     background-color: #d3e1f1;/*#D1C6AE;*/
     margin: 0px
@@ -56,7 +56,6 @@ body{
 
 #div_04{
     background-color: #ece9d8;
-    
 }
 
 .frmHeading
