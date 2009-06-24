@@ -95,7 +95,7 @@ function fullscreen(url) {
       <h1>Featured Projects</h1>
       <div class="gp_row"> <img src="/img/web-site/fams-logo-small.png" alt="" />
         <p>A Fixed Asset Management System is vital for any organization. 
-        When the organization operates from different geographical locations this becomes more critical. 
+        When organization operates from different geographical locations this becomes more critical. 
         Find out <a href="#">more...</a> </p>
       </div>
       <!--
