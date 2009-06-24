@@ -37,6 +37,6 @@ Ext.onReady(function(){
 });
 
 </script>
-<div id="tree-div" style="overflow:auto; height:725px;width:228px;border:1px solid #c3daf9;text-align:left;">
+<div id="tree-div" style="overflow:auto; height:525px;width:228px;border:1px solid #c3daf9;text-align:left;">
 </div>
 
