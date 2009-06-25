@@ -12,13 +12,11 @@ body{
     /*background-color : #ece9d8;*/
     margin:0px;
     padding:0;
-    height:500px;
 }
 
 #div_00{
     background-color: #b2c8e2; /*#D1C6AE;*/
     position: static;
-    height : 630px
 }
 
 #div_01{
@@ -27,7 +25,6 @@ body{
     height: 70px;
     top: 0px;
     left: 0px;
-    /*background-color: #ece9d8;*/
     background-color: #ffffff;
 }
 
@@ -36,12 +33,7 @@ body{
     top: 70px;
     left: 0px;
     width: 238px;
-   /* height: 100%;*/
-/*    background-color: #D1C6AE;
-    border-top: 1px solid #000000;
-    border-bottom: 1px solid #000000;
-    border-right: 1px solid #000000;
-    border-left: 1px solid #000000;*/
+    background-color: #b2c8e2;
 }
 
 #div_03{
@@ -49,170 +41,26 @@ body{
     top: 73px;
     left: 240px;
     width:765px;
-   /* height: 100%;*/
     background-color: #d3e1f1;/*#D1C6AE;*/
     margin: 0px
 }
 
-#div_04{
-    background-color: #ece9d8;
-}
-
-.frmHeading
-{
-    font-family:Serif, Verdana, Arial, Helvetica, sans-serif, "comic Sans MS";
-    font-size:9pt;
-    font-weight:bold;
-}
-
-.frmGridHead
-{
-    font-family:Verdana, Arial, Helvetica, sans-serif, "comic Sans MS";
-    font-size:9pt;
-    font-weight:bold;
-    background-color:buttonface;
-    height:20px;
-    border-bottom:1px solid #ACA899;
-}
-
-.frmGridLabel
-{
-    font-family:Verdana, Arial, Helvetica, sans-serif, "comic Sans MS";
-    font-size:8pt;
-    font-weight:normal;
-}
-
-.frmLabel
-{
-    font-family:Serif, Verdana, Arial, Helvetica, sans-serif", comic Sans MS";
-    font-size:9pt;
-    font-weight:normal;
-}
-
-.mtp_tasklstborder
-{
-    border-bottom-color:#A3A378;
-    border-bottom-style:solid;
-    border-bottom-width:1px;
-    
-    border-top-color:#A3A378;
-    border-top-style:solid;
-    border-top-width:1px;
-    
-    border-left-color:#A3A378;
-    border-left-style:solid;
-    border-left-width:1px;
-    
-    border-right-color:#A3A378;
-    border-right-style:solid;
-    border-right-width:1px;	
-    
-}
-
-.button {
-    background-image:url(../images/btn_normal2.png);
-    width:100px;
-    height:25px;
-    border:none;
-    cursor:pointer;
-    /*font-family:Verdana, Arial, Helvetica, sans-serif;*/
+#logout_bar {
     font-family: Serif, Verdana, Arial, Helvetica, sans-serif, "comic Sans MS";
-    font-weight:bold;
-    
-}
-
-.button_common {
-    background-image:url(../images/btn_common_browser.png);
-    cursor:hand;
-    width:30px;
-    height:22px;
-    border:none;
-    cursor:pointer;
-    /*font-family:Verdana, Arial, Helvetica, sans-serif;*/
-    font-family: Serif, Verdana, Arial, Helvetica, sans-serif, "comic Sans MS";
-    font-weight:bold;
-    
-}
-.input_label {
-    font-family: Serif, Verdana, Arial, Helvetica, sans-serif;
     font-size: 9pt;
-    font-weight:bold;
-    background-color:#D1C6AE;
-    margin:2px;
-    color:#FFFFFF;
-    border:none;
-    height:20px
+    font-weight: bold;
 }
 
-.hideDiv
-{
-    visibility:hidden;
-    display:none;
-}
-.showDiv
-{
-    visibility:visible;
-    display:block;
+#logout_bar a {
+	text-decoration: none;
+	color: #000000;
 }
 
-.tab_active
-{
-    background-image:url(images/tab_active.png);
-    font-family: Serif, Arial, Helvetica, sans-serif;
-    font-size: 9pt;
+#logout_bar a:hover {
+	text-decoration: none;
+	color: #b2c8e2;
 }
 
-.tab_inactive
-{
-    background-image:url(images/tab_inactive.png);
-    font-family: Serif, Arial, Helvetica, sans-serif;
-    font-size: 9pt;
-}
-/*
-input {
-    font-family: Serif, Arial, Helvetica, sans-serif;
-    font-size: 9pt;
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-    border-top-color: #996633;
-    border-right-color: #996633;
-    border-bottom-color: #996633;
-    border-left-color: #996633;
-    height:17px;
-}
-
-select {
-    font-family: Serif, Verdana, Arial, Helvetica, sans-serif;
-    font-size: 9pt;
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-    border-top-color: #996633;
-    border-right-color: #996633;
-    border-bottom-color: #996633;
-    border-left-color: #996633;
-    height:17px;
-}
-
-
-img {
-    border-top-style: none;
-    border-right-style: none;
-    border-bottom-style: none;
-    border-left-style: none;
-}
-*/
 /* Form CSS section */
 #frm-main {
 
@@ -229,50 +77,4 @@ img {
     font-size:9pt;
     font-weight:normal;
     border-width: 1px;    border-style: solid;    border-color: #ff0000;}
-/*
-#datagrid_00 {
-    position: absolute;
-    top: 60px;
-    left: 30px;
-}
 
-#datagrid_common_browser {
-    
-}
-
-#frm_header {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width : 785px;
-    height : 25px;
-    background-color : #D1C6AE;
-    color : 000000;
-    text-align : center;
-    padding : 3px;
-    font-weight : bold;
-}
-
-#frm_button_set_01  {
-    position: absolute;
-    top: 492px;
-    left: 30px;
-    padding:5px;
-    background-color: #f9f9ef;
-}
-
-#frm_button_set_02  {
-    position: absolute;
-    top: 492px;
-    left: 525px;
-    padding:5px;
-    background-color: #f9f9ef;
-}
-
-#frm_fields {
-    position: absolute;
-    top: 235px;
-    left: 30px;
-    background-color:#gggggg;
-    width: 755px;
-}*/
