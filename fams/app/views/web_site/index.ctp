@@ -23,13 +23,13 @@ function fullscreen(url) {
     <div id="logo"> <img src="/img/web-site/company-logo.png" height="120px" alt="Logo" />
     </div>
     <div id="login">
-    	<a href="#">Home</a> | <a href="#">About Us</a> | <a href="#">FAQ</a>
+    	<a href="#">Help</a> | <a href="#">About Us</a> | <a href="#">FAQ</a>
     </div>
   </div>
   <div id="menu">
     <ul>
       <li><a href="#"  class="current">Home</a></li>
-      <li><a href="subpage.html">Services</a></li>
+      <li><a href="#">Services</a></li>
       <li><a href="#">Solutions</a></li>
       <li><a href="#">Partners</a></li>
       <li><a href="#">News</a></li>

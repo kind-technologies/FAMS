@@ -1,26 +1,79 @@
-<div id="div_00">
-	<div id="div_01">
-		<div style="float:left;margin-left:20px;">
-			<img src="/img/fams-logo-small.png" />
-		</div>
-		<div style="float:right;margin-right:20px;">
-			<?=$html->link('logout', '/users/logout');?>
-		</div>
-	</div>
-	<div id="div_02">
-		<table border="0" style="width:234px;height:26px;margin-left:3px">
-			<tr>
-				<td style="background: transparent url(<?php echo $this->base ?>/js/ext-2.2.1/resources/images/default/tabs/tabs-sprite.gif) repeat-x 0 -201px;">
-					
-				</td>
-			</tr>
-		</table>
-		<div style="position:relative;float:left;">
-			<iframe id="tree_frame" scrolling="auto" style="width:230px;height:530px;background-color: #b2c8e2;margin-left:5px" frameborder="0" src="/main_tree"></iframe>
-		</div>
-	</div>
-	<div id="div_03">
-		<iframe id="form_frame" style="width:100%;height:550px;background-color: #d3e1f1;" frameborder="0" src="/fams/home"></iframe>
-	</div>
-</div>	
+    <script type="text/javascript">
+    //Fams = { version:"0.0.5" };
+    var Fams = function(){};
+    Fams.homePage = function() {};
 
+	//Header for main screen
+	Fams.homePage.header = '	<div>' +
+								'<div style="float:left;margin-left:20px;">' +
+									'<img src="/img/fams-logo-small.png" >' +
+								'</div>' +
+								'<div id="logout_bar" style="float:right;margin-right:20px;">' +
+									'<?=$html->link("logout", "/users/logout");?> | ' +
+									'<?=$html->link("help", "#");?>' +
+								'</div>' +
+							'</div>';
+
+	Fams.homePage.tree = '<iframe id="tree_frame" scrolling="no" style="height:100%;width:100%;" frameborder="0" src="/main_tree"></iframe>';
+	
+	Fams.homePage.form = '<iframe id="form_frame" style="height:100%;width:100%" frameborder="0" src="/fams/home"></iframe>';
+    </script>
+    
+    
+	<script type="text/javascript">
+
+    Ext.onReady(function(){
+
+       // NOTE: This is an example showing simple state management. During development,
+       // it is generally best to disable state management as dynamically-generated ids
+       // can change across page loads, leading to unpredictable results.  The developer
+       // should ensure that stable state ids are set for stateful components in real apps.
+       Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+
+       var viewport = new Ext.Viewport({
+            layout:'border',
+            items:[
+				{
+					region: 'north',
+					html: Fams.homePage.header,
+					autoHeight: true,
+					border: false,
+					margins: '0 0 5 0'
+				},
+				{
+                region:'west',
+                id:'west-panel',
+                title:'FAMS Menu',
+                split:true,
+                width: 200,
+                minSize: 175,
+                maxSize: 400,
+                collapsible: true,
+                margins:'2 0 5 5',
+                cmargins:'35 5 5 5',
+                layout:'accordion',
+                layoutConfig:{
+                    animate:true
+                },
+                items: [{
+                    html: Fams.homePage.tree,
+                    title:'Navigation',
+                    autoScroll:true,
+                    border:false,
+                    iconCls:'nav'
+                },{
+                    title:'Settings',
+                    html: '<p>test</p>',
+                    border:false,
+                    autoScroll:true,
+                    iconCls:'settings'
+                }]
+            },{
+                region:'center',
+                margins:'2 5 5 0',
+                html: Fams.homePage.form,
+                autoScroll:true
+            }]
+        });
+    });
+	</script>

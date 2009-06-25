@@ -43,9 +43,6 @@ Ext.onReady(function(){
             text: 'Clear'
         }]
     });
-
-
-    //loginDiv.style.left = left+"px";
     
     login.render(loginDiv);
     
@@ -66,7 +63,7 @@ Ext.onReady(function(){
 		
 	</div>
 	<?php } ?>
-	<div id="div_03" style="top: 250px;width:300px;">
+	<div id="div_03" style="top: 250px;width:300px;background-color: #b2c8e2;">
 	</div>
 </div>
 
@@ -76,5 +73,15 @@ Ext.onReady(function(){
     left = (w/2) - 150;    
     left = left+"px";
     loginDiv.style.left=left;
-
+</script>
+<script type="text/javascript" language="javascript1.2">
+    screenHeight = screen.availHeight - 70;
+    screenWidth = screen.availWidth - 70;
+    h = screenHeight + "px";
+    try {
+    		mainDiv = document.getElementById("div_00");
+    		mainDiv.style.height = h;
+	} catch (e) {
+	
+	}
 </script>

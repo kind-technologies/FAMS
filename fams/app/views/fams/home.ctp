@@ -65,5 +65,5 @@ var myData = [
 });
 </script>
 
-<div id="content">    	<div id="myDiv">This is a test div.</div>	    	<input type="button" id="myButton" value="My Button" />
+<div id="content" style="background-color: #d3e1f1;">    	<div id="myDiv">This is a test div.</div>	    	<input type="button" id="myButton" value="My Button" />
 </div>
