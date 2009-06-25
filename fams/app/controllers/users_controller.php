@@ -17,6 +17,7 @@ class UsersController extends AppController {
 	}
 	
 	function login() {
+		Configure::write('debug', 0);
 		if($this->Auth->isAuthorized()){
 			$this->redirect('/fams/index');
 		}

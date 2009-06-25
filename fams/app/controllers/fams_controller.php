@@ -7,11 +7,11 @@ class FamsController extends AppController {
 	var $helpers = array('Html', 'Form', 'Javascript');
 
 	function index() {
-		
+		Configure::write('debug', 0);
 	}
-	
+
 	function home() {
-		
+		Configure::write('debug', 0);
 	}
 }
 ?>
