@@ -4,7 +4,7 @@
     Fams.homePage = function() {};
 
 	//Header for main screen
-	Fams.homePage.header = '	<div>' +
+	Fams.homePage.header = '<div>' +
 								'<div style="float:left;margin-left:20px;">' +
 									'<img src="/img/fams-logo-small.png" >' +
 								'</div>' +
