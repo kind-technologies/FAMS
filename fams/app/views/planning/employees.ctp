@@ -152,14 +152,6 @@ Ext.onReady(function(){
 		renderTo: clear_
 	});
 	
-	/*
-	var buttonRightPanel = new Ext.Panel({
-    	renderTo: 'right_buttons',
-    	layout:'column',
-    	items: [btnSave, btnClear]
-	});
-	*/
-
 });
 </script>
 
