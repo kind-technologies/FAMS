@@ -81,6 +81,10 @@ Ext.onReady(function(){
     try {
     		mainDiv = document.getElementById("div_00");
     		mainDiv.style.height = h;
+    		
+    		error_msg_div =  document.getElementById("error_message");
+    		error_msg_div.style.left = (screenWidth/2 - 350) + "px" ;
+    		 
 	} catch (e) {
 	
 	}
