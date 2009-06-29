@@ -10,6 +10,11 @@ class PlanningController extends AppController {
 
 	}
 
+	function emplayee_update() {
+		Configure::write('debug', 0);
+		$this->layout = 'ajax';
+	}
+	
 	function organization_setup() {
 
 	}
