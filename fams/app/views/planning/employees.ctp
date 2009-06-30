@@ -64,7 +64,7 @@ Ext.onReady(function() {
  */
 
 Ext.onReady(function(){
-    // basic tabs 1, built from existing content
+
     var tabs = new Ext.TabPanel({
         renderTo: 'fields_div',
         activeTab: 0,
@@ -78,7 +78,7 @@ Ext.onReady(function(){
 			forceFit: true,
 		 	fitContainer: true
 		},
-		height: 250
+		height: 280
     });
 
 });
@@ -102,8 +102,10 @@ Ext.onReady(function(){
 </script>
 
 <script type="text/javascript" language="javascript">
-Ext.onReady(function(){
-	
+/*
+ * Event handlers for buttons
+ */
+
 	function add() {
 		alert('hi add');
 	}
@@ -115,46 +117,16 @@ Ext.onReady(function(){
 	function del() {
 		alert('hi delete');
 	}
-	
-	
-	var btnAdd = new Ext.Button({
-		text: 'Add',
-		handler: add,
-		id: 'add_button',
-		renderTo: add_
-	});
-	
-	var btnEdit = new Ext.Button({
-		text: 'Edit',
-		handler: edit,
-		id: 'edit_button',
-		renderTo: edit_
-	});
-	
-	var btnDelete = new Ext.Button({
-		text: 'Delete',
-		handler: del,
-		id: 'delete_button',
-		renderTo: del_
-	});
 
-	var btnSave = new Ext.Button({
-		text: 'Save',
-		handler: del,
-		id: 'save_button',
-		renderTo: save_
-	});
+	function save() {
+		alert('hi save');
+	}
 	
-	var btnClear = new Ext.Button({
-		text: 'Clear',
-		handler: del,
-		id: 'Clear_button',
-		renderTo: clear_
-	});
-	
-});
+	function cancel() {
+		alert('hi clear');
+	}
+
 </script>
-
 
 <div id="title_div">&nbsp;</div>
 <div id="grid_area" style="width:100%"></div>
@@ -173,23 +145,8 @@ Ext.onReady(function(){
     </div>
 </div>
 
-<div id="buttons_div" style="margin-top:10px; padding:5px">
-	<!-- New / Edit / Save / Delete/ Clear-->
-	<div id="left_buttons" style="float:left">
-		<table>
-			<tr>
-				<td id="add_"></td><td id="edit_"></td><td id="del_"></td>
-			</tr>
-		</table>
-	</div>
-	<div id="right_buttons" style="float:right">
-		<table>
-			<tr>
-				<td id="save_"></td><td id="clear_"></td>
-			</tr>
-		</table>
-	</div>
-</div>
+<?php echo $this->renderElement('command_buttons'); ?>
+
 
 
 
