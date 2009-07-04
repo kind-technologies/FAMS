@@ -90,13 +90,13 @@ Ext.onReady(function(){
  */
 Ext.onReady(function(){
 	Ext.get('okButton').on('click', function(){
-		var msg = Ext.get('msg');
-		msg.load({
+		var status_div = Ext.get('status_div');
+		status_div.load({
 			url: '/planning/emplayee_update', // <-- change if necessary
 			params: 'name=' + Ext.get('name').dom.value,
 			text: 'Updating...'
 		});
-		msg.show();
+		status_div.show();
 	});
 });
 </script>
@@ -123,12 +123,13 @@ Ext.onReady(function(){
 	}
 	
 	function cancel() {
-		alert('hi clear');
+		alert('hi cancel');
 	}
 
 </script>
 
-<div id="title_div">&nbsp;</div>
+<div id="status_div"></div>
+
 <div id="grid_area" style="width:100%"></div>
 
 <div id="fields_div" style="margin-top:5px">
@@ -137,7 +138,6 @@ Ext.onReady(function(){
     		Name: <input type="text" id="name" />
     		<input type="button" id="okButton" value="OK" />
 		</div>
-		<div id="msg"></div>        
     </div>
 
     <div id="tab2">
