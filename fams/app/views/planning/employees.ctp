@@ -1,3 +1,5 @@
+<?php echo $this->renderElement('common_js_objects'); ?>
+
 <script type="text/javascript" language="javascript">
 /*
  * Grid Area
@@ -5,42 +7,50 @@
 
 
 Ext.onReady(function() {
-	var myData = [
-		['Apple',29.89,0.24,0.81,'9/1 12:00am'],
-		['Ext',83.81,0.28,0.34,'9/12 12:00am'],
-		['Google',71.72,0.02,0.03,'10/1 12:00am'],
-		['Microsoft',52.55,0.01,0.02,'7/4 12:00am'],
-		['Yahoo!',29.01,0.42,1.47,'5/22 12:00am'],
-		['Yahoo!',29.01,0.42,1.47,'5/22 12:00am'],
-		['Yahoo!',29.01,0.42,1.47,'5/22 12:00am']		
+	var empData = [
+		['00001', 'MMCK Bandara', '94716833516', 'CMB','WEB', '04/11/1981', 'Chaminda Keerthi Bandara', 'M', '811021938V', '113/4, Kithulawila Uyana, Kiriwattuduwa', 1],
+		['00002', 'MN Chaturanga', '94716833516', 'CMB','WEB', '05/23/1981', 'Nuwan Chaturanga', 'M', '811021938V', '', '', 2],
+		['00003', 'J Cluff', '94716833516', 'UTH','MGT', '03/30/1955', 'James Cluff', 'M', '811021938V', '', '', 3],
+		['00004', 'D Praneeth', '94716833516', 'UTH','MGT', '09/12/1965', 'Dihan Praneeth', 'M', '811021938V', '', '', 4],
+		['00005', 'N Pradeep', '94716833516', 'CMB','MGT', '08/15/1974', 'Nishan Pradeep', 'M', '811021938V', '', '', 5],
+		['00006', 'DD Weerasinghe', '94716833516', 'CMB','WEB', '08/21/1980', 'Darshika Weerasinghe', 'F', '811021938V', '', '', 6],
+		['00007', 'N Kodithuwakku', '94716833516', 'CMB','WEB', '05/13/1983', 'Nishchala Kodithuwakku', 'F', '811021938V', '', '', 7]		
 	];
 	
-	var myReader = new Ext.data.ArrayReader({}, [
-		{name: 'company'},
-		{name: 'price', type: 'float'},
-		{name: 'change', type: 'float'},
-		{name: 'pctChange', type: 'float'},
-		{name: 'lastChange', type: 'date', dateFormat: 'n/j h:ia'}
+	var empReader = new Ext.data.ArrayReader({}, [
+		{name: 'emp_empid'},
+		{name: 'emp_name'},
+		{name: 'emp_contact'},
+		{name: 'emp_branch'},
+		{name: 'emp_div'},
+		{name: 'emp_dob', type: 'date', dateFormat: 'm/d/Y'}, /* : float */
+		{name: 'emp_full_name'},
+		{name: 'emp_gender'},
+		{name: 'emp_nid'},
+		{name: 'emp_address'},
+		{name: 'rec_id', type: 'int'}
 	]);	
 	
 	var grid = new Ext.grid.GridPanel({
 			store: new Ext.data.Store({
-				data: myData,
-				reader: myReader
+				data: empData,
+				reader: empReader
 			}),
 			columns: [
-				{header: 'Company', width: 120, sortable: true, dataIndex: 'company'},
-				{header: 'Price', width: 90, sortable: true, dataIndex: 'price'},
-				{header: 'Change', width: 90, sortable: true, dataIndex: 'change'},
-				{header: '% Change', width: 90, sortable: true, dataIndex: 'pctChange'},
-				{header: 'Last Updated', width: 320, sortable: true, 
+				{header: 'Emp. ID', width: 120, sortable: true, dataIndex: 'emp_empid'},
+				{header: 'Name', width: 90, sortable: true, dataIndex: 'emp_name'},
+				{header: 'Contact No.', width: 90, sortable: true, dataIndex: 'emp_contact'},
+				{header: 'Branch', width: 90, sortable: true, dataIndex: 'emp_branch'},
+				{header: 'Division', width: 90, sortable: true, dataIndex: 'emp_div'}
+				/*{header: 'Last Updated', width: 320, sortable: true, 
 					renderer: Ext.util.Format.dateRenderer('m/d/Y'), 
-				                dataIndex: 'lastChange'}
+				                dataIndex: 'lastChange'}*/
 			],
 			viewConfig: {
 				forceFit: true,
 			 	fitContainer: true
 			},
+			sm: new Ext.grid.RowSelectionModel({singleSelect: true}),
 			renderTo: 'grid_area',
 			title: 'Employees',
 			/*width: 700,*/
@@ -53,7 +63,27 @@ Ext.onReady(function() {
 		 grid.setWidth(700);
 	}
 	
-	grid.getSelectionModel().selectFirstRow();
+	//grid.getSelectionModel().selectFirstRow();
+	
+	grid.getSelectionModel().on('rowselect', function(sm, rowIdx, r) {
+		emp_id.setValue(r.data['emp_empid']);
+		emp_full_name.setValue(r.data['emp_full_name']);
+		emp_name_with_init.setValue(r.data['emp_name']);
+		emp_dob.setValue(r.data['emp_dob']);
+
+		if(r.data['emp_gender'] == 'M'){
+			emp_gender.items.get(0).setValue(true);
+			emp_gender.items.get(1).setValue(false);
+		} else {
+			emp_gender.items.get(0).setValue(false);
+			emp_gender.items.get(1).setValue(true);
+		}
+		emp_nid.setValue(r.data['emp_nid']);
+		emp_address.setValue(r.data['emp_address']);
+		emp_phone.setValue(r.data['emp_contact']);
+		emp_branch.setValue(r.data['emp_branch']);
+		emp_division.setValue(r.data['emp_div']);
+	});
 	
 });
 </script>
@@ -67,6 +97,7 @@ Ext.onReady(function(){
 
     var tabs = new Ext.TabPanel({
         renderTo: 'fields_div',
+        id:'tab_panel',
         activeTab: 0,
         frame:true,
         defaults:{autoHeight: true},
@@ -86,28 +117,115 @@ Ext.onReady(function(){
 
 <script type="text/javascript" language="javascript">
 /*
- * Ajax Call
+ * Form fields
  */
+var emp_id = null;
+var emp_full_name = null;
+var emp_name_with_init = null;
+var emp_dob = null;
+var emp_gender = null;
+var emp_nid = null;
+var emp_address = null;
+var emp_phone = null;
+var emp_branch = null;
+var emp_division = null;
+
 Ext.onReady(function(){
-	Ext.get('okButton').on('click', function(){
-		var status_div = Ext.get('status_div');
-		status_div.load({
-			url: '/planning/emplayee_update', // <-- change if necessary
-			params: 'name=' + Ext.get('name').dom.value,
-			text: 'Updating...'
-		});
-		status_div.show();
-	});
+    emp_id = new Ext.form.TextField({
+    			id: 'txt_emp_id',
+    			width: 200,
+    			disabled: true,
+    		    renderTo: 'cnt_emp_id'
+    });
+
+	emp_full_name = new Ext.form.TextField({
+    			id: 'txt_full_name',
+    			width: 700,
+    			disabled: true,
+    		    renderTo: 'cnt_full_name'
+    });
+
+	emp_name_with_init = new Ext.form.TextField({
+    			id: 'txt_name_with_init',
+    			width: 400,
+    			disabled: true,
+    		    renderTo: 'cnt_name_with_init'
+    });
+    
+	emp_dob = new Ext.form.DateField({
+    			id: 'dat_emp_id',
+    			width: 200,
+    			disabled: true,
+    		    renderTo: 'cnt_dob'
+    });
+
+	emp_gender = new Ext.form.RadioGroup({
+    			id: 'rdg_gender',
+    			width: 150,
+    			disabled: true,
+    			items: [{
+                        checked: true,
+                        id: 'opt_male',
+                        boxLabel: 'Male',
+                        name: 'rdo_gender',
+                        inputValue: 'M'
+                    },{
+                    		checked: false,
+                    		id: 'opt_female',
+                        boxLabel: 'Female',
+                        name: 'rdo_gender',
+                        inputValue: 'F'
+                    }],
+    		    renderTo: 'cnt_gender'
+    });
+
+	emp_nid = new Ext.form.TextField({
+    			id: 'txt_nid',
+    			width: 200,
+    			disabled: true,
+    		    renderTo: 'cnt_nid'
+    });
+    
+	emp_address = new Ext.form.TextField({
+    			id: 'txt_address',
+    			width: 700,
+    			disabled: true,
+    		    renderTo: 'cnt_address'
+    });
+
+	emp_phone = new Ext.form.TextField({
+    			id: 'txt_phone',
+    			width: 200,
+    			disabled: true,
+    		    renderTo: 'cnt_phone'
+    });
+
+	emp_branch = new Ext.form.TextField({
+    			id: 'txt_branch',
+    			width: 200,
+    			disabled: true,
+    		    renderTo: 'cnt_branch'
+    });
+
+	emp_division = new Ext.form.TextField({
+    			id: 'txt_division',
+    			width: 200,
+    			disabled: true,
+    		    renderTo: 'cnt_division'
+    });
+
 });
 </script>
+
 
 <script type="text/javascript" language="javascript">
 /*
  * Event handlers for buttons
  */
-
+			
 	function add() {
-		alert('hi add');
+		alert(Ext.get('txt_emp_id').dom.value);
+		alert(Ext.get('tab_panel'));
 	}
 	
 	function edit() {
@@ -119,7 +237,23 @@ Ext.onReady(function(){
 	}
 
 	function save() {
-		alert('hi save');
+
+		ajaxClass.on('beforerequest', show_mask);
+		ajaxClass.on('requestcomplete', hide_mask); 
+		
+		ajaxClass.request({
+				   url: '/planning/emplayee_update',
+				   /*success: someFn,
+				   failure: otherFn,
+				   headers: {
+					   'my-header': 'foo'
+				   },*/
+				   params: { name: Ext.get('txt_emp_id').dom.value },
+				   callback : function(options, success, response) { 
+				   				alert('got the response : ' + response);
+				   			}
+				});
+		
 	}
 	
 	function cancel() {
@@ -134,10 +268,54 @@ Ext.onReady(function(){
 
 <div id="fields_div" style="margin-top:5px">
     <div id="tab1">
-		<div>
-    		Name: <input type="text" id="name" />
-    		<input type="button" id="okButton" value="OK" />
-		</div>
+		<table border="0" width="100%">
+			<tr>
+				<td width="150px">Employee ID</td>
+				<td width="5px">:</td>
+				<td colspan="4" id="cnt_emp_id"><!-- employee id (ext gen.) --></td>
+			</tr>
+			<tr>
+				<td>Full Name</td>
+				<td width="5px">:</td>
+				<td colspan="4" id="cnt_full_name"><!-- full name (ext gen.) --></td>
+			</tr>
+			<tr>
+				<td>Name with Initials</td>
+				<td width="5px">:</td>
+				<td colspan="4" id="cnt_name_with_init"><!-- name with init (ext gen.) --></td>
+			</tr>
+			<tr>
+				<td>Date of Birth</td>
+				<td width="5px">:</td>
+				<td id='cnt_dob'><!-- date of birth (ext gen.) --></td>
+				<td width="80px">Gender</td>
+				<td width="5px">:</td>
+				<td id="cnt_gender"><!-- gender (ext gen.) --></td>
+			</tr>
+			<tr>
+				<td>National ID</td>
+				<td width="5px">:</td>
+				<td colspan="4" id="cnt_nid"><!-- NID (ext gen.) --></td>
+			</tr>
+			<tr>
+				<td>Address</td>
+				<td width="5px">:</td>
+				<td colspan="4" id="cnt_address"><!-- address (ext gen.) --></td>
+			</tr>			
+			<tr>
+				<td>Contact Number</td>
+				<td width="5px">:</td>
+				<td colspan="4" id="cnt_phone"><!-- contact number (ext gen.) --></td>
+			</tr>
+			<tr>
+				<td>Branch</td>
+				<td width="5px">:</td>
+				<td id="cnt_branch"><!-- branch (ext gen.) --></td>
+				<td>Division</td>
+				<td>:</td>
+				<td id="cnt_division"><!-- divsion (ext gen.) --></td>
+			</tr>
+		</table>
     </div>
 
     <div id="tab2">
