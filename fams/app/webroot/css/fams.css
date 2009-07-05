@@ -64,8 +64,17 @@ body{
 }
 
 /* Form CSS section */
-#frm-main {
+#fields_div div table {
+    font-family:Serif, Verdana, Arial, Helvetica, sans-serif", comic Sans MS";
+    font-size:10pt;
+    font-weight:normal;
+}
+#fields_div table {
+	margin:5px;
+}
 
+#fields_div table td{
+	padding:2px
 }
 
 #status_div {
