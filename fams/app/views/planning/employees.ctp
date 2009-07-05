@@ -7,6 +7,8 @@
 
 
 Ext.onReady(function() {
+	/*
+	// Sample data set, replaced with data from DB
 	var empData = [
 		['00001', 'MMCK Bandara', '94716833516', 'CMB','WEB', '04/11/1981', 'Chaminda Keerthi Bandara', 'M', '811021938V', '113/4, Kithulawila Uyana, Kiriwattuduwa', 1],
 		['00002', 'MN Chaturanga', '94716833516', 'CMB','WEB', '05/23/1981', 'Nuwan Chaturanga', 'M', '811021938V', '', '', 2],
@@ -16,6 +18,9 @@ Ext.onReady(function() {
 		['00006', 'DD Weerasinghe', '94716833516', 'CMB','WEB', '08/21/1980', 'Darshika Weerasinghe', 'F', '811021938V', '', '', 6],
 		['00007', 'N Kodithuwakku', '94716833516', 'CMB','WEB', '05/13/1983', 'Nishchala Kodithuwakku', 'F', '811021938V', '', '', 7]		
 	];
+	*/
+	
+	var empData = <?php echo $emp_data; ?>;
 	
 	var empReader = new Ext.data.ArrayReader({}, [
 		{name: 'emp_empid'},
@@ -129,7 +134,8 @@ var emp_address = null;
 var emp_phone = null;
 var emp_branch = null;
 var emp_division = null;
-
+var status_div = null;
+	
 Ext.onReady(function(){
     emp_id = new Ext.form.TextField({
     			id: 'txt_emp_id',
@@ -214,6 +220,7 @@ Ext.onReady(function(){
     		    renderTo: 'cnt_division'
     });
 
+	status_div = Ext.get('status_div');
 });
 </script>
 
@@ -233,7 +240,15 @@ Ext.onReady(function(){
 	}
 
 	function del() {
-		alert('hi delete');
+		
+
+		status_div.highlight();
+		//myDiv.addClass('red');  // Add a custom CSS class (defined in ExtStart.css)
+		//myDiv.center();         // Center the element in the viewport
+		//myDiv.setOpacity(.25);
+		//alert('Clicked');
+		//alert(myDiv.dom.innerHTML);
+
 	}
 
 	function save() {
