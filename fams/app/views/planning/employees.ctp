@@ -4,7 +4,8 @@
 /*
  * Grid Area
  */
-
+var grid = null;
+var current_row_index = 0;
 
 Ext.onReady(function() {
 	/*
@@ -36,7 +37,7 @@ Ext.onReady(function() {
 		{name: 'rec_id', type: 'int'}
 	]);	
 	
-	var grid = new Ext.grid.GridPanel({
+	grid = new Ext.grid.GridPanel({
 			store: new Ext.data.Store({
 				data: empData,
 				reader: empReader
@@ -70,7 +71,7 @@ Ext.onReady(function() {
 	
 	//grid.getSelectionModel().selectFirstRow();
 	
-	grid.getSelectionModel().on('rowselect', function(sm, rowIdx, r) {
+	grid.getSelectionModel().on('rowselect', function(sm, row_index, r) {
 		emp_id.setValue(r.data['emp_empid']);
 		emp_full_name.setValue(r.data['emp_full_name']);
 		emp_name_with_init.setValue(r.data['emp_name']);
@@ -88,7 +89,13 @@ Ext.onReady(function() {
 		emp_phone.setValue(r.data['emp_contact']);
 		emp_branch.setValue(r.data['emp_branch']);
 		emp_division.setValue(r.data['emp_div']);
+		
+		current_row_index = row_index;
+		
+		
+		
 	});
+	
 	
 });
 </script>
@@ -134,6 +141,10 @@ var emp_address = null;
 var emp_phone = null;
 var emp_branch = null;
 var emp_division = null;
+
+var rec_id = null;
+var action = null;
+
 var status_div = null;
 	
 Ext.onReady(function(){
@@ -220,6 +231,16 @@ Ext.onReady(function(){
     		    renderTo: 'cnt_division'
     });
 
+	rec_id = new Ext.form.Hidden({
+    			id: 'hdn_rec_id',
+    		    renderTo: 'cnt_hdn_rec_id'
+    });
+    
+	action = new Ext.form.Hidden({
+    			id: 'hdn_action',
+    		    renderTo: 'cnt_hdn_action'
+    });
+    
 	status_div = Ext.get('status_div');
 });
 </script>
@@ -231,12 +252,19 @@ Ext.onReady(function(){
  */
 			
 	function add() {
-		alert(Ext.get('txt_emp_id').dom.value);
-		alert(Ext.get('tab_panel'));
+		//alert(Ext.get('txt_emp_id').dom.value);
+		clear();
+		disable_fields(false);
+		btn_edit.setDisabled(true);
+		btn_delete.setDisabled(true);
+		btn_save.setDisabled(false);
 	}
 	
 	function edit() {
-		alert('hi edit');
+		disable_fields(false);
+		btn_add.setDisabled(true);
+		btn_delete.setDisabled(true);
+		btn_save.setDisabled(false);
 	}
 
 	function del() {
@@ -265,16 +293,51 @@ Ext.onReady(function(){
 				   },*/
 				   params: { name: Ext.get('txt_emp_id').dom.value },
 				   callback : function(options, success, response) { 
-				   				alert('got the response : ' + response);
+				   				alert('got the response : ' 
+				   								+ response.responseText);
 				   			}
 				});
 		
 	}
 	
 	function cancel() {
-		alert('hi cancel');
+		clear();
+		grid.getSelectionModel().deselectRow(current_row_index);
+		disable_fields(true);
 	}
 
+	
+	// Clear all text fields
+	function clear() {
+		emp_id.setValue('');
+		emp_full_name.setValue('');
+		emp_name_with_init.setValue('');
+		emp_dob.setValue('');
+		emp_gender.setValue('');
+		emp_nid.setValue('');
+		emp_address.setValue('');
+		emp_phone.setValue('');
+		emp_branch.setValue('');
+		emp_division.setValue('');
+
+		rec_id.setValue('');
+		action.setValue('');
+		
+		
+	}
+
+	function disable_fields(bool) {
+		emp_id.setDisabled(bool);
+		emp_full_name.setDisabled(bool);
+		emp_name_with_init.setDisabled(bool);
+		emp_dob.setDisabled(bool);
+		emp_gender.setDisabled(bool);
+		emp_nid.setDisabled(bool);
+		emp_address.setDisabled(bool);
+		emp_phone.setDisabled(bool);
+		emp_branch.setDisabled(bool);
+		emp_division.setDisabled(bool);
+	}
 </script>
 
 <div id="status_div"></div>
@@ -330,8 +393,16 @@ Ext.onReady(function(){
 				<td>:</td>
 				<td id="cnt_division"><!-- divsion (ext gen.) --></td>
 			</tr>
+			<tr>
+				<td></td>
+				<td width="5px"></td>
+				<td id="cnt_hdn_rec_id"><!-- hidden field employee record id (ext gen.) --></td>
+				<td></td>
+				<td></td>
+				<td id="cnt_hdn_action"><!-- hidden field action (ext gen.) --></td>
+			</tr>
 		</table>
-    </div>
+    </div> 
 
     <div id="tab2">
         

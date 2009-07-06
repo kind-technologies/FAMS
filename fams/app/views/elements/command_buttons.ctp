@@ -7,9 +7,15 @@
 
 
 <script type="text/javascript" language="javascript">
+var btn_add = null;
+var btn_edit = null;
+var btn_delete = null;
+var btn_save = null;
+var btn_clear = null;
+
 Ext.onReady(function(){
 	
-	var btnAdd = new Ext.Button({
+	btn_add = new Ext.Button({
 		text: 'Add',
 		handler: add,
 		id: 'add_button',
@@ -19,37 +25,40 @@ Ext.onReady(function(){
 		renderTo: add_
 	});
 	
-	var btnEdit = new Ext.Button({
+	btn_edit = new Ext.Button({
 		text: 'Edit',
 		handler: edit,
 		id: 'edit_button',
 		icon: '/img/edit.png',
 		iconCls: 'btn_img',
 		minWidth: 100,
+		disabled: true,
 		renderTo: edit_
 	});
 	
-	var btnDelete = new Ext.Button({
+	btn_delete = new Ext.Button({
 		text: 'Delete',
 		handler: del,
 		minWidth: 100,
 		id: 'delete_button',
 		icon: '/img/delete.png',
 		iconCls: 'btn_img',
+		disabled: true,
 		renderTo: del_
 	});
 
-	var btnSave = new Ext.Button({
+	btn_save = new Ext.Button({
 		text: 'Save',
 		handler: save,
 		minWidth: 100,
 		id: 'save_button',
 		icon: '/img/save.png',
 		iconCls: 'btn_img',
+		disabled: true,
 		renderTo: save_
 	});
 	
-	var btnClear = new Ext.Button({
+	btn_clear = new Ext.Button({
 		text: 'Cancel',
 		handler: cancel,
 		minWidth: 100,
@@ -59,7 +68,24 @@ Ext.onReady(function(){
 		renderTo: cancel_
 	});
 	
+	// Enable edit/delete buttons
+	grid.getSelectionModel().on('rowselect', function(sm, row_index, r) {
+		btn_edit.setDisabled(false);
+		btn_delete.setDisabled(false);
+	});
+	
+	// Disable when clear button is clicked
+	grid.getSelectionModel().on('rowdeselect', function(sm, row_index, r) {
+		btn_add.setDisabled(false);
+		btn_edit.setDisabled(true);
+		btn_delete.setDisabled(true);
+		btn_save.setDisabled(true);
+	});
+	 
 });
+
+
+
 </script>
 
 <div id="buttons_div" style="margin:10px;  ">
