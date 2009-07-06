@@ -20,7 +20,7 @@ class PlanningController extends AppController {
 							'", "' . $employee['Employee']['contact_number'] .
 							'", "' . $employee['Employee']['branch_id'] .
 							'","' . $employee['Employee']['division_id'] .
-							'", "' . $employee['Employee']['date_of_birth'] .
+							'", "' . date( 'm/d/Y', strtotime($employee['Employee']['date_of_birth'])) .
 							'", "' . $employee['Employee']['full_name'] .
 							'", "' . $employee['Employee']['gender'] .
 							'", "' . $employee['Employee']['national_id'] .
