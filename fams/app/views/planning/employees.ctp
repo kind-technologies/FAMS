@@ -258,6 +258,7 @@ Ext.onReady(function(){
 		btn_edit.setDisabled(true);
 		btn_delete.setDisabled(true);
 		btn_save.setDisabled(false);
+		grid.setDisabled(true);
 	}
 	
 	function edit() {
@@ -265,6 +266,7 @@ Ext.onReady(function(){
 		btn_add.setDisabled(true);
 		btn_delete.setDisabled(true);
 		btn_save.setDisabled(false);
+		grid.setDisabled(true);
 	}
 
 	function del() {
@@ -304,6 +306,7 @@ Ext.onReady(function(){
 		clear();
 		grid.getSelectionModel().deselectRow(current_row_index);
 		disable_fields(true);
+		grid.setDisabled(false);
 	}
 
 	
