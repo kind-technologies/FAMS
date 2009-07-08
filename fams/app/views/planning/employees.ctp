@@ -157,7 +157,7 @@ Ext.onReady(function(){
 
 	emp_full_name = new Ext.form.TextField({
     			id: 'txt_full_name',
-    			width: 700,
+    			width: 600,
     			disabled: true,
     		    renderTo: 'cnt_full_name'
     });
@@ -205,7 +205,7 @@ Ext.onReady(function(){
     
 	emp_address = new Ext.form.TextField({
     			id: 'txt_address',
-    			width: 700,
+    			width: 600,
     			disabled: true,
     		    renderTo: 'cnt_address'
     });
