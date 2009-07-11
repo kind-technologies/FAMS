@@ -13,7 +13,6 @@ class PlanningController extends AppController {
 
 		$emp_data = '[';
 
-		
 		foreach($employees as $employee) {
 			$emp_data .= '["'. $employee['Employee']['employee_id'] . 
 							'", "' . $employee['Employee']['name_with_initials'] .
