@@ -7,11 +7,14 @@
 var grid = null;
 var current_row_index = 0;
 
+var grid_data_store = null;
+var empData_test = null;
+
 Ext.onReady(function() {
-	/*
+	
 	// Sample data set, replaced with data from DB
-	var empData = [
-		['00001', 'MMCK Bandara', '94716833516', 'CMB','WEB', '04/11/1981', 'Chaminda Keerthi Bandara', 'M', '811021938V', '113/4, Kithulawila Uyana, Kiriwattuduwa', 1],
+	empData_test = [
+		['00001', 'MMCK Bandara', '94716833516', 'CMB','WEB', '04/11/1981', 'Madakumbure Keerthi Bandara', 'M', '811021938V', '113/4, Kithulawila Uyana, Kiriwattuduwa', 1],
 		['00002', 'MN Chaturanga', '94716833516', 'CMB','WEB', '05/23/1981', 'Nuwan Chaturanga', 'M', '811021938V', '', '', 2],
 		['00003', 'J Cluff', '94716833516', 'UTH','MGT', '03/30/1955', 'James Cluff', 'M', '811021938V', '', '', 3],
 		['00004', 'D Praneeth', '94716833516', 'UTH','MGT', '09/12/1965', 'Dihan Praneeth', 'M', '811021938V', '', '', 4],
@@ -19,7 +22,7 @@ Ext.onReady(function() {
 		['00006', 'DD Weerasinghe', '94716833516', 'CMB','WEB', '08/21/1980', 'Darshika Weerasinghe', 'F', '811021938V', '', '', 6],
 		['00007', 'N Kodithuwakku', '94716833516', 'CMB','WEB', '05/13/1983', 'Nishchala Kodithuwakku', 'F', '811021938V', '', '', 7]		
 	];
-	*/
+	
 	
 	var empData = <?php echo $emp_data; ?>;
 	
@@ -37,11 +40,14 @@ Ext.onReady(function() {
 		{name: 'rec_id', type: 'int'}
 	]);	
 	
-	grid = new Ext.grid.GridPanel({
-			store: new Ext.data.Store({
+	
+	grid_data_store =  new Ext.data.Store({
 				data: empData,
 				reader: empReader
-			}),
+			});
+	
+	grid = new Ext.grid.GridPanel({
+			store: grid_data_store,
 			columns: [
 				{header: 'Emp. ID', width: 120, sortable: true, dataIndex: 'emp_empid'},
 				{header: 'Name', width: 90, sortable: true, dataIndex: 'emp_name'},
@@ -250,7 +256,7 @@ Ext.onReady(function(){
 /*
  * Event handlers for buttons
  */
-			
+	
 	function add() {
 		//alert(Ext.get('txt_emp_id').dom.value);
 		clear();
@@ -295,8 +301,12 @@ Ext.onReady(function(){
 				   },*/
 				   params: { name: Ext.get('txt_emp_id').dom.value },
 				   callback : function(options, success, response) { 
-				   				alert('got the response : ' 
-				   								+ response.responseText);
+				   				//alert('got the response : ' 
+				   				//				+ response.responseText);
+				   				//alert(response.responseText.length);
+				   				obj = Ext.util.JSON.decode(response.responseText);
+				   				//Ext.MessageBox.alert("FAMS", response.responseText);
+				   				grid_data_store.loadData(obj.data);
 				   			}
 				});
 		

@@ -42,7 +42,7 @@ function fullscreen(url) {
 	    <strong>ITCottage Research Center (ITC-RC)</strong> explores new boundaries in business application development with the latest Web/Internet technologies coming out.
 	</p>
 	<p>
-		Current researches focus on Rich Internet Application (RIA) development.
+		Current researches focus on Rich Internet Applications (RIA).
 	</p>
     <div class="more_button"><a href="#">Read more</a></div>
   </div>
