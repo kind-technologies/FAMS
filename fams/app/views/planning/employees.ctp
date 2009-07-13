@@ -8,11 +8,11 @@ var grid = null;
 var current_row_index = 0;
 
 var grid_data_store = null;
-var empData_test = null;
 
 Ext.onReady(function() {
 	
 	// Sample data set, replaced with data from DB
+	/*
 	empData_test = [
 		['00001', 'MMCK Bandara', '94716833516', 'CMB','WEB', '04/11/1981', 'Madakumbure Keerthi Bandara', 'M', '811021938V', '113/4, Kithulawila Uyana, Kiriwattuduwa', 1],
 		['00002', 'MN Chaturanga', '94716833516', 'CMB','WEB', '05/23/1981', 'Nuwan Chaturanga', 'M', '811021938V', '', '', 2],
@@ -22,9 +22,10 @@ Ext.onReady(function() {
 		['00006', 'DD Weerasinghe', '94716833516', 'CMB','WEB', '08/21/1980', 'Darshika Weerasinghe', 'F', '811021938V', '', '', 6],
 		['00007', 'N Kodithuwakku', '94716833516', 'CMB','WEB', '05/13/1983', 'Nishchala Kodithuwakku', 'F', '811021938V', '', '', 7]		
 	];
+	*/
 	
 	
-	var empData = <?php echo $emp_data; ?>;
+	//var empData = <?php echo $emp_data; ?>;
 	
 	var empReader = new Ext.data.ArrayReader({}, [
 		{name: 'emp_empid'},
@@ -42,9 +43,13 @@ Ext.onReady(function() {
 	
 	
 	grid_data_store =  new Ext.data.Store({
-				data: empData,
 				reader: empReader
 			});
+
+
+	employees_json = Ext.util.JSON.decode('<?php echo $javascript->object($employee_data); ?>');
+	grid_data_store.loadData(employees_json.employee_data);
+
 	
 	grid = new Ext.grid.GridPanel({
 			store: grid_data_store,
@@ -301,12 +306,9 @@ Ext.onReady(function(){
 				   },*/
 				   params: { name: Ext.get('txt_emp_id').dom.value },
 				   callback : function(options, success, response) { 
-				   				//alert('got the response : ' 
-				   				//				+ response.responseText);
-				   				//alert(response.responseText.length);
 				   				obj = Ext.util.JSON.decode(response.responseText);
-				   				//Ext.MessageBox.alert("FAMS", response.responseText);
-				   				grid_data_store.loadData(obj.data);
+				   				grid_data_store.loadData(obj.employee_data);
+				   				Ext.MessageBox.alert("FAMS", response.message);
 				   			}
 				});
 		
