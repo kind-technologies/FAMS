@@ -27,7 +27,9 @@ class Employee extends AppModel {
 									$employee['Employee']['gender'], 
 									$employee['Employee']['national_id'], 
 									$employee['Employee']['address'], 
-									$employee['Employee']['id'] );
+									$employee['Employee']['id'],
+									$employee['Division']['id'],
+									$employee['Branch']['id'] );
 			
 		}
 		
