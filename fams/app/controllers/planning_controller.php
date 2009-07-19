@@ -20,16 +20,45 @@ class PlanningController extends AppController {
 	function emplayee_update() {
 		Configure::write('debug', 0);
 		$this->layout = 'ajax';
+	
+		$this->data['Employee']['employee_id'] = 
+											$this->params['form']['employee_id'];
+		$this->data['Employee']['full_name'] = 
+											$this->params['form']['full_name'];
+		$this->data['Employee']['name_with_initials'] = 
+											$this->params['form']['name_with_initials'];
+		$this->data['Employee']['date_of_birth'] = 
+											$this->params['form']['date_of_birth'];
+		
+		$this->data['Employee']['gender'] = 	$this->params['form']['gender'];
+		
+		$this->data['Employee']['national_id'] = 
+											$this->params['form']['national_id'];
+		$this->data['Employee']['address'] = 
+											$this->params['form']['address'];
+		$this->data['Employee']['contact_number'] = 
+											$this->params['form']['contact_number'];
+		$this->data['Employee']['branch_id'] = 
+											$this->params['form']['branch_id'];
+		$this->data['Employee']['division_id'] = 
+											$this->params['form']['division_id'];
 
-		// If request is to ADD a new record
-		
-		
-		// If request is to EDIT a record
-		
-		
-		// If request is to DELETE a record
+		$record_id = $this->params['form']['id'];
+		$form_action = $this->params['form']['action'];
 
+		
+		if($form_action == '__a') { // If request is to ADD a new record
+			$this->data['Employee']['id'] == null;
+			$this->Employee->save($this->data);
+		
+		} elseif($form_action == '__e') { // If request is to EDIT a record		
 
+		
+		} elseif($form_action == '__d') { // If request is to DELETE a record
+
+		
+		}
+//		$this->set('params', $this->params['form']);
 
 		// Set data for update data-grid.
 		// JSON object is created in view file accordingly
