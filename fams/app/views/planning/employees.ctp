@@ -38,7 +38,9 @@ Ext.onReady(function() {
 		{name: 'emp_gender'},
 		{name: 'emp_nid'},
 		{name: 'emp_address'},
-		{name: 'rec_id', type: 'int'}
+		{name: 'rec_id', type: 'int'},
+		{name: 'emp_branch_id'},
+		{name: 'emp_div_id'}
 	]);	
 	
 	
@@ -98,12 +100,11 @@ Ext.onReady(function() {
 		emp_nid.setValue(r.data['emp_nid']);
 		emp_address.setValue(r.data['emp_address']);
 		emp_phone.setValue(r.data['emp_contact']);
-		emp_branch.setValue(r.data['emp_branch']);
-		emp_division.setValue(r.data['emp_div']);
-		
+		emp_branch.focus();
+		emp_branch.selectByValue('1');//setValue(r.data['emp_branch']);
+		//emp_division.selectByValue(r.data['emp_div_id'], true);//setValue(r.data['emp_div']);
+		//alert(r.data['emp_div_id']);
 		current_row_index = row_index;
-		
-		
 		
 	});
 	
@@ -228,17 +229,33 @@ Ext.onReady(function(){
     		    renderTo: 'cnt_phone'
     });
 
-	emp_branch = new Ext.form.TextField({
+	emp_branch = new Ext.form.ComboBox({
     			id: 'txt_branch',
     			width: 200,
-    			disabled: true,
+    			disabled: false,
+    			editable: false,
+    			store: new Ext.data.SimpleStore({
+				fields:['id', 'branch_code'],
+				data: [['1', 'STG'], ['2', 'CMB']]
+			}),
+			displayField:'branch_code',
+			valueField: 'id',
+			mode: 'local',
     		    renderTo: 'cnt_branch'
     });
 
-	emp_division = new Ext.form.TextField({
+	emp_division = new Ext.form.ComboBox({
     			id: 'txt_division',
     			width: 200,
-    			disabled: true,
+    			disabled: false,
+    			editable: false,
+    			store: new Ext.data.SimpleStore({
+				fields:['id', 'division_code'],
+				data: [['1', 'MGT'], ['2', 'WEB']]
+			}),
+			displayField: 'division_code',
+			valueField: 'id',
+			mode: 'local',
     		    renderTo: 'cnt_division'
     });
 
@@ -263,13 +280,19 @@ Ext.onReady(function(){
  */
 	
 	function add() {
-		//alert(Ext.get('txt_emp_id').dom.value);
+		
+		// Enable/Disable fields accodingly
 		clear();
 		disable_fields(false);
 		btn_edit.setDisabled(true);
 		btn_delete.setDisabled(true);
 		btn_save.setDisabled(false);
 		grid.setDisabled(true);
+		
+		// Set form action to add
+		rec_id.setValue('');
+		action.setValue('__a');
+		
 	}
 	
 	function edit() {
@@ -296,7 +319,7 @@ Ext.onReady(function(){
 
 		ajaxClass.on('beforerequest', show_mask);
 		ajaxClass.on('requestcomplete', hide_mask); 
-		
+
 		ajaxClass.request({
 				   url: '/planning/emplayee_update',
 				   /*success: someFn,
@@ -304,11 +327,24 @@ Ext.onReady(function(){
 				   headers: {
 					   'my-header': 'foo'
 				   },*/
-				   params: { name: Ext.get('txt_emp_id').dom.value },
+				   params: { 
+				   			employee_id: emp_id.getValue(), 
+				   			full_name: emp_full_name.getValue(),
+				   			name_with_initials: emp_name_with_init.getValue(),
+				   			date_of_birth: emp_dob.getValue(),
+				   			gender: (emp_gender.items.get(0).checked) ? 'M' : 'F',
+				   			national_id: emp_nid.getValue(),
+				   			address: emp_address.getValue(),
+				   			contact_number: emp_phone.getValue(),
+				   			branch_id: emp_branch.getValue(),
+				   			division_id: emp_division.getValue(),
+				   			id: rec_id.getValue(),
+				   			action: action.getValue()
+				   			},
 				   callback : function(options, success, response) { 
 				   				obj = Ext.util.JSON.decode(response.responseText);
 				   				grid_data_store.loadData(obj.employee_data);
-				   				Ext.MessageBox.alert("FAMS", response.message);
+				   				Ext.MessageBox.alert("FAMS", response.responseText);
 				   			}
 				});
 		
@@ -360,6 +396,7 @@ Ext.onReady(function(){
 <div id="grid_area" style="width:100%"></div>
 
 <div id="fields_div" style="margin-top:5px">
+    <form id="frm_employee"></form>
     <div id="tab1">
 		<table border="0" width="100%">
 			<tr>
@@ -420,7 +457,7 @@ Ext.onReady(function(){
     </div> 
 
     <div id="tab2">
-        
+
     </div>
 </div>
 
