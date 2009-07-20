@@ -124,7 +124,8 @@ Ext.onReady(function(){
         renderTo: 'fields_div',
         id:'tab_panel',
         activeTab: 0,
-        frame:true,
+        frame: true,
+        deferredRender: false,
         defaults:{autoHeight: true},
         items:[
             {contentEl:'tab1', title: 'Emp. Details'},
@@ -159,7 +160,7 @@ var rec_id = null;
 var action = null;
 
 var status_div = null;
-	
+
 Ext.onReady(function(){
     emp_id = new Ext.form.TextField({
     			id: 'txt_emp_id',
@@ -278,7 +279,6 @@ Ext.onReady(function(){
 });
 </script>
 
-
 <script type="text/javascript" language="javascript">
 /*
  * Event handlers for buttons
@@ -309,7 +309,6 @@ Ext.onReady(function(){
 	}
 
 	function del() {
-		
 
 		status_div.highlight();
 		//myDiv.addClass('red');  // Add a custom CSS class (defined in ExtStart.css)
@@ -401,7 +400,6 @@ Ext.onReady(function(){
 <div id="grid_area" style="width:100%"></div>
 
 <div id="fields_div" style="margin-top:5px">
-    <form id="frm_employee"></form>
     <div id="tab1">
 		<table border="0" width="100%">
 			<tr>
@@ -460,9 +458,15 @@ Ext.onReady(function(){
 			</tr>
 		</table>
     </div> 
-
     <div id="tab2">
-
+    	<div id="cnt_emp_photo" style="clear:both;margin-top:10px">
+			<form action="upload_file.php" method="post" enctype="multipart/form-data">
+				<label for="file">Filename:</label>
+				<input type="file" name="file" id="file" />
+				<br />
+				<input type="submit" name="submit" value="Submit" />
+			</form>
+		</div>
     </div>
 </div>
 
