@@ -91,7 +91,7 @@ Ext.onReady(function(){
 <div id="buttons_div" style="margin:10px;  ">
 	<!-- New / Edit / Save / Delete/ Clear-->
 	<div id="left_buttons" style="float: left; padding: 2px; width: 310px; background-color:#ffffff">
-		<table bgcolor="#c6d9f1">
+		<table width="100%" bgcolor="#c6d9f1">
 			<tr>
 				<td id="add_"></td><td id="edit_"></td><td id="del_"></td>
 			</tr>

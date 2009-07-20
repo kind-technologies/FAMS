@@ -100,10 +100,11 @@ Ext.onReady(function() {
 		emp_nid.setValue(r.data['emp_nid']);
 		emp_address.setValue(r.data['emp_address']);
 		emp_phone.setValue(r.data['emp_contact']);
+		
 		emp_branch.focus();
-		emp_branch.selectByValue('1');//setValue(r.data['emp_branch']);
-		//emp_division.selectByValue(r.data['emp_div_id'], true);//setValue(r.data['emp_div']);
-		//alert(r.data['emp_div_id']);
+		emp_branch.setValue(r.data['emp_branch_id'], true);
+		emp_division.focus();
+		emp_division.setValue(r.data['emp_div_id'], true);
 		current_row_index = row_index;
 		
 	});
@@ -232,31 +233,35 @@ Ext.onReady(function(){
 	emp_branch = new Ext.form.ComboBox({
     			id: 'txt_branch',
     			width: 200,
-    			disabled: false,
+    			disabled: true,
     			editable: false,
     			store: new Ext.data.SimpleStore({
-				fields:['id', 'branch_code'],
-				data: [['1', 'STG'], ['2', 'CMB']]
-			}),
-			displayField:'branch_code',
-			valueField: 'id',
-			mode: 'local',
+									fields:['bid', 'branch_code'],
+									data: [['1', 'STG'], ['2', 'CMB']]
+									}),
+				valueField: 'bid',
+				displayField:'branch_code',
+				forceSelection: true,
+				mode: 'local',
+				triggerAction: 'all',
     		    renderTo: 'cnt_branch'
     });
 
 	emp_division = new Ext.form.ComboBox({
     			id: 'txt_division',
     			width: 200,
-    			disabled: false,
+    			disabled: true,
     			editable: false,
+    			lazyInit: false,
     			store: new Ext.data.SimpleStore({
-				fields:['id', 'division_code'],
-				data: [['1', 'MGT'], ['2', 'WEB']]
-			}),
-			displayField: 'division_code',
-			valueField: 'id',
-			mode: 'local',
-    		    renderTo: 'cnt_division'
+									fields:['id', 'division_code'],
+									data: [['1', 'MGT'], ['2', 'WEB']]
+								}),
+				displayField: 'division_code',
+				valueField: 'id',
+				mode: 'local',
+				triggerAction: 'all',
+			    renderTo: 'cnt_division'
     });
 
 	rec_id = new Ext.form.Hidden({
