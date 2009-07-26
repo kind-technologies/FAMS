@@ -8,6 +8,8 @@ var grid = null;
 var current_row_index = 0;
 
 var grid_data_store = null;
+var file_upload_form = null;
+
 
 Ext.onReady(function() {
 	
@@ -105,8 +107,11 @@ Ext.onReady(function() {
 		emp_branch.setValue(r.data['emp_branch_id'], true);
 		emp_division.focus();
 		emp_division.setValue(r.data['emp_div_id'], true);
+		rec_id.setValue(r.data['rec_id'], true);
 		current_row_index = row_index;
 		
+		// fill the hidden field for photo upload
+		file_upload_form.get('hdn_upld_emp_id').setValue(r.data['rec_id'], true);
 	});
 	
 	
@@ -160,6 +165,10 @@ var rec_id = null;
 var action = null;
 
 var status_div = null;
+
+var btn_popup_upload = null;
+var btn_load_image = null;
+
 
 Ext.onReady(function(){
     emp_id = new Ext.form.TextField({
@@ -274,6 +283,8 @@ Ext.onReady(function(){
     			id: 'hdn_action',
     		    renderTo: 'cnt_hdn_action'
     });
+    
+
     
 	status_div = Ext.get('status_div');
 });
@@ -394,6 +405,121 @@ Ext.onReady(function(){
 		emp_division.setDisabled(bool);
 	}
 </script>
+<script>
+Ext.onReady(function(){
+
+    	btn_popup_upload = new Ext.Button({
+		text: 'Upload Photo',
+		//handler: add,
+		id: 'btn_popup_upload',
+		//icon: '/img/add.png',
+		//iconCls: 'btn_img',
+		minWidth: 100,
+		renderTo: cnt_upload_button
+	});
+
+    var win;
+
+    btn_popup_upload.on('click', function(){
+        // create the window on the first click and reuse on subsequent clicks
+        if(!win){
+            win = new Ext.Window({
+                applyTo:'hello-win',
+                layout:'fit',
+                width:510,
+                height:122,
+                closeAction:'hide',
+                plain: true,
+				title: 'File Upload Form',
+                items: file_upload_form
+            });
+        }
+        win.show(this);
+    });
+
+    file_upload_form = new Ext.FormPanel({
+        renderTo: 'fi-form',
+        fileUpload: true,
+        width: 500,
+        frame: true,
+        autoHeight: true,
+        bodyStyle: 'padding: 10px 10px 0 10px;',
+        labelWidth: 50,
+        defaults: {
+            anchor: '95%',
+            allowBlank: false,
+            msgTarget: 'side'
+        },
+        items: [{
+            xtype: 'hidden',
+            id: 'hdn_upld_emp_id',
+            name: 'hdn_upld_emp_id'
+        },{
+            xtype: 'fileuploadfield',
+            id: 'form-file',
+            emptyText: 'Select an image',
+            fieldLabel: 'Photo',
+            name: 'photo-path',
+            buttonText: '',
+            buttonCfg: {
+                iconCls: 'upload-icon'
+            }
+        }],
+        buttons: [{
+            text: 'Save',
+            handler: function(){
+                if(file_upload_form.getForm().isValid()){
+                		alert(file_upload_form.get('hdn_upld_emp_id').getValue());
+	                file_upload_form.getForm().submit({
+	                    url: '/planning/employee_upload_photo',
+	                    waitMsg: 'Uploading your photo...',
+	                    success: function(fp, o){
+	                        msg('Success', 'Processed file "'+o.result.file+'" on the server');
+	                    }
+	                });
+                }
+            }
+        },{
+            text: 'Reset',
+            handler: function(){
+               file_upload_form.getForm().reset();
+            }
+        }]
+    });
+
+	btn_load_image =  new Ext.Button({
+		text: 'Load Photo',
+		//handler: add,
+		id: 'btn_load_image',
+		//icon: '/img/add.png',
+		//iconCls: 'btn_img',
+		minWidth: 100,
+		renderTo: cnt_load_image
+	});
+	
+	btn_load_image.on('click', function(){
+			ajaxClass.request({
+					   url: '/planning/employee_load_photo',
+					   /*success: someFn,
+					   failure: otherFn,
+					   headers: {
+						   'my-header': 'foo'
+					   },*/
+					   params: { 
+					   			employee_id: emp_id.getValue(), 
+					   			id: rec_id.getValue(),
+				   			},
+					   callback : function(options, success, response) { 
+					   				//obj = Ext.util.JSON.decode(response.responseText);
+					   				//grid_data_store.loadData(obj.employee_data);
+					   				//Ext.MessageBox.alert("FAMS", response.responseText);
+					   				emp_img = document.getElementById('cnt_emp_image');
+					   				emp_img.innerHTML = response.responseText;
+					   			}
+					});
+        });
+});
+</script>
 
 <div id="status_div"></div>
 
@@ -423,7 +549,7 @@ Ext.onReady(function(){
 				<td id='cnt_dob'><!-- date of birth (ext gen.) --></td>
 				<td width="80px">Gender</td>
 				<td width="5px">:</td>
-				<td id="cnt_gender"><!-- gender (ext gen.) --></td>
+				<td id="cnt_gender" valign="middle"><!-- gender (ext gen.) --></td>
 			</tr>
 			<tr>
 				<td>National ID</td>
@@ -459,17 +585,23 @@ Ext.onReady(function(){
 		</table>
     </div> 
     <div id="tab2">
-    	<div id="cnt_emp_photo" style="clear:both;margin-top:10px">
-			<form action="upload_file.php" method="post" enctype="multipart/form-data">
-				<label for="file">Filename:</label>
-				<input type="file" name="file" id="file" />
-				<br />
-				<input type="submit" name="submit" value="Submit" />
-			</form>
-		</div>
-    </div>
+    			<table>
+				<tr>
+					<td id="cnt_upload_button"><!--upload buton container--></td>
+					<td id="cnt_load_image"><!--load image buton container--></td>
+				</tr>
+				<tr>
+					<td><!--upload buton container--></td>
+					<td id="cnt_emp_image"><!--employee image container--></td>
+				</tr>
+			</table>
+	</div>
 </div>
 
+
+<div id="hello-win" class="x-hidden">
+	<div id="fi-form"></div>
+</div>
 <?php echo $this->renderElement('command_buttons'); ?>
 
 

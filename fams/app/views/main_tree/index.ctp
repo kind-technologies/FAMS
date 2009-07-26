@@ -5,6 +5,7 @@ Ext.onReady(function(){
     
     var tree = new Tree.TreePanel({
         el:'tree_div',
+        border: false,
         useArrows:true,
         autoScroll:true,
         animate:true,
@@ -37,6 +38,6 @@ Ext.onReady(function(){
 });
 
 </script>
-<div id="tree_div" style="overflow:auto; height:100%; _height:700px; text-align:left;">
+<div id="tree_div" style="background-color:#ffffff;overflow:auto; height:100%; _height:700px; text-align:left;">
 
 </div>
