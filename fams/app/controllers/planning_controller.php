@@ -67,6 +67,22 @@ class PlanningController extends AppController {
 		
 	}
 	
+	function employee_upload_photo() {
+		Configure::write('debug', 0);
+		$this->layout = 'ajax';
+		
+		// Update database
+		
+		// Save photo file
+		
+		$this->set('photo_name', json_encode($_FILES['photo-path']['name']));
+	}
+	
+	function employee_load_photo() {
+		Configure::write('debug', 0);
+		$this->layout = 'ajax';
+	}
+	
 	function organization_setup() {
 
 	}
