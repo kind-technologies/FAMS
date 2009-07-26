@@ -10,6 +10,7 @@ var current_row_index = 0;
 var grid_data_store = null;
 var file_upload_form = null;
 
+var tabs = null;
 
 Ext.onReady(function() {
 	
@@ -110,6 +111,13 @@ Ext.onReady(function() {
 		rec_id.setValue(r.data['rec_id'], true);
 		current_row_index = row_index;
 		
+		// clear photo when moving among records
+		document.getElementById('cnt_emp_image').innerHTML = '';
+		
+		
+		// enable the second tab
+		tabs.items.get(1).setDisabled(false);
+		
 		// fill the hidden field for photo upload
 		file_upload_form.get('hdn_upld_emp_id').setValue(r.data['rec_id'], true);
 	});
@@ -125,7 +133,7 @@ Ext.onReady(function() {
 
 Ext.onReady(function(){
 
-    var tabs = new Ext.TabPanel({
+    tabs = new Ext.TabPanel({
         renderTo: 'fields_div',
         id:'tab_panel',
         activeTab: 0,
@@ -134,7 +142,7 @@ Ext.onReady(function(){
         defaults:{autoHeight: true},
         items:[
             {contentEl:'tab1', title: 'Emp. Details'},
-            {contentEl:'tab2', title: 'Additional Info'}
+            {contentEl:'tab2', title: 'Additional Info', disabled: true}
         ],
         viewConfig: {
 			forceFit: true,
@@ -389,7 +397,9 @@ Ext.onReady(function(){
 		rec_id.setValue('');
 		action.setValue('');
 		
-		
+		document.getElementById('cnt_emp_image').innerHTML = '';
+		tabs.items.get(1).setDisabled(true);
+		tabs.setActiveTab(0);
 	}
 
 	function disable_fields(bool) {
@@ -585,14 +595,18 @@ Ext.onReady(function(){
 		</table>
     </div> 
     <div id="tab2">
-    			<table>
+    			<table border="0" width="100%">
 				<tr>
-					<td id="cnt_upload_button"><!--upload buton container--></td>
+					<td width="10%" id="cnt_upload_button"><!--upload buton container--></td>
 					<td id="cnt_load_image"><!--load image buton container--></td>
 				</tr>
 				<tr>
-					<td><!--upload buton container--></td>
-					<td id="cnt_emp_image"><!--employee image container--></td>
+					<td colspan="2" align="center">
+					<!--employee image container-->
+						<div style="background-color:#c6d9f1;border:#d3e1f1 5px solid;width:180px;height:180px" id="cnt_emp_image">
+						
+						</div>
+					</td>
 				</tr>
 			</table>
 	</div>
