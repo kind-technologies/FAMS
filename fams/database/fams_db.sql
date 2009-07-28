@@ -2,7 +2,23 @@
 -- PostgreSQL database dump
 --
 
--- Started on 2009-07-06 22:14:05 IST
+-- Started on 2009-07-28 22:34:35 IST
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+--
+-- TOC entry 1812 (class 1262 OID 16385)
+-- Name: fams; Type: DATABASE; Schema: -; Owner: -
+--
+
+CREATE DATABASE fams WITH TEMPLATE = template0 ENCODING = 'UTF8';
+
+
+\connect fams
 
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = off;
@@ -12,66 +28,13 @@ SET escape_string_warning = off;
 
 SET search_path = public, pg_catalog;
 
-DROP INDEX public.aro_aco_key;
-ALTER TABLE ONLY public.users DROP CONSTRAINT users_pkey;
-ALTER TABLE ONLY public.system_menus DROP CONSTRAINT system_menu_pkey;
-ALTER TABLE ONLY public.employees DROP CONSTRAINT employees_pkey;
-ALTER TABLE ONLY public.divisions DROP CONSTRAINT divisions_pkey;
-ALTER TABLE ONLY public.branches DROP CONSTRAINT branches_pkey;
-ALTER TABLE ONLY public.aros DROP CONSTRAINT aros_pkey;
-ALTER TABLE ONLY public.aros_acos DROP CONSTRAINT aros_acos_pkey;
-ALTER TABLE ONLY public.acos DROP CONSTRAINT acos_pkey;
-ALTER TABLE public.users ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.system_menus ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.employees ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.divisions ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.branches ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.aros_acos ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.aros ALTER COLUMN id DROP DEFAULT;
-ALTER TABLE public.acos ALTER COLUMN id DROP DEFAULT;
-DROP SEQUENCE public.users_id_seq;
-DROP SEQUENCE public.system_menu_id_seq;
-DROP SEQUENCE public.employees_id_seq;
-DROP SEQUENCE public.divisions_id_seq;
-DROP SEQUENCE public.branches_id_seq;
-DROP SEQUENCE public.aros_id_seq;
-DROP SEQUENCE public.aros_acos_id_seq;
-DROP SEQUENCE public.acos_id_seq;
-DROP TABLE public.users;
-DROP TABLE public.system_menus;
-DROP TABLE public.employees;
-DROP TABLE public.divisions;
-DROP TABLE public.branches;
-DROP TABLE public.aros_acos;
-DROP TABLE public.aros;
-DROP TABLE public.acos;
-DROP SCHEMA public;
---
--- TOC entry 3 (class 2615 OID 2200)
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
---
-
-CREATE SCHEMA public;
-
-
---
--- TOC entry 1813 (class 0 OID 0)
--- Dependencies: 3
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON SCHEMA public IS 'standard public schema';
-
-
-SET search_path = public, pg_catalog;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
 -- TOC entry 1490 (class 1259 OID 16396)
--- Dependencies: 1771 1772 3
+-- Dependencies: 1770 1771 6
 -- Name: acos; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -88,7 +51,7 @@ CREATE TABLE acos (
 
 --
 -- TOC entry 1492 (class 1259 OID 16409)
--- Dependencies: 1774 1775 3
+-- Dependencies: 1773 1774 6
 -- Name: aros; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -105,7 +68,7 @@ CREATE TABLE aros (
 
 --
 -- TOC entry 1494 (class 1259 OID 16422)
--- Dependencies: 1777 1778 1779 1780 3
+-- Dependencies: 1776 1777 1778 1779 6
 -- Name: aros_acos; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -122,7 +85,7 @@ CREATE TABLE aros_acos (
 
 --
 -- TOC entry 1500 (class 1259 OID 16464)
--- Dependencies: 3
+-- Dependencies: 6
 -- Name: branches; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -135,7 +98,7 @@ CREATE TABLE branches (
 
 --
 -- TOC entry 1502 (class 1259 OID 16472)
--- Dependencies: 3
+-- Dependencies: 6
 -- Name: divisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -148,7 +111,7 @@ CREATE TABLE divisions (
 
 --
 -- TOC entry 1498 (class 1259 OID 16453)
--- Dependencies: 3
+-- Dependencies: 6
 -- Name: employees; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -169,7 +132,7 @@ CREATE TABLE employees (
 
 --
 -- TOC entry 1487 (class 1259 OID 16386)
--- Dependencies: 3
+-- Dependencies: 6
 -- Name: system_menus; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -185,7 +148,7 @@ CREATE TABLE system_menus (
 
 --
 -- TOC entry 1496 (class 1259 OID 16435)
--- Dependencies: 3
+-- Dependencies: 6
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -198,7 +161,7 @@ CREATE TABLE users (
 
 --
 -- TOC entry 1489 (class 1259 OID 16394)
--- Dependencies: 3 1490
+-- Dependencies: 6 1490
 -- Name: acos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -230,7 +193,7 @@ SELECT pg_catalog.setval('acos_id_seq', 1, false);
 
 --
 -- TOC entry 1493 (class 1259 OID 16420)
--- Dependencies: 1494 3
+-- Dependencies: 1494 6
 -- Name: aros_acos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -262,7 +225,7 @@ SELECT pg_catalog.setval('aros_acos_id_seq', 1, false);
 
 --
 -- TOC entry 1491 (class 1259 OID 16407)
--- Dependencies: 1492 3
+-- Dependencies: 6 1492
 -- Name: aros_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -294,7 +257,7 @@ SELECT pg_catalog.setval('aros_id_seq', 1, false);
 
 --
 -- TOC entry 1499 (class 1259 OID 16462)
--- Dependencies: 3 1500
+-- Dependencies: 6 1500
 -- Name: branches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -325,7 +288,7 @@ SELECT pg_catalog.setval('branches_id_seq', 2, true);
 
 --
 -- TOC entry 1501 (class 1259 OID 16470)
--- Dependencies: 3 1502
+-- Dependencies: 6 1502
 -- Name: divisions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -356,7 +319,7 @@ SELECT pg_catalog.setval('divisions_id_seq', 2, true);
 
 --
 -- TOC entry 1497 (class 1259 OID 16451)
--- Dependencies: 1498 3
+-- Dependencies: 1498 6
 -- Name: employees_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -382,12 +345,12 @@ ALTER SEQUENCE employees_id_seq OWNED BY employees.id;
 -- Name: employees_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('employees_id_seq', 7, true);
+SELECT pg_catalog.setval('employees_id_seq', 12, true);
 
 
 --
 -- TOC entry 1488 (class 1259 OID 16389)
--- Dependencies: 1487 3
+-- Dependencies: 6 1487
 -- Name: system_menu_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -418,7 +381,7 @@ SELECT pg_catalog.setval('system_menu_id_seq', 19, true);
 
 --
 -- TOC entry 1495 (class 1259 OID 16433)
--- Dependencies: 3 1496
+-- Dependencies: 6 1496
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -448,7 +411,7 @@ SELECT pg_catalog.setval('users_id_seq', 1, true);
 
 
 --
--- TOC entry 1770 (class 2604 OID 16399)
+-- TOC entry 1772 (class 2604 OID 16486)
 -- Dependencies: 1490 1489 1490
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
@@ -457,7 +420,7 @@ ALTER TABLE acos ALTER COLUMN id SET DEFAULT nextval('acos_id_seq'::regclass);
 
 
 --
--- TOC entry 1773 (class 2604 OID 16412)
+-- TOC entry 1775 (class 2604 OID 16487)
 -- Dependencies: 1491 1492 1492
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
@@ -466,8 +429,8 @@ ALTER TABLE aros ALTER COLUMN id SET DEFAULT nextval('aros_id_seq'::regclass);
 
 
 --
--- TOC entry 1776 (class 2604 OID 16425)
--- Dependencies: 1494 1493 1494
+-- TOC entry 1780 (class 2604 OID 16488)
+-- Dependencies: 1493 1494 1494
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -475,8 +438,8 @@ ALTER TABLE aros_acos ALTER COLUMN id SET DEFAULT nextval('aros_acos_id_seq'::re
 
 
 --
--- TOC entry 1783 (class 2604 OID 16467)
--- Dependencies: 1500 1499 1500
+-- TOC entry 1783 (class 2604 OID 16489)
+-- Dependencies: 1499 1500 1500
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -484,7 +447,7 @@ ALTER TABLE branches ALTER COLUMN id SET DEFAULT nextval('branches_id_seq'::regc
 
 
 --
--- TOC entry 1784 (class 2604 OID 16475)
+-- TOC entry 1784 (class 2604 OID 16490)
 -- Dependencies: 1502 1501 1502
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
@@ -493,7 +456,7 @@ ALTER TABLE divisions ALTER COLUMN id SET DEFAULT nextval('divisions_id_seq'::re
 
 
 --
--- TOC entry 1782 (class 2604 OID 16456)
+-- TOC entry 1782 (class 2604 OID 16491)
 -- Dependencies: 1498 1497 1498
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
@@ -502,7 +465,7 @@ ALTER TABLE employees ALTER COLUMN id SET DEFAULT nextval('employees_id_seq'::re
 
 
 --
--- TOC entry 1769 (class 2604 OID 16391)
+-- TOC entry 1769 (class 2604 OID 16492)
 -- Dependencies: 1488 1487
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
@@ -511,7 +474,7 @@ ALTER TABLE system_menus ALTER COLUMN id SET DEFAULT nextval('system_menu_id_seq
 
 
 --
--- TOC entry 1781 (class 2604 OID 16438)
+-- TOC entry 1781 (class 2604 OID 16493)
 -- Dependencies: 1496 1495 1496
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
@@ -581,12 +544,17 @@ COPY divisions (id, division_code, description) FROM stdin;
 
 COPY employees (id, employee_id, full_name, name_with_initials, date_of_birth, gender, national_id, address, contact_number, branch_id, division_id) FROM stdin;
 1	00001	Chaminda Keerthi Bandara	MMCK Bandara	1981-04-11	M	811021938V	113/4, Kithulawila Uyana, Kiriwattuduwa	94716833516	2	2
-2	00002	Nuwan Chaturanga	MN Chaturanga	1981-05-23	M	811021938V	\N	94716833516	2	2
-3	00003	James Cluff	J Cluff	1955-03-30	M	811021938V	\N	94716833516	1	1
 4	00004	Darshika Weerasinghe	DD Weerasinghe	1980-08-21	F	811021938V	\N	94716833516	2	2
 5	00005	Dihan Praneeth	D Praneeth	1965-09-12	M	811021938V	\N	94716833516	1	1
 6	00006	Nishan Pradeep	N Pradeep	1974-08-15	M	811021938V	\N	94716833516	2	1
 7	00007	Nishchala Kodithuwakku	N Kodithuwakku	1983-05-13	F	811021938V	\N	94716833516	2	2
+2	00002	Nuwan Chaturanga	MN Chaturanga	1981-05-23	M	811021938V	\N	94714567567	2	2
+3	00003	James Cluff	J Cluff	1955-03-30	M	551021938V	\N	01716833516	1	1
+8	00008	Dewian Cluff	D Cluff	1965-03-19	M	97654321V	Main Street, St George, Utah USA	0123456789	\N	\N
+9	00008	Abigail Cluff	A Cluff	1991-07-19	F	97654321V	Main Street, St George, Utah USA	0123456789	\N	\N
+10	00008	Abigail Cluff	A Cluff	1991-07-19	F	97654321V	Main Street, St George, Utah USA	0123456789	\N	\N
+11	00010	Abigail Cluff	A Cluff	1991-07-19	F	97654321V	Main Street, St George, Utah USA	0123456789	1	1
+12	00011	Mali Duruge	D Duruge	2009-07-08	F	09343434V	Thalahena North,	7101223123	2	2
 \.
 
 
@@ -601,7 +569,6 @@ COPY system_menus (id, parent_id, title, description, program_name, "order") FRO
 2	0	Execution	Execution	\N	2
 3	0	Monitoring	Monitoring	\N	3
 4	0	Controlling	Controlling	\N	4
-5	1	Employees	Employees	/planning/employees	1
 6	1	Org. Setup	Org. Setup	/planning/organization_setup	2
 7	1	Asset Categories	Asset Categories	/planning/asset_categories	3
 8	1	Asset Suppliers	Asset Suppliers	/planning/asset_suppliers	4
@@ -616,6 +583,7 @@ COPY system_menus (id, parent_id, title, description, program_name, "order") FRO
 17	4	Change Custodian	Change Custodian	/controlling/change_custodian	1
 18	4	Change Location	Change Location	/controlling/change_location	2
 19	4	Disposals	Disposals	/controlling/disposals	3
+5	1	Employees	Employees	/employees/employees	1
 \.
 
 
@@ -721,7 +689,7 @@ CREATE UNIQUE INDEX aro_aco_key ON aros_acos USING btree (aro_id, aco_id);
 
 --
 -- TOC entry 1814 (class 0 OID 0)
--- Dependencies: 3
+-- Dependencies: 6
 -- Name: public; Type: ACL; Schema: -; Owner: -
 --
 
@@ -731,7 +699,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2009-07-06 22:14:05 IST
+-- Completed on 2009-07-28 22:34:35 IST
 
 --
 -- PostgreSQL database dump complete
