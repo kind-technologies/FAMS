@@ -181,9 +181,14 @@ var btn_load_image = null;
 Ext.onReady(function(){
     emp_id = new Ext.form.TextField({
     			id: 'txt_emp_id',
+    			validateOnBlur: true,
+    			invalidText: 'The value in this field is invalid',
+    			maxLength : 5,
     			width: 200,
     			disabled: true,
-    		    renderTo: 'cnt_emp_id'
+    		    renderTo: 'cnt_emp_id',
+    		    msgTarget: 'under',
+    		    allowBlank:false
     });
 
 	emp_full_name = new Ext.form.TextField({
@@ -245,6 +250,8 @@ Ext.onReady(function(){
     			id: 'txt_phone',
     			width: 200,
     			disabled: true,
+    			vtype:'email',
+    			vtypeText:"The from field should be an email address in the format of user@domain.com",
     		    renderTo: 'cnt_phone'
     });
 
@@ -340,6 +347,12 @@ Ext.onReady(function(){
 
 	function save() {
 
+		// Validate fields before submit
+		if(!is_form_valid()) {
+			return false;
+		}
+
+
 		ajaxClass.on('beforerequest', show_mask);
 		ajaxClass.on('requestcomplete', hide_mask); 
 
@@ -383,7 +396,8 @@ Ext.onReady(function(){
 	
 	// Clear all text fields
 	function clear() {
-		emp_id.setValue('');
+		emp_id.setValue(''); emp_id.clearInvalid();
+		
 		emp_full_name.setValue('');
 		emp_name_with_init.setValue('');
 		emp_dob.setValue('');
@@ -414,6 +428,13 @@ Ext.onReady(function(){
 		emp_branch.setDisabled(bool);
 		emp_division.setDisabled(bool);
 	}
+	
+	function is_form_valid() {
+		is_valid = false;
+		
+		//emp_id.validate();
+		alert(emp_phone.validate());
+	}
 </script>
 <script>
 Ext.onReady(function(){
@@ -422,8 +443,7 @@ Ext.onReady(function(){
 		text: 'Upload Photo',
 		//handler: add,
 		id: 'btn_popup_upload',
-		//icon: '/img/add.png',
-		//iconCls: 'btn_img',
+		icon: '/img/image_add.png',
 		minWidth: 100,
 		renderTo: cnt_upload_button
 	});
@@ -501,8 +521,7 @@ Ext.onReady(function(){
 		text: 'Load Photo',
 		//handler: add,
 		id: 'btn_load_image',
-		//icon: '/img/add.png',
-		//iconCls: 'btn_img',
+		icon: '/img/load_image.png',
 		minWidth: 100,
 		renderTo: cnt_load_image
 	});
@@ -510,19 +529,11 @@ Ext.onReady(function(){
 	btn_load_image.on('click', function(){
 			ajaxClass.request({
 					   url: '/employees/employee_load_photo',
-					   /*success: someFn,
-					   failure: otherFn,
-					   headers: {
-						   'my-header': 'foo'
-					   },*/
 					   params: { 
 					   			employee_id: emp_id.getValue(), 
 					   			id: rec_id.getValue(),
 				   			},
 					   callback : function(options, success, response) { 
-					   				//obj = Ext.util.JSON.decode(response.responseText);
-					   				//grid_data_store.loadData(obj.employee_data);
-					   				//Ext.MessageBox.alert("FAMS", response.responseText);
 					   				emp_img = document.getElementById('cnt_emp_image');
 					   				emp_img.innerHTML = response.responseText;
 					   			}
@@ -534,7 +545,6 @@ Ext.onReady(function(){
 <div id="status_div"></div>
 
 <div id="grid_area" style="width:100%"></div>
-
 <div id="fields_div" style="margin-top:5px">
     <div id="tab1">
 		<table border="0" width="100%">
@@ -611,7 +621,6 @@ Ext.onReady(function(){
 			</table>
 	</div>
 </div>
-
 
 <div id="hello-win" class="x-hidden">
 	<div id="fi-form"></div>
