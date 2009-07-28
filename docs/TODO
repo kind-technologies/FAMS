@@ -1,0 +1,30 @@
+Create New Record
+	Client  Side
+		- Validations for add (for empty, date/email format)
+		- Prepare parameter list
+		- Pass ajax request
+
+	Server Side
+		- Capture Params
+		- Validate (for empty, date/email format, field lengths)
+
+		-> IF valid
+			- Save data
+			- Display OK message
+			- Reload datagrid
+			- Clear and reset form
+		-> ELSE invalid
+			- Keep entered values in fields
+			- Display the error message
+			- Highlignt the field with errorneous data
+
+
+
+
+
+
+
+
+
+
+
