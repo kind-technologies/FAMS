@@ -360,18 +360,13 @@ Ext.onReady(function(){
 													   callback : function(options, success, response) { 
 													   	obj = Ext.util.JSON.decode(response.responseText);
 													   	grid_data_store.loadData(obj.employee_data);
-													   	Ext.MessageBox.alert("FAMS", obj.params);
+													   	//Ext.MessageBox.alert("FAMS", obj.params);
+													   	display_message("Record deleted successfully");
 													   }
 													});
 										}
+										
 									});
-
-		status_div.highlight();
-		//myDiv.addClass('red');  // Add a custom CSS class (defined in ExtStart.css)
-		//myDiv.center();         // Center the element in the viewport
-		//myDiv.setOpacity(.25);
-		//alert('Clicked');
-		//alert(myDiv.dom.innerHTML);
 
 	}
 
@@ -465,6 +460,18 @@ Ext.onReady(function(){
 		emp_phone.setDisabled(bool);
 		emp_branch.setDisabled(bool);
 		emp_division.setDisabled(bool);
+	}
+	
+	function display_message(text) {
+		
+		status_div.insertHtml("beforeEnd", text);
+		status_div.highlight();
+		setTimeout("status_div.dom.innerHTML=''", 3000);
+		//myDiv.addClass('red');  // Add a custom CSS class (defined in ExtStart.css)
+		//myDiv.center();         // Center the element in the viewport
+		//myDiv.setOpacity(.25);
+		//alert('Clicked');
+		//alert(myDiv.dom.innerHTML);
 	}
 	
 	function is_form_valid() {
