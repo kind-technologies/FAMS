@@ -3,6 +3,7 @@
     <title>Fixed Asset Management System : Laknipayum LLC</title>
 	<?php echo $javascript->link('ext-3.0.0/adapter/ext/ext-base'); ?>
 	<?php echo $javascript->link('ext-3.0.0/ext-all-debug'); ?>
+	<?php echo $javascript->link('ext-3.0.0/src/util/Date'); ?>
 	<link rel='StyleSheet' href="<?php echo $this->base ?>/js/ext-3.0.0/resources/css/ext-all.css" />
 	<!--link rel='StyleSheet' href='<?php echo $this->base ?>/js/ext-3.0.0/resources/css/structure/borders.css' />
 	<link rel='StyleSheet' href='<?php echo $this->base ?>/js/ext-3.0.0/resources/css/structure/box.css' />

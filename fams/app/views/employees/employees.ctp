@@ -39,7 +39,7 @@ Ext.onReady(function() {
 		{name: 'emp_dob', type: 'date', dateFormat: 'm/d/Y'}, /* : float */
 		{name: 'emp_full_name'},
 		{name: 'emp_gender'},
-		{name: 'emp_nid'},
+		{name: 'emp_email'},
 		{name: 'emp_address'},
 		{name: 'rec_id', type: 'int'},
 		{name: 'emp_branch_id'},
@@ -100,7 +100,7 @@ Ext.onReady(function() {
 			emp_gender.items.get(0).setValue(false);
 			emp_gender.items.get(1).setValue(true);
 		}
-		emp_nid.setValue(r.data['emp_nid']);
+		emp_email.setValue(r.data['emp_email']);
 		emp_address.setValue(r.data['emp_address']);
 		emp_phone.setValue(r.data['emp_contact']);
 		
@@ -163,7 +163,7 @@ var emp_full_name = null;
 var emp_name_with_init = null;
 var emp_dob = null;
 var emp_gender = null;
-var emp_nid = null;
+var emp_email = null;
 var emp_address = null;
 var emp_phone = null;
 var emp_branch = null;
@@ -195,21 +195,25 @@ Ext.onReady(function(){
     			id: 'txt_full_name',
     			width: 600,
     			disabled: true,
-    		    renderTo: 'cnt_full_name'
+    		    renderTo: 'cnt_full_name',
+    		    allowBlank:false
     });
 
 	emp_name_with_init = new Ext.form.TextField({
     			id: 'txt_name_with_init',
     			width: 400,
     			disabled: true,
-    		    renderTo: 'cnt_name_with_init'
+    		    renderTo: 'cnt_name_with_init',
+    		    allowBlank:false
     });
     
 	emp_dob = new Ext.form.DateField({
     			id: 'dat_emp_id',
     			width: 200,
     			disabled: true,
-    		    renderTo: 'cnt_dob'
+    			format: 'm/d/Y',
+    		    renderTo: 'cnt_dob',
+    		    allowBlank:false
     });
 
 	emp_gender = new Ext.form.RadioGroup({
@@ -232,27 +236,30 @@ Ext.onReady(function(){
     		    renderTo: 'cnt_gender'
     });
 
-	emp_nid = new Ext.form.TextField({
-    			id: 'txt_nid',
+	emp_email = new Ext.form.TextField({
+    			id: 'txt_email',
     			width: 200,
     			disabled: true,
-    		    renderTo: 'cnt_nid'
+    		    renderTo: 'cnt_email',
+			vtype:'email',
+			vtypeText:"The from field should be an email address in the format of user@domain.com",
+    		    allowBlank:false
     });
     
 	emp_address = new Ext.form.TextField({
     			id: 'txt_address',
     			width: 600,
     			disabled: true,
-    		    renderTo: 'cnt_address'
+    		    renderTo: 'cnt_address',
+    		    allowBlank:false
     });
 
 	emp_phone = new Ext.form.TextField({
     			id: 'txt_phone',
     			width: 200,
     			disabled: true,
-    			vtype:'email',
-    			vtypeText:"The from field should be an email address in the format of user@domain.com",
-    		    renderTo: 'cnt_phone'
+    		    renderTo: 'cnt_phone',
+    		    allowBlank:false
     });
 
 	emp_branch = new Ext.form.ComboBox({
@@ -269,7 +276,8 @@ Ext.onReady(function(){
 				forceSelection: true,
 				mode: 'local',
 				triggerAction: 'all',
-    		    renderTo: 'cnt_branch'
+    		    renderTo: 'cnt_branch',
+    		    allowBlank:false
     });
 
 	emp_division = new Ext.form.ComboBox({
@@ -282,11 +290,12 @@ Ext.onReady(function(){
 									fields:['id', 'division_code'],
 									data: [['1', 'MGT'], ['2', 'WEB']]
 								}),
-				displayField: 'division_code',
-				valueField: 'id',
-				mode: 'local',
-				triggerAction: 'all',
-			    renderTo: 'cnt_division'
+			displayField: 'division_code',
+			valueField: 'id',
+			mode: 'local',
+			triggerAction: 'all',
+		    renderTo: 'cnt_division',
+			allowBlank:false
     });
 
 	rec_id = new Ext.form.Hidden({
@@ -309,12 +318,13 @@ Ext.onReady(function(){
 /*
  * Event handlers for buttons
  */
-	
+
 	function add() {
 		
 		// Enable/Disable fields accodingly
 		clear();
 		disable_fields(false);
+		btn_add.setDisabled(true);
 		btn_edit.setDisabled(true);
 		btn_delete.setDisabled(true);
 		btn_save.setDisabled(false);
@@ -323,18 +333,38 @@ Ext.onReady(function(){
 		// Set form action to add
 		rec_id.setValue('');
 		action.setValue('__a');
-		
 	}
 	
 	function edit() {
 		disable_fields(false);
 		btn_add.setDisabled(true);
+		btn_edit.setDisabled(true);
 		btn_delete.setDisabled(true);
 		btn_save.setDisabled(false);
 		grid.setDisabled(true);
+		action.setValue('__e');
 	}
 
 	function del() {
+		action.setValue('__d');
+		
+		Ext.MessageBox.confirm("FAMS", "Do you want to delete this record?", 
+									function(btn){
+										if(btn == "yes") {
+											ajaxClass.request({
+													   url: '/employees/emplayee_update',
+													   params: { 
+													   	id: rec_id.getValue(),
+													   	action: action.getValue()
+													   },
+													   callback : function(options, success, response) { 
+													   	obj = Ext.util.JSON.decode(response.responseText);
+													   	grid_data_store.loadData(obj.employee_data);
+													   	Ext.MessageBox.alert("FAMS", obj.params);
+													   }
+													});
+										}
+									});
 
 		status_div.highlight();
 		//myDiv.addClass('red');  // Add a custom CSS class (defined in ExtStart.css)
@@ -349,12 +379,12 @@ Ext.onReady(function(){
 
 		// Validate fields before submit
 		if(!is_form_valid()) {
+			Ext.MessageBox.alert("FAMS", "Please check the values you have entered.");
 			return false;
 		}
 
-
-		ajaxClass.on('beforerequest', show_mask);
-		ajaxClass.on('requestcomplete', hide_mask); 
+		//ajaxClass.on('beforerequest', show_mask);
+		//ajaxClass.on('requestcomplete', hide_mask); 
 
 		ajaxClass.request({
 				   url: '/employees/emplayee_update',
@@ -367,9 +397,9 @@ Ext.onReady(function(){
 				   			employee_id: emp_id.getValue(), 
 				   			full_name: emp_full_name.getValue(),
 				   			name_with_initials: emp_name_with_init.getValue(),
-				   			date_of_birth: emp_dob.getValue(),
+				   			date_of_birth: emp_dob.getValue().format('Y-m-d'),
 				   			gender: (emp_gender.items.get(0).checked) ? 'M' : 'F',
-				   			national_id: emp_nid.getValue(),
+				   			email: emp_email.getValue(),
 				   			address: emp_address.getValue(),
 				   			contact_number: emp_phone.getValue(),
 				   			branch_id: emp_branch.getValue(),
@@ -380,7 +410,7 @@ Ext.onReady(function(){
 				   callback : function(options, success, response) { 
 				   				obj = Ext.util.JSON.decode(response.responseText);
 				   				grid_data_store.loadData(obj.employee_data);
-				   				Ext.MessageBox.alert("FAMS", response.responseText);
+				   				Ext.MessageBox.alert("FAMS", obj.params);
 				   			}
 				});
 		
@@ -394,19 +424,27 @@ Ext.onReady(function(){
 	}
 
 	
-	// Clear all text fields
+	// Clear all text fields and error messages
 	function clear() {
 		emp_id.setValue(''); emp_id.clearInvalid();
 		
-		emp_full_name.setValue('');
-		emp_name_with_init.setValue('');
-		emp_dob.setValue('');
-		emp_gender.setValue('');
-		emp_nid.setValue('');
-		emp_address.setValue('');
-		emp_phone.setValue('');
-		emp_branch.setValue('');
-		emp_division.setValue('');
+		emp_full_name.setValue(''); emp_full_name.clearInvalid();
+		
+		emp_name_with_init.setValue(''); emp_name_with_init.clearInvalid();
+		
+		emp_dob.setValue(''); emp_dob.clearInvalid();
+		
+		emp_gender.setValue(''); emp_gender.clearInvalid();
+		
+		emp_email.setValue(''); emp_email.clearInvalid();
+		
+		emp_address.setValue(''); emp_address.clearInvalid();
+		
+		emp_phone.setValue(''); emp_phone.clearInvalid();
+		
+		emp_branch.setValue(''); emp_branch.clearInvalid();
+		
+		emp_division.setValue(''); emp_division.clearInvalid();
 
 		rec_id.setValue('');
 		action.setValue('');
@@ -422,7 +460,7 @@ Ext.onReady(function(){
 		emp_name_with_init.setDisabled(bool);
 		emp_dob.setDisabled(bool);
 		emp_gender.setDisabled(bool);
-		emp_nid.setDisabled(bool);
+		emp_email.setDisabled(bool);
 		emp_address.setDisabled(bool);
 		emp_phone.setDisabled(bool);
 		emp_branch.setDisabled(bool);
@@ -430,10 +468,18 @@ Ext.onReady(function(){
 	}
 	
 	function is_form_valid() {
-		is_valid = false;
 		
-		//emp_id.validate();
-		alert(emp_phone.validate());
+		return (	emp_id.validate() &&
+					emp_full_name.validate() &&
+					emp_name_with_init.validate() &&
+					emp_dob.validate() &&
+					emp_email.validate() &&
+					emp_address.validate() &&
+					emp_phone.validate() &&
+					emp_branch.validate() &&
+					emp_division.validate() );
+
+
 	}
 </script>
 <script>
@@ -572,9 +618,9 @@ Ext.onReady(function(){
 				<td id="cnt_gender" valign="middle"><!-- gender (ext gen.) --></td>
 			</tr>
 			<tr>
-				<td>National ID</td>
+				<td>Email</td>
 				<td width="5px">:</td>
-				<td colspan="4" id="cnt_nid"><!-- NID (ext gen.) --></td>
+				<td colspan="4" id="cnt_email"><!-- email (ext gen.) --></td>
 			</tr>
 			<tr>
 				<td>Address</td>
