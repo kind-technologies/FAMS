@@ -378,9 +378,6 @@ Ext.onReady(function(){
 			return false;
 		}
 
-		//ajaxClass.on('beforerequest', show_mask);
-		//ajaxClass.on('requestcomplete', hide_mask); 
-
 		ajaxClass.request({
 				   url: '/employees/emplayee_update',
 				   /*success: someFn,
