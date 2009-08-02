@@ -347,6 +347,9 @@ Ext.onReady(function(){
 
 	function del() {
 		action.setValue('__d');
+		btn_add.setDisabled(true);
+		btn_edit.setDisabled(true);
+		btn_delete.setDisabled(true);
 		
 		Ext.MessageBox.confirm("FAMS", "Do you want to delete this record?", 
 									function(btn){
@@ -362,8 +365,13 @@ Ext.onReady(function(){
 													   	grid_data_store.loadData(obj.employee_data);
 													   	//Ext.MessageBox.alert("FAMS", obj.params);
 													   	display_message("Record deleted successfully");
+													   	cancel();
+														grid.getSelectionModel().selectFirstRow();
 													   }
 													});
+										} else {
+											cancel();
+											grid.getSelectionModel().selectRow(current_row_index);
 										}
 										
 									});
@@ -404,6 +412,9 @@ Ext.onReady(function(){
 				   				grid_data_store.loadData(obj.employee_data);
 				   				//Ext.MessageBox.alert("FAMS", obj.params);
 				   				display_message("Record saved successfully");
+				   															
+				   				cancel();
+								grid.getSelectionModel().selectRow(current_row_index);
 				   			}
 				});
 		
