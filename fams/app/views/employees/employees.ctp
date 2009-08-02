@@ -405,7 +405,8 @@ Ext.onReady(function(){
 				   callback : function(options, success, response) { 
 				   				obj = Ext.util.JSON.decode(response.responseText);
 				   				grid_data_store.loadData(obj.employee_data);
-				   				Ext.MessageBox.alert("FAMS", obj.params);
+				   				//Ext.MessageBox.alert("FAMS", obj.params);
+				   				display_message("Record saved successfully");
 				   			}
 				});
 		
