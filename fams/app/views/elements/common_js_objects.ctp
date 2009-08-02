@@ -2,8 +2,6 @@
 
 var page_mask = new Ext.LoadMask(Ext.getBody(), {msg:"Please wait..."});
 
-var ajaxClass = Ext.Ajax;
-
 var show_mask = function (conn, request) {
 					page_mask.show();
 				}
@@ -22,5 +20,9 @@ var msg = function(title, msg){
 		buttons: Ext.Msg.OK
 	});
 };
+
+var ajaxClass = Ext.Ajax;
+ajaxClass.on('beforerequest', show_mask);
+ajaxClass.on('requestcomplete', hide_mask);
 
 </script>
