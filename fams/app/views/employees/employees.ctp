@@ -511,12 +511,30 @@ Ext.onReady(function(){
 	});
 
     var win;
+    
+	var upload_success = function(fp, o) {
+							msg('Success', 'Processed file "'+o.result.file+'" on the server');
+							
+							if(o.result.success == true) {
+								display_message("Image uploaded successfully.");
+							} else {
+								display_message("Image upload failed.");
+							}
+							
+							btn_load_image.fireEvent('click');
+							win.hide();
+	                    };
 
-    btn_popup_upload.on('click', function(){
+	var load_image = function(options, success, response) { 
+					   		emp_img = document.getElementById('cnt_emp_image');
+					   		emp_img.innerHTML = response.responseText;
+					 };
+
+    btn_popup_upload.on('click', function() {
         // create the window on the first click and reuse on subsequent clicks
         if(!win){
             win = new Ext.Window({
-                applyTo:'hello-win',
+                applyTo:'cnt_photo_win',
                 layout:'fit',
                 width:510,
                 height:122,
@@ -530,7 +548,7 @@ Ext.onReady(function(){
     });
 
     file_upload_form = new Ext.FormPanel({
-        renderTo: 'fi-form',
+        renderTo: 'cnt_photo_form',
         fileUpload: true,
         width: 500,
         frame: true,
@@ -548,10 +566,10 @@ Ext.onReady(function(){
             name: 'hdn_upld_emp_id'
         },{
             xtype: 'fileuploadfield',
-            id: 'form-file',
+            id: 'photo',
             emptyText: 'Select an image',
             fieldLabel: 'Photo',
-            name: 'photo-path',
+            name: 'photo',
             buttonText: '',
             buttonCfg: {
                 iconCls: 'upload-icon'
@@ -559,19 +577,17 @@ Ext.onReady(function(){
         }],
         buttons: [{
             text: 'Save',
-            handler: function(){
+            handler: function() {
                 if(file_upload_form.getForm().isValid()){
-                		alert(file_upload_form.get('hdn_upld_emp_id').getValue());
+                		//alert(file_upload_form.get('hdn_upld_emp_id').getValue());
 	                file_upload_form.getForm().submit({
 	                    url: '/employees/employee_upload_photo',
 	                    waitMsg: 'Uploading your photo...',
-	                    success: function(fp, o){
-	                        msg('Success', 'Processed file "'+o.result.file+'" on the server');
-	                    }
+	                    success: upload_success
 	                });
                 }
             }
-        },{
+        }, {
             text: 'Reset',
             handler: function(){
                file_upload_form.getForm().reset();
@@ -595,10 +611,7 @@ Ext.onReady(function(){
 					   			employee_id: emp_id.getValue(), 
 					   			id: rec_id.getValue(),
 				   			},
-					   callback : function(options, success, response) { 
-					   				emp_img = document.getElementById('cnt_emp_image');
-					   				emp_img.innerHTML = response.responseText;
-					   			}
+					   callback : load_image
 					});
         });
 });
@@ -684,8 +697,8 @@ Ext.onReady(function(){
 	</div>
 </div>
 
-<div id="hello-win" class="x-hidden">
-	<div id="fi-form"></div>
+<div id="cnt_photo_win" class="x-hidden">
+	<div id="cnt_photo_form"></div>
 </div>
 <?php echo $this->renderElement('command_buttons'); ?>
 
