@@ -82,11 +82,33 @@ class EmployeesController extends AppController {
 		Configure::write('debug', 0);
 		$this->layout = 'ajax';
 		
+		if ((($_FILES["photo"]["type"] == "image/gif") ||
+				($_FILES["photo"]["type"] == "image/png") || 
+				($_FILES["photo"]["type"] == "image/jpeg") || 
+				($_FILES["photo"]["type"] == "image/pjpeg")) && 
+				($_FILES["photo"]["size"] < 300000)) {
+
+			if ($_FILES["photo"]["error"] > 0) {
+				//echo "Return Code: " . $_FILES["file"]["error"] . "<br />";
+			} else {
+		
+				if (file_exists("img/employee_imgs/" . $_FILES["photo"]["name"])) {
+					//echo $_FILES["file"]["name"] . " already exists. ";
+				} else { 
+					move_uploaded_file($_FILES["photo"]["tmp_name"],
+												"img/employee_imgs/" . $_FILES["photo"]["name"]);
+					//echo "Stored in: " . "upload/" . $_FILES["file"]["name"];
+				}
+			}
+		} else {
+			//echo "Invalid file";
+		}
+		
 		// Update database
 		
 		// Save photo file
 		
-		$this->set('photo_name', json_encode($_FILES['photo-path']['name']));
+		$this->set('photo_name', json_encode($this->params['form']['hdn_upld_emp_id']));
 	}
 	
 	function employee_load_photo() {
