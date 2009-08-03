@@ -411,9 +411,18 @@ Ext.onReady(function(){
 				   				obj = Ext.util.JSON.decode(response.responseText);
 				   				grid_data_store.loadData(obj.employee_data);
 				   				display_message("Record saved successfully");
-				   															
+				   				
+				   				act = action.getValue();
+				   														
 				   				cancel();
-								grid.getSelectionModel().selectRow(current_row_index);
+				   				
+				   				if(act == '__e') {
+									grid.getSelectionModel().selectRow(current_row_index);
+								} else if(act == '__a') {
+									grid.getSelectionModel().selectLastRow();
+									idx = grid.store.indexOf(grid.getSelectionModel().getSelected());
+									grid.getView().focusRow(idx);
+								}
 		   			}
 				});
 		
