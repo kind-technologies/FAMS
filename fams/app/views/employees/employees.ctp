@@ -473,7 +473,7 @@ Ext.onReady(function(){
 	function display_message(text) {
 		status_div.highlight("ffffff");		
 		status_div.insertHtml("beforeEnd", text);
-		setTimeout("status_div.dom.innerHTML=''", 3000);
+		setTimeout("status_div.dom.innerHTML=''", 5000);
 	}
 	
 	function is_form_valid() {
