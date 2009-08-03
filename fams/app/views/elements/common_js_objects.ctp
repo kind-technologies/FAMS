@@ -1,9 +1,12 @@
 <script type="text/javascript" language="javascript">
 
+var enable_mask = true;
+
 var page_mask = new Ext.LoadMask(Ext.getBody(), {msg:"Please wait..."});
 
 var show_mask = function (conn, request) {
-					page_mask.show();
+					if(enable_mask)
+						page_mask.show();
 				}
 
 var hide_mask = function (conn, response, options )  {
