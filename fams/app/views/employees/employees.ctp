@@ -311,6 +311,7 @@ Ext.onReady(function(){
 
     
 	status_div = Ext.get('status_div');
+
 });
 </script>
 
@@ -355,20 +356,19 @@ Ext.onReady(function(){
 									function(btn){
 										if(btn == "yes") {
 											ajaxClass.request({
-													   url: '/employees/emplayee_update',
-													   params: { 
-													   	id: rec_id.getValue(),
-													   	action: action.getValue()
-													   },
-													   callback : function(options, success, response) { 
-													   	obj = Ext.util.JSON.decode(response.responseText);
-													   	grid_data_store.loadData(obj.employee_data);
-													   	//Ext.MessageBox.alert("FAMS", obj.params);
-													   	display_message("Record deleted successfully");
-													   	cancel();
-														grid.getSelectionModel().selectFirstRow();
-													   }
-													});
+														url: '/employees/emplayee_update',
+														params: { 
+															id: rec_id.getValue(),
+															action: action.getValue()
+														},
+														callback : function(options, success, response) { 
+															obj = Ext.util.JSON.decode(response.responseText);
+															grid_data_store.loadData(obj.employee_data);
+															display_message("Record deleted successfully");
+															cancel();
+															grid.getSelectionModel().selectFirstRow();
+														}
+												});
 										} else {
 											cancel();
 											grid.getSelectionModel().selectRow(current_row_index);
@@ -406,16 +406,15 @@ Ext.onReady(function(){
 				   			division_id: emp_division.getValue(),
 				   			id: rec_id.getValue(),
 				   			action: action.getValue()
-				   			},
+		   			},
 				   callback : function(options, success, response) { 
 				   				obj = Ext.util.JSON.decode(response.responseText);
 				   				grid_data_store.loadData(obj.employee_data);
-				   				//Ext.MessageBox.alert("FAMS", obj.params);
 				   				display_message("Record saved successfully");
 				   															
 				   				cancel();
 								grid.getSelectionModel().selectRow(current_row_index);
-				   			}
+		   			}
 				});
 		
 	}
@@ -472,15 +471,9 @@ Ext.onReady(function(){
 	}
 	
 	function display_message(text) {
-		
+		status_div.highlight("ffffff");		
 		status_div.insertHtml("beforeEnd", text);
-		status_div.highlight();
 		setTimeout("status_div.dom.innerHTML=''", 3000);
-		//myDiv.addClass('red');  // Add a custom CSS class (defined in ExtStart.css)
-		//myDiv.center();         // Center the element in the viewport
-		//myDiv.setOpacity(.25);
-		//alert('Clicked');
-		//alert(myDiv.dom.innerHTML);
 	}
 	
 	function is_form_valid() {
@@ -495,7 +488,6 @@ Ext.onReady(function(){
 					emp_branch.validate() &&
 					emp_division.validate() );
 
-
 	}
 </script>
 <script>
@@ -503,7 +495,6 @@ Ext.onReady(function(){
 
     btn_popup_upload = new Ext.Button({
 							text: 'Upload Photo',
-							//handler: add,
 							id: 'btn_popup_upload',
 							icon: '/img/image_add.png',
 							minWidth: 100,
@@ -513,7 +504,6 @@ Ext.onReady(function(){
     var win;
     
 	var upload_success = function(fp, o) {
-							//msg('Success', 'Processed file "'+ o.result.employee_data +'" on the server');
 							
 							if(o.result.success == true) {
 								display_message("Image uploaded successfully.");
@@ -605,7 +595,6 @@ Ext.onReady(function(){
 
 	btn_load_image =  new Ext.Button({
 		text: 'Load Photo',
-		//handler: add,
 		id: 'btn_load_image',
 		icon: '/img/load_image.png',
 		minWidth: 100,
@@ -709,7 +698,4 @@ Ext.onReady(function(){
 	<div id="cnt_photo_form"></div>
 </div>
 <?php echo $this->renderElement('command_buttons'); ?>
-
-
-
 
