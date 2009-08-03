@@ -96,8 +96,8 @@ class EmployeesController extends AppController {
 				$emp_id = $this->params['form']['hdn_upld_emp_id'];
 				$employee = $this->Employee->find(array('Employee.id'=>$emp_id));
 				
-
-				$file_name = md5($employee['Employee']['id']);
+				// Create unique file name
+				$file_name = md5($employee['Employee']['id']) . '-' . rand(0, 5);
 				$extension = '';
 				
 				switch ($_FILES['photo']['type']) {
