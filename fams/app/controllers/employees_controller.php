@@ -69,7 +69,7 @@ class EmployeesController extends AppController {
 			$this->Employee->save($this->data);	
 		}
 		
-		$this->set('params', $record_id . $form_action);
+		//$this->set('params', $record_id . $form_action);
 
 		// Set data for update data-grid.
 		// JSON object is created in view file accordingly
@@ -79,41 +79,79 @@ class EmployeesController extends AppController {
 	}
 	
 	function employee_upload_photo() {
-		Configure::write('debug', 0);
+		//Configure::write('debug', 0);
 		$this->layout = 'ajax';
 		
-		if ((($_FILES["photo"]["type"] == "image/gif") ||
-				($_FILES["photo"]["type"] == "image/png") || 
-				($_FILES["photo"]["type"] == "image/jpeg") || 
-				($_FILES["photo"]["type"] == "image/pjpeg")) && 
-				($_FILES["photo"]["size"] < 300000)) {
+		if ((($_FILES['photo']['type'] == 'image/gif') ||
+				($_FILES['photo']['type'] == 'image/png') || 
+				($_FILES['photo']['type'] == 'image/jpeg') || 
+				($_FILES['photo']['type'] == 'image/pjpeg')) && 
+				($_FILES['photo']['size'] < 300000)) { // Restrict the file size to 300KB
 
-			if ($_FILES["photo"]["error"] > 0) {
+			if ($_FILES['photo']['error'] > 0) {
 				//echo "Return Code: " . $_FILES["file"]["error"] . "<br />";
 			} else {
-		
-				if (file_exists("img/employee_imgs/" . $_FILES["photo"]["name"])) {
-					//echo $_FILES["file"]["name"] . " already exists. ";
-				} else { 
-					move_uploaded_file($_FILES["photo"]["tmp_name"],
-												"img/employee_imgs/" . $_FILES["photo"]["name"]);
-					//echo "Stored in: " . "upload/" . $_FILES["file"]["name"];
+				
+				
+				$emp_id = $this->params['form']['hdn_upld_emp_id'];
+				$employee = $this->Employee->find(array('Employee.id'=>$emp_id));
+				
+
+				$file_name = md5($employee['Employee']['id']);
+				$extension = '';
+				
+				switch ($_FILES['photo']['type']) {
+					case 'image/gif':
+						$extension = '.gif';
+						break;
+					case 'image/png':
+						$extension = '.png';
+						break;
+					case 'image/jpeg':
+						$extension = '.jpg';
+						break;
+					case 'image/pjpeg': // IE MIME type for jpg
+						$extension = '.jpg';
+						break;
 				}
+
+				$file_name .= $extension;
+				
+				// Get the existing file name, remove the file if exists
+				if($employee['Employee']['photo']) {
+					@unlink("img/employee_imgs/" . $employee['Employee']['photo']);
+				}
+
+				// Update the DB with new file name
+				$emp_data['Employee']['id'] = $emp_id;
+				$emp_data['Employee']['photo'] = $file_name;
+				$this->Employee->save($emp_data);
+				
+				// Save the file
+				move_uploaded_file($_FILES["photo"]["tmp_name"],
+											"img/employee_imgs/" . $file_name);
+		
 			}
 		} else {
 			//echo "Invalid file";
 		}
 		
-		// Update database
-		
-		// Save photo file
 		
 		$this->set('photo_name', json_encode($this->params['form']['hdn_upld_emp_id']));
 	}
 	
 	function employee_load_photo() {
-		Configure::write('debug', 0);
+		//Configure::write('debug', 0);
 		$this->layout = 'ajax';
+
+		$emp_id = $this->params['form']['id'];
+		$employee = $this->Employee->find(array('Employee.id' => $emp_id));
+		
+		if(isset($employee['Employee']['photo'])) {
+			$this->set('emp_photo', $employee['Employee']['photo']);
+		} else {
+			$this->set('emp_photo', 'NO');
+		}
 	}
 
 }
