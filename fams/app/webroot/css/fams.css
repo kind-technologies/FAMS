@@ -85,9 +85,10 @@ body{
 	height:20px;
 	margin-left:5px;
 	margin-bottom:5px;
-    font-family:Serif, Verdana, Arial, Helvetica, sans-serif", comic Sans MS";
+    font-family: Serif, Verdana, Arial, Helvetica, sans-serif", comic Sans MS";
     font-size:9pt;
-    font-weight:normal;
+    font-weight:bold;
+    color: #15428b;
 }
 
 #error_message {
