@@ -501,19 +501,19 @@ Ext.onReady(function(){
 <script>
 Ext.onReady(function(){
 
-    	btn_popup_upload = new Ext.Button({
-		text: 'Upload Photo',
-		//handler: add,
-		id: 'btn_popup_upload',
-		icon: '/img/image_add.png',
-		minWidth: 100,
-		renderTo: cnt_upload_button
-	});
+    btn_popup_upload = new Ext.Button({
+							text: 'Upload Photo',
+							//handler: add,
+							id: 'btn_popup_upload',
+							icon: '/img/image_add.png',
+							minWidth: 100,
+							renderTo: cnt_upload_button
+						});
 
     var win;
     
 	var upload_success = function(fp, o) {
-							msg('Success', 'Processed file "'+o.result.file+'" on the server');
+							//msg('Success', 'Processed file "'+ o.result.employee_data +'" on the server');
 							
 							if(o.result.success == true) {
 								display_message("Image uploaded successfully.");
@@ -523,6 +523,9 @@ Ext.onReady(function(){
 							
 							btn_load_image.fireEvent('click');
 							win.hide();
+							
+							// Reset page-mask for normal ajax operations
+                			enable_mask = true;
 	                    };
 
 	var load_image = function(options, success, response) { 
@@ -578,14 +581,19 @@ Ext.onReady(function(){
         buttons: [{
             text: 'Save',
             handler: function() {
+            	// Disable ajax page-mask when uploading image
+            	enable_mask = false;
+
                 if(file_upload_form.getForm().isValid()){
-                		//alert(file_upload_form.get('hdn_upld_emp_id').getValue());
+                	
 	                file_upload_form.getForm().submit({
 	                    url: '/employees/employee_upload_photo',
 	                    waitMsg: 'Uploading your photo...',
 	                    success: upload_success
 	                });
+	                
                 }
+
             }
         }, {
             text: 'Reset',
