@@ -22,5 +22,8 @@ class MonitoringController extends AppController {
 
 	}
 
+	function depreciation_info() {
+	
+	}
 }
 ?>
