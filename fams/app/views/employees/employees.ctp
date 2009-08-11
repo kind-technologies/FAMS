@@ -507,7 +507,7 @@ Ext.onReady(function(){
 							id: 'btn_popup_upload',
 							icon: '/img/image_add.png',
 							minWidth: 100,
-							renderTo: cnt_upload_button
+							renderTo: 'cnt_upload_button'
 						});
 
     var win;
@@ -607,7 +607,7 @@ Ext.onReady(function(){
 		id: 'btn_load_image',
 		icon: '/img/load_image.png',
 		minWidth: 100,
-		renderTo: cnt_load_image
+		renderTo: 'cnt_load_image'
 	});
 	
 	btn_load_image.on('click', function(){
