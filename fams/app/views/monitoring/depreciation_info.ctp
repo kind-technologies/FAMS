@@ -112,6 +112,95 @@ var asset_name = null;
 var ast_cat_id = null;
 var asset_id = null;
 
+var win_ast_cat;
+var win_ast;
+
+var grid_asset_cat_data_store = null;
+var grid_asset_cat = null;
+
+var grid_asset_data_store = null;
+var grid_asset = null;
+
+
+Ext.onReady(function(){
+
+	// Data grid for Asset Category Browser	
+	var myData = [
+        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
+        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
+        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
+        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
+        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
+        [5, 'FFF', 'FFFFFFFFFFFFFFFF']
+    ];
+    
+    var store = new Ext.data.ArrayStore({
+        fields: [
+           {name: 'ast_cat_id', type: 'int'},
+           {name: 'ast_cat_code'},
+           {name: 'ast_cat_desc'}
+	 	]
+    });
+    
+	store.loadData(myData);
+
+    grid_asset_cat = new Ext.grid.GridPanel({
+						store: store,
+						columns: [
+						   /* {header: 'Price', width: 75, sortable: true, renderer: 'usMoney', dataIndex: 'ast_cat_id'},*/
+							{header: 'Category Code', width: 100, sortable: true, dataIndex: 'ast_cat_code'},
+							{header: 'Description', width: 310, sortable: true, dataIndex: 'ast_cat_desc'}
+						],
+					   /* stripeRows: true,
+						autoExpandColumn: 'company',*/
+						height: 350,
+						width: 420/*,
+						title: 'Asset Categories',
+						// config options for stateful behavior
+						stateful: true,
+						stateId: 'grid'   */     
+					});
+    
+	// Data grid for Asset Browser
+
+	var myData2 = [
+        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
+        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
+        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
+        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
+        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
+        [5, 'FFF', 'FFFFFFFFFFFFFFFF']
+    ];
+    
+    var store2 = new Ext.data.ArrayStore({
+        fields: [
+           {name: 'ast_cat_id', type: 'int'},
+           {name: 'ast_cat_code'},
+           {name: 'ast_cat_desc'}
+	 	]
+    });
+    
+	store2.loadData(myData2);
+
+    grid_asset = new Ext.grid.GridPanel({
+						store: store2,
+						columns: [
+						   /* {header: 'Price', width: 75, sortable: true, renderer: 'usMoney', dataIndex: 'ast_cat_id'},*/
+							{header: 'Category Code', width: 100, sortable: true, dataIndex: 'ast_cat_code'},
+							{header: 'Description', width: 310, sortable: true, dataIndex: 'ast_cat_desc'}
+						],
+					   /* stripeRows: true,
+						autoExpandColumn: 'company',*/
+						height: 350,
+						width: 420/*,
+						title: 'Asset Categories',
+						// config options for stateful behavior
+						stateful: true,
+						stateId: 'grid'   */     
+					});
+
+});
+
 Ext.onReady(function(){
     ast_cat_name = new Ext.form.TextField({
 				id: 'ast_cat_name',
@@ -153,6 +242,43 @@ Ext.onReady(function(){
 							renderTo: 'cnt_asset_btn'
 						});
 	
+	
+	
+	btn_popup_ast_cat.on('click', function() {
+        // create the window on the first click and reuse on subsequent clicks
+        if(!win_ast_cat){
+            win_ast_cat = new Ext.Window({
+                applyTo:'cnt_asst_cat_browser',
+                layout:'fit',
+                width:450,
+                height:200,
+                closeAction:'hide',
+                plain: true,
+				title: 'Asset Category Browser',
+                items: grid_asset_cat
+            });
+        }
+        win_ast_cat.show(this);
+    });
+    
+	btn_popup_asset.on('click', function() {
+        // create the window on the first click and reuse on subsequent clicks
+        if(!win_ast){
+            win_ast = new Ext.Window({
+                applyTo:'cnt_asst_browser',
+                layout:'fit',
+                width:450,
+                height:200,
+                closeAction:'hide',
+                plain: true,
+				title: 'Asset Browser',
+                items: grid_asset
+            });
+        }
+        win_ast.show(this);
+    });
+    
+
 });
 
 </script>
@@ -208,7 +334,7 @@ Ext.onReady(function(){
 	</div>
 </div>
 
-<div>
+<div id="cnt_asst_cat_browser" class="x-hidden"><!--asset category browser container--></div>
+<div id="cnt_asst_browser" class="x-hidden"><!--asset browser container--></div>
 
-</div>
 
