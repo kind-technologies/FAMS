@@ -102,4 +102,25 @@ body{
     font-size:9pt;
     font-weight:normal;
     border-width: 1px;    border-style: solid;    border-color: #ff0000;}
- 
+
+#top_links {
+	padding: 2px; 
+	width: 98%; 
+	background-color:#ffffff;
+	border: #ffffff 2px solid;
+	height:20px;
+	margin-left:5px;
+	margin-bottom:5px;
+    font-family: Serif, Verdana, Arial, Helvetica, sans-serif", comic Sans MS";
+    font-size:9pt;
+    font-weight:bold;
+    color: #15428b;
+}
+
+#top_links a {
+    font-family: Serif, Verdana, Arial, Helvetica, sans-serif", comic Sans MS";
+    font-size:9pt;
+    font-weight:bold;
+    color: #444444;
+}
+
