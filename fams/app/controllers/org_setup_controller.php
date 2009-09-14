@@ -17,7 +17,7 @@ class OrgSetupController extends AppController {
 	}
 	
 	function division_view() {
-		//Configure::write('debug', 0);
+		Configure::write('debug', 0);
 
 		$divisions_data = $this->Division->get_divisions_for_json();
 		$this->set('divisions_data', array('divisions_data' => $divisions_data));	
