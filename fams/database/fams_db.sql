@@ -276,7 +276,7 @@ ALTER SEQUENCE employees_id_seq OWNED BY employees.id;
 -- Name: employees_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('employees_id_seq', 19, true);
+SELECT pg_catalog.setval('employees_id_seq', 15, true);
 
 
 --
@@ -497,7 +497,6 @@ COPY system_menus (id, parent_id, title, description, program_name, "order") FRO
 2	0	Execution	Execution	\N	2
 3	0	Monitoring	Monitoring	\N	3
 4	0	Controlling	Controlling	\N	4
-6	1	Org. Setup	Org. Setup	/planning/organization_setup	2
 7	1	Asset Categories	Asset Categories	/planning/asset_categories	3
 8	1	Asset Suppliers	Asset Suppliers	/planning/asset_suppliers	4
 9	2	Asset Registry	Asset Registry	/execution/asset_registry	1
@@ -513,6 +512,7 @@ COPY system_menus (id, parent_id, title, description, program_name, "order") FRO
 19	4	Change Location	Change Location	/controlling/change_location	2
 18	4	Change Custodian	Change Custodian	/controlling/change_custodian	1
 17	3	Depreciation Info	Depreciation Info	/monitoring/depreciation_info	5
+6	1	Org. Setup	Org. Setup	/org_setup/org_structure	2
 \.
 
 
