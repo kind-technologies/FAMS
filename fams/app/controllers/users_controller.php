@@ -1,5 +1,5 @@
 <?php
-
+// Controller to handle user authentication
 class UsersController extends AppController {
 
 	var $name = 'Users';
@@ -7,15 +7,15 @@ class UsersController extends AppController {
 	var $components = array('Auth'); 
 	//Not necessary if declared in your app controller
 
-	/**
-	*  The AuthComponent provides the needed functionality
-	*  for login, so you can leave this function blank.
-	*/
+
+	//  The AuthComponent provides the needed functionality
+	//  for login, so can leave this function blank.
 	
 	function beforeFilter() {
 		$this->Auth->autoRedirect = FALSE;
 	}
 	
+	// Function to validate login
 	function login() {
 		Configure::write('debug', 0);
 		if($this->Auth->isAuthorized()){
@@ -23,6 +23,7 @@ class UsersController extends AppController {
 		}
 	}
 
+	// Handle system logout functionality
 	function logout() {
 		$this->redirect($this->Auth->logout());
 	}

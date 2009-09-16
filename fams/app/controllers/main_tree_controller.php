@@ -1,24 +1,5 @@
 <?php
-/* FILE Id: home_controller.php */
-
-/**
- * Short description for file.
- *
- * This file is application-wide controller file. You can put all
- * application-wide controller-related methods here.
- *
- * @filesource
- * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
- * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
- * @package       cake
- * @subpackage    cake.cake.libs.controller
- * @since         CakePHP(tm) v 0.2.9
- * @version       $Revision: 7945 $
- * @modifiedby    $LastChangedBy: gwoo $
- * @lastmodified  $Date: 2008-12-18 20:16:01 -0600 (Thu, 18 Dec 2008) $
- * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
- */
-
+// Main controller class for the system tree menu
 class MainTreeController extends AppController {
 
 	var $name = 'MainTree';
@@ -31,14 +12,18 @@ class MainTreeController extends AppController {
 		Configure::write('debug', 0);
 	}
 	
+	// Function to generate tree-view (javascript) dynamically from DB
 	function tree_view() {
 
 		Configure::write('debug', 0);
 
+		// Set layout to empty, so only javascript will be printed to output
 		$this->layout = 'ajax';
 
+		// Retrieve data for tree-menu from database
 		$menu_data = $this->SystemMenu->findAll('parent_id=0', null, 'order asc');
 
+		// Build the tree
 		$tree_data = '[';
 
 		foreach($menu_data as $root) :
@@ -72,8 +57,8 @@ class MainTreeController extends AppController {
 		
 		$tree_data .= ']';
 
-
-
+		// Set the generated tree-view javascript
+		// to be printed on view file
 		$this->set('tree_data', $tree_data);
 
 	}
