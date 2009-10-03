@@ -6,13 +6,13 @@ Ext.chart.Chart.CHART_URL = "<?php echo $this->base ?>/js/ext-3.0.0/resources/ch
 Ext.onReady(function(){
 
     var store = new Ext.data.JsonStore({
-        fields:['name', 'visits', 'views'],
+        fields:['name', 'accumulate', 'depreciate'],
         data: [
-            {name:'Jul 07', visits: 3000, views: 17000},
-            {name:'Jul 08', visits: 6000, views: 14000},
-            {name:'Jul 09', visits: 9000, views: 11000},
-            {name:'Jul 10', visits: 12000, views: 8000},
-            {name:'Jul 11', visits: 15000, views: 5000}
+            {name:'Jul 07', accumulate: 3000, depreciate: 17000},
+            {name:'Jul 08', accumulate: 6000, depreciate: 14000},
+            {name:'Jul 09', accumulate: 9000, depreciate: 11000},
+            {name:'Jul 10', accumulate: 12000, depreciate: 8000},
+            {name:'Jul 11', accumulate: 15000, depreciate: 5000}
         ]
     });
 
@@ -32,11 +32,11 @@ Ext.onReady(function(){
             url: Ext.chart.Chart.CHART_URL,
             xField: 'name',
             yAxis: new Ext.chart.NumericAxis({
-                displayName: 'Visits',
+                displayName: 'Accumulated Amt.',
                 labelRenderer : Ext.util.Format.numberRenderer('0,0')
             }),
             tipRenderer : function(chart, record, index, series){
-                if(series.yField == 'visits'){
+                if(series.yField == 'accumulate'){
                     return Ext.util.Format.number(record.data.visits, '0,0') + ' visits in ' + record.data.name;
                 }else{
                     return Ext.util.Format.number(record.data.views, '0,0') + ' page views in ' + record.data.name;
@@ -82,8 +82,8 @@ Ext.onReady(function(){
             },
             series: [{
                 type: 'column',
-                displayName: 'Page Views',
-                yField: 'views',
+                displayName: 'Depreciate',
+                yField: 'depreciate',
                 style: {
                     image:'bar.gif',
                     mode: 'stretch',
@@ -91,8 +91,8 @@ Ext.onReady(function(){
                 }
             },{
                 type:'line',
-                displayName: 'Visits',
-                yField: 'visits',
+                displayName: 'Accumulate',
+                yField: 'accumulate',
                 style: {
                     color: 0x15428B
                 }
@@ -206,24 +206,26 @@ Ext.onReady(function(){
 				id: 'ast_cat_name',
 				validateOnBlur: true,
 				invalidText: 'The value in this field is invalid',
-				maxLength : 5,
+				//maxLength : 5,
 				width: 300,
-				disabled: true,
+				disabled: false,
 				renderTo: 'cnt_asset_cat',
 				msgTarget: 'under',
-				allowBlank:false
+				allowBlank:false,
+				value: 'Printer (Laser)'
     		});
     
     asset_name = new Ext.form.TextField({
 				id: 'asset_name',
-				validateOnBlur: true,
+				validateOnBlur: false,
 				invalidText: 'The value in this field is invalid',
-				maxLength : 5,
+				//maxLength : 5,
 				width: 300,
-				disabled: true,
+				disabled: false,
 				renderTo: 'cnt_asset',
 				msgTarget: 'under',
-				allowBlank:false
+				allowBlank:false,
+				value: 'HP Laser D1560'
     		});
 
     btn_popup_ast_cat = new Ext.Button({
@@ -311,7 +313,7 @@ Ext.onReady(function(){
 					Start Date
 				</td>
 				<td style="background-color:#e4ebf6">
-					
+					&nbsp;07/01/2007
 				</td>
 			</tr>
 			<tr>
@@ -319,7 +321,7 @@ Ext.onReady(function(){
 					Accumulated Depreciation
 				</td>
 				<td style="background-color:#e4ebf6">
-					
+					&nbsp;9000.00
 				</td>
 			</tr>
 			<tr>
@@ -327,7 +329,7 @@ Ext.onReady(function(){
 					Current Book Value
 				</td>
 				<td style="background-color:#e4ebf6">
-					
+					&nbsp;11000.00
 				</td>
 			</tr>
 		</table>
