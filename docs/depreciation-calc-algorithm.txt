@@ -1,0 +1,51 @@
+Annual Depreciation Expense		=	Cost of fixed Asset - Scrap Value
+									---------------------------------
+											Life Span (Years)
+											
+Life span : 5
+Purchase Cost : 17000
+Salvage Value : 2000
+
+	ADE = (17000 - 2000) / 5 = 3000
+	
+Book Value = Original Cost - Accumulated Depreciation
+
+---------------------------------------------------------
+
+If the vehicle were to be sold and the sales price exceeded 
+the depreciated value (net book value) then the excess would be 
+considered a gain and subject to depreciation recapture. 
+
+In addition, this gain above the depreciated value would be recognized 
+as ordinary income by the tax office. If the sales price is ever less 
+than the book value, the resulting capital loss is tax deductible. 
+If the sale price were ever more than the original book value, 
+then the gain above the original book value is recognized as a capital gain.
+
+If a company chooses to depreciate an asset at a different rate from that 
+used by the tax office then this generates a timing difference in the income 
+statement due to the difference (at a point in time) between the taxation 
+department's and company's view of the profit.
+
+----------------------------------------------------------
+
+****** Asset Table *******
+
+Purchase Cost
+Life Span
+Salvage Value
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
