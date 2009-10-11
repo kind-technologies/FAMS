@@ -2,7 +2,7 @@
 class OrgSetupController extends AppController {
 
 	var $name = 'OrgSetup';
-	var $uses = array('Branch', 'Division');
+	var $uses = array('Branch', 'Division', 'Location');
 	
 	function org_structure() {
 		Configure::write('debug', 0);
@@ -26,6 +26,13 @@ class OrgSetupController extends AppController {
 
 		$divisions_data = $this->Division->get_divisions_for_json();
 		$this->set('divisions_data', array('divisions_data' => $divisions_data));	
+	}
+
+	function location_view() {
+		Configure::write('debug', 2);
+
+		$locations_data = $this->Location->get_locations_for_json();
+		$this->set('locations_data', array('locations_data' => $locations_data));	
 	}
 
 }
