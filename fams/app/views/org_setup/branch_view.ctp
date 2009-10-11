@@ -289,7 +289,8 @@ Ext.onReady(function(){
 </script>
 <div align="right" id="top_links">
 	<?php echo $html->link('Company Branches', '/org_setup/branch_view'); ?> | 
-	<?php echo $html->link('Company Divisions', '/org_setup/division_view'); ?>
+	<?php echo $html->link('Company Divisions', '/org_setup/division_view'); ?> | 
+	<?php echo $html->link('Company Locations', '/org_setup/location_view'); ?>
 </div>
 <div id="status_div"></div>
 <div id="grid_area" style="width:100%"></div>
@@ -329,8 +330,5 @@ Ext.onReady(function(){
 
 </div>
 
-<div id="cnt_photo_win" class="x-hidden">
-	<div id="cnt_photo_form"></div>
-</div>
 <?php echo $this->renderElement('command_buttons'); ?>
 
