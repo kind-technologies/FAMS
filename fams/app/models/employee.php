@@ -11,7 +11,7 @@ class Employee extends AppModel {
 	// Prepare an array	with employee data
 	// to render as a JSON object 	
 	function get_employees_for_json() {
-		$employees = $this->findAll(array('record_status'=>'A'), 
+		$employees = $this->findAll(array('Employee.record_status'=>'A'), 
 												null, 'Employee.id ASC');
 		$emp_data = array();
 

@@ -8,7 +8,8 @@ class Location extends AppModel {
 			);
 	
 	function get_locations_for_json() {
-		$locations = $this->findAll(null, null, 'Location.id ASC');
+		$locations = $this->findAll(array('Location.record_status'=>'A'), 
+													null, 'Location.id ASC');
 		$locations_data = array();
 
 		foreach($locations as $location) {

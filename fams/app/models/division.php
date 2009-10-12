@@ -4,7 +4,8 @@ class Division extends AppModel {
 	var $name = 'Division';
 	
 	function get_divisions_for_json() {
-		$divisions = $this->findAll(null, null, 'Division.id ASC');
+		$divisions = $this->findAll(array('record_status'=>'A'), 
+													null, 'Division.id ASC');
 		$divisions_data = array();
 
 		foreach($divisions as $division) {
