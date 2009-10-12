@@ -21,16 +21,13 @@ Ext.onReady(function() {
 		{name: 'division_description'}
 	]);	
 	
-	
 	grid_data_store =  new Ext.data.Store({
 				reader: divisionsReader
 			});
 
-
 	divisions_json = Ext.util.JSON.decode('<?php echo $javascript->object($divisions_data); ?>');
 	grid_data_store.loadData(divisions_json.divisions_data);
 
-	
 	grid = new Ext.grid.GridPanel({
 			store: grid_data_store,
 			columns: [
@@ -176,39 +173,39 @@ Ext.onReady(function(){
 	}
 
 	function del() {
-/*		action.setValue('__d');
+		action.setValue('__d');
 		btn_add.setDisabled(true);
 		btn_edit.setDisabled(true);
 		btn_delete.setDisabled(true);
 		
 		Ext.MessageBox.confirm("FAMS", "Do you want to delete this record?", 
-									function(btn){
-										if(btn == "yes") {
-											ajaxClass.request({
-														url: '/employees/emplayee_update',
-														params: { 
-															id: rec_id.getValue(),
-															action: action.getValue()
-														},
-														callback : function(options, success, response) { 
-															obj = Ext.util.JSON.decode(response.responseText);
-															grid_data_store.loadData(obj.employee_data);
-															display_message("Record deleted successfully");
-															cancel();
-															grid.getSelectionModel().selectFirstRow();
-														}
-												});
-										} else {
-											cancel();
-											grid.getSelectionModel().selectRow(current_row_index);
-										}
-										
-									});
+			function(btn){
+				if(btn == "yes") {
+					ajaxClass.request({
+								url: '/org_setup/division_update',
+								params: { 
+									id: rec_id.getValue(),
+									action: action.getValue()
+								},
+								callback : function(options, success, response) { 
+									obj = Ext.util.JSON.decode(response.responseText);
+									grid_data_store.loadData(obj.division_data);
+									display_message("Record deleted successfully");
+									cancel();
+									grid.getSelectionModel().selectFirstRow();
+								}
+						});
+				} else {
+					cancel();
+					grid.getSelectionModel().selectRow(current_row_index);
+				}
+				
+			});
 
-*/	}
+	}
 
 	function save() {
-/*
+
 		// Validate fields before submit
 		if(!is_form_valid()) {
 			Ext.MessageBox.alert("FAMS", "Please check the values you have entered.");
@@ -216,24 +213,16 @@ Ext.onReady(function(){
 		}
 
 		ajaxClass.request({
-				   url: '/employees/emplayee_update',
+				   url: '/org_setup/division_update',
 				   params: { 
-				   			employee_id: emp_id.getValue(), 
-				   			full_name: emp_full_name.getValue(),
-				   			name_with_initials: emp_name_with_init.getValue(),
-				   			date_of_birth: emp_dob.getValue().format('Y-m-d'),
-				   			gender: (emp_gender.items.get(0).checked) ? 'M' : 'F',
-				   			email: emp_email.getValue(),
-				   			address: emp_address.getValue(),
-				   			contact_number: emp_phone.getValue(),
-				   			branch_id: emp_branch.getValue(),
-				   			division_id: emp_division.getValue(),
+				   			division_code: division_code.getValue(), 
+				   			division_description: division_description.getValue(),
 				   			id: rec_id.getValue(),
 				   			action: action.getValue()
 		   			},
 				   callback : function(options, success, response) { 
 				   				obj = Ext.util.JSON.decode(response.responseText);
-				   				grid_data_store.loadData(obj.employee_data);
+				   				grid_data_store.loadData(obj.division_data);
 				   				display_message("Record saved successfully");
 				   				
 				   				act = action.getValue();
@@ -249,7 +238,7 @@ Ext.onReady(function(){
 								}
 		   			}
 				});
-*/		
+		
 	}
 	
 	function cancel() {
@@ -289,9 +278,9 @@ Ext.onReady(function(){
 </script>
 
 <div align="right" id="top_links">
-	<?php echo $html->link('Company Branches', '/org_setup/branch_view'); ?> | 
-	<?php echo $html->link('Company Divisions', '/org_setup/division_view'); ?> | 
-	<?php echo $html->link('Company Locations', '/org_setup/location_view'); ?>
+	<?php echo $html->link('Branches', '/org_setup/branch_view'); ?> | 
+	<?php echo $html->link('Divisions', '/org_setup/division_view'); ?> | 
+	<?php echo $html->link('Locations', '/org_setup/location_view'); ?>
 </div>
 <div id="status_div"></div>
 <div id="grid_area" style="width:100%"></div>

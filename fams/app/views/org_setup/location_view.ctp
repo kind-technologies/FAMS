@@ -130,14 +130,18 @@ Ext.onReady(function(){
     		    allowBlank:false
     });
 
+
+	// Get the data for branch selection drop down list
+	branch_json = Ext.util.JSON.decode('<?php echo $javascript->object($branch_data); ?>');
+	
 	location_branch = new Ext.form.ComboBox({
     			id: 'txt_branch',
     			width: 200,
     			disabled: true,
     			editable: false,
     			store: new Ext.data.SimpleStore({
-									fields:['bid', 'branch_code'],
-									data: [['1', 'STG'], ['2', 'CMB']]
+									fields:['bid', 'branch_code', 'description'],
+									data: branch_json.branch_data // Set branch data from json string
 									}),
 				valueField: 'bid',
 				displayField:'branch_code',
@@ -196,7 +200,7 @@ Ext.onReady(function(){
 	}
 
 	function del() {
-/*		action.setValue('__d');
+		action.setValue('__d');
 		btn_add.setDisabled(true);
 		btn_edit.setDisabled(true);
 		btn_delete.setDisabled(true);
@@ -205,14 +209,14 @@ Ext.onReady(function(){
 									function(btn){
 										if(btn == "yes") {
 											ajaxClass.request({
-														url: '/employees/emplayee_update',
+														url: '/org_setup/location_update',
 														params: { 
 															id: rec_id.getValue(),
 															action: action.getValue()
 														},
 														callback : function(options, success, response) { 
 															obj = Ext.util.JSON.decode(response.responseText);
-															grid_data_store.loadData(obj.employee_data);
+															grid_data_store.loadData(obj.location_data);
 															display_message("Record deleted successfully");
 															cancel();
 															grid.getSelectionModel().selectFirstRow();
@@ -225,10 +229,10 @@ Ext.onReady(function(){
 										
 									});
 
-*/	}
+	}
 
 	function save() {
-/*
+
 		// Validate fields before submit
 		if(!is_form_valid()) {
 			Ext.MessageBox.alert("FAMS", "Please check the values you have entered.");
@@ -236,24 +240,17 @@ Ext.onReady(function(){
 		}
 
 		ajaxClass.request({
-				   url: '/employees/emplayee_update',
+				   url: '/org_setup/location_update',
 				   params: { 
-				   			employee_id: emp_id.getValue(), 
-				   			full_name: emp_full_name.getValue(),
-				   			name_with_initials: emp_name_with_init.getValue(),
-				   			date_of_birth: emp_dob.getValue().format('Y-m-d'),
-				   			gender: (emp_gender.items.get(0).checked) ? 'M' : 'F',
-				   			email: emp_email.getValue(),
-				   			address: emp_address.getValue(),
-				   			contact_number: emp_phone.getValue(),
-				   			branch_id: emp_branch.getValue(),
-				   			division_id: emp_division.getValue(),
+				   			location_code: location_code.getValue(), 
+				   			location_description: location_description.getValue(),
+				   			location_branch: location_branch.getValue(),
 				   			id: rec_id.getValue(),
 				   			action: action.getValue()
 		   			},
-				   callback : function(options, success, response) { 
+					callback : function(options, success, response) { 
 				   				obj = Ext.util.JSON.decode(response.responseText);
-				   				grid_data_store.loadData(obj.employee_data);
+				   				grid_data_store.loadData(obj.location_data);
 				   				display_message("Record saved successfully");
 				   				
 				   				act = action.getValue();
@@ -269,7 +266,7 @@ Ext.onReady(function(){
 								}
 		   			}
 				});
-*/		
+		
 	}
 	
 	function cancel() {
@@ -310,9 +307,9 @@ Ext.onReady(function(){
 	}
 </script>
 <div align="right" id="top_links">
-	<?php echo $html->link('Company Branches', '/org_setup/branch_view'); ?> | 
-	<?php echo $html->link('Company Divisions', '/org_setup/division_view'); ?> | 
-	<?php echo $html->link('Company Locations', '/org_setup/location_view'); ?>
+	<?php echo $html->link('Branches', '/org_setup/branch_view'); ?> | 
+	<?php echo $html->link('Divisions', '/org_setup/division_view'); ?> | 
+	<?php echo $html->link('Locations', '/org_setup/location_view'); ?>
 </div>
 <div id="status_div"></div>
 <div id="grid_area" style="width:100%"></div>
