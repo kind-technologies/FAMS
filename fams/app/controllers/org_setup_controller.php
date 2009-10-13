@@ -13,11 +13,6 @@ class OrgSetupController extends AppController {
 		Configure::write('debug', 0);
 
 		$branches_data = $this->Branch->get_branches_for_json();
-		
-		if (isset($this->params['requested'])) { 
-			return $branches_data; 
-		}
-		
 		$this->set('branches_data', array('branches_data' => $branches_data));	
 	}
 	
