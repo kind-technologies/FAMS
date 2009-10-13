@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Started on 2009-10-12 14:02:51 IST
+-- Started on 2009-10-14 04:41:02 IST
 
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = off;
@@ -17,7 +17,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 1506 (class 1259 OID 25455)
+-- TOC entry 1506 (class 1259 OID 18454)
 -- Dependencies: 1800 1801 6
 -- Name: acos; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -34,39 +34,7 @@ CREATE TABLE acos (
 
 
 --
--- TOC entry 1520 (class 1259 OID 25518)
--- Dependencies: 6 1506
--- Name: acos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE acos_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1870 (class 0 OID 0)
--- Dependencies: 1520
--- Name: acos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE acos_id_seq OWNED BY acos.id;
-
-
---
--- TOC entry 1871 (class 0 OID 0)
--- Dependencies: 1520
--- Name: acos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('acos_id_seq', 1, false);
-
-
---
--- TOC entry 1507 (class 1259 OID 25463)
+-- TOC entry 1508 (class 1259 OID 18464)
 -- Dependencies: 1803 1804 6
 -- Name: aros; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -83,7 +51,7 @@ CREATE TABLE aros (
 
 
 --
--- TOC entry 1508 (class 1259 OID 25471)
+-- TOC entry 1509 (class 1259 OID 18472)
 -- Dependencies: 1806 1807 1808 1809 6
 -- Name: aros_acos; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -100,71 +68,7 @@ CREATE TABLE aros_acos (
 
 
 --
--- TOC entry 1521 (class 1259 OID 25520)
--- Dependencies: 1508 6
--- Name: aros_acos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE aros_acos_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1872 (class 0 OID 0)
--- Dependencies: 1521
--- Name: aros_acos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE aros_acos_id_seq OWNED BY aros_acos.id;
-
-
---
--- TOC entry 1873 (class 0 OID 0)
--- Dependencies: 1521
--- Name: aros_acos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('aros_acos_id_seq', 1, false);
-
-
---
--- TOC entry 1522 (class 1259 OID 25522)
--- Dependencies: 1507 6
--- Name: aros_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE aros_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1874 (class 0 OID 0)
--- Dependencies: 1522
--- Name: aros_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE aros_id_seq OWNED BY aros.id;
-
-
---
--- TOC entry 1875 (class 0 OID 0)
--- Dependencies: 1522
--- Name: aros_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('aros_id_seq', 1, false);
-
-
---
--- TOC entry 1509 (class 1259 OID 25478)
+-- TOC entry 1512 (class 1259 OID 18483)
 -- Dependencies: 6
 -- Name: asset_categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -178,39 +82,7 @@ CREATE TABLE asset_categories (
 
 
 --
--- TOC entry 1523 (class 1259 OID 25524)
--- Dependencies: 6 1509
--- Name: asset_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE asset_categories_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1876 (class 0 OID 0)
--- Dependencies: 1523
--- Name: asset_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE asset_categories_id_seq OWNED BY asset_categories.id;
-
-
---
--- TOC entry 1877 (class 0 OID 0)
--- Dependencies: 1523
--- Name: asset_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('asset_categories_id_seq', 1, false);
-
-
---
--- TOC entry 1510 (class 1259 OID 25481)
+-- TOC entry 1514 (class 1259 OID 18488)
 -- Dependencies: 6
 -- Name: asset_complaints; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -221,39 +93,7 @@ CREATE TABLE asset_complaints (
 
 
 --
--- TOC entry 1524 (class 1259 OID 25526)
--- Dependencies: 1510 6
--- Name: asset_complaints_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE asset_complaints_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1878 (class 0 OID 0)
--- Dependencies: 1524
--- Name: asset_complaints_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE asset_complaints_id_seq OWNED BY asset_complaints.id;
-
-
---
--- TOC entry 1879 (class 0 OID 0)
--- Dependencies: 1524
--- Name: asset_complaints_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('asset_complaints_id_seq', 1, false);
-
-
---
--- TOC entry 1511 (class 1259 OID 25484)
+-- TOC entry 1516 (class 1259 OID 18493)
 -- Dependencies: 6
 -- Name: asset_requests; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -264,39 +104,7 @@ CREATE TABLE asset_requests (
 
 
 --
--- TOC entry 1525 (class 1259 OID 25528)
--- Dependencies: 1511 6
--- Name: asset_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE asset_requests_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1880 (class 0 OID 0)
--- Dependencies: 1525
--- Name: asset_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE asset_requests_id_seq OWNED BY asset_requests.id;
-
-
---
--- TOC entry 1881 (class 0 OID 0)
--- Dependencies: 1525
--- Name: asset_requests_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('asset_requests_id_seq', 1, false);
-
-
---
--- TOC entry 1512 (class 1259 OID 25487)
+-- TOC entry 1518 (class 1259 OID 18498)
 -- Dependencies: 6
 -- Name: assets; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -315,39 +123,7 @@ CREATE TABLE assets (
 
 
 --
--- TOC entry 1526 (class 1259 OID 25530)
--- Dependencies: 6 1512
--- Name: assets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE assets_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1882 (class 0 OID 0)
--- Dependencies: 1526
--- Name: assets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE assets_id_seq OWNED BY assets.id;
-
-
---
--- TOC entry 1883 (class 0 OID 0)
--- Dependencies: 1526
--- Name: assets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('assets_id_seq', 1, false);
-
-
---
--- TOC entry 1513 (class 1259 OID 25493)
+-- TOC entry 1520 (class 1259 OID 18506)
 -- Dependencies: 6
 -- Name: branches; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -361,38 +137,7 @@ CREATE TABLE branches (
 
 
 --
--- TOC entry 1527 (class 1259 OID 25532)
--- Dependencies: 6 1513
--- Name: branches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE branches_id_seq
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1884 (class 0 OID 0)
--- Dependencies: 1527
--- Name: branches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE branches_id_seq OWNED BY branches.id;
-
-
---
--- TOC entry 1885 (class 0 OID 0)
--- Dependencies: 1527
--- Name: branches_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('branches_id_seq', 9, true);
-
-
---
--- TOC entry 1514 (class 1259 OID 25496)
+-- TOC entry 1522 (class 1259 OID 18511)
 -- Dependencies: 6
 -- Name: divisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -406,38 +151,7 @@ CREATE TABLE divisions (
 
 
 --
--- TOC entry 1528 (class 1259 OID 25534)
--- Dependencies: 6 1514
--- Name: divisions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE divisions_id_seq
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1886 (class 0 OID 0)
--- Dependencies: 1528
--- Name: divisions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE divisions_id_seq OWNED BY divisions.id;
-
-
---
--- TOC entry 1887 (class 0 OID 0)
--- Dependencies: 1528
--- Name: divisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('divisions_id_seq', 10, true);
-
-
---
--- TOC entry 1515 (class 1259 OID 25499)
+-- TOC entry 1524 (class 1259 OID 18516)
 -- Dependencies: 1817 6
 -- Name: employees; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -460,38 +174,7 @@ CREATE TABLE employees (
 
 
 --
--- TOC entry 1529 (class 1259 OID 25536)
--- Dependencies: 6 1515
--- Name: employees_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE employees_id_seq
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1888 (class 0 OID 0)
--- Dependencies: 1529
--- Name: employees_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE employees_id_seq OWNED BY employees.id;
-
-
---
--- TOC entry 1889 (class 0 OID 0)
--- Dependencies: 1529
--- Name: employees_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('employees_id_seq', 15, true);
-
-
---
--- TOC entry 1516 (class 1259 OID 25506)
+-- TOC entry 1526 (class 1259 OID 18525)
 -- Dependencies: 6
 -- Name: locations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -506,38 +189,7 @@ CREATE TABLE locations (
 
 
 --
--- TOC entry 1530 (class 1259 OID 25538)
--- Dependencies: 6 1516
--- Name: locations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE locations_id_seq
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1890 (class 0 OID 0)
--- Dependencies: 1530
--- Name: locations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
-
-
---
--- TOC entry 1891 (class 0 OID 0)
--- Dependencies: 1530
--- Name: locations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('locations_id_seq', 4, true);
-
-
---
--- TOC entry 1517 (class 1259 OID 25509)
+-- TOC entry 1528 (class 1259 OID 18530)
 -- Dependencies: 6
 -- Name: suppliers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -548,44 +200,13 @@ CREATE TABLE suppliers (
     description character varying(150),
     address character varying(200),
     contact_number character varying(20),
-    email character varying(50)
+    email character varying(50),
+    record_status character(1)
 );
 
 
 --
--- TOC entry 1531 (class 1259 OID 25540)
--- Dependencies: 6 1517
--- Name: suppliers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE suppliers_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1892 (class 0 OID 0)
--- Dependencies: 1531
--- Name: suppliers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE suppliers_id_seq OWNED BY suppliers.id;
-
-
---
--- TOC entry 1893 (class 0 OID 0)
--- Dependencies: 1531
--- Name: suppliers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('suppliers_id_seq', 1, false);
-
-
---
--- TOC entry 1518 (class 1259 OID 25512)
+-- TOC entry 1530 (class 1259 OID 18535)
 -- Dependencies: 6
 -- Name: system_menus; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -601,38 +222,7 @@ CREATE TABLE system_menus (
 
 
 --
--- TOC entry 1532 (class 1259 OID 25542)
--- Dependencies: 6 1518
--- Name: system_menu_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE system_menu_id_seq
-    INCREMENT BY 1
-    NO MAXVALUE
-    NO MINVALUE
-    CACHE 1;
-
-
---
--- TOC entry 1894 (class 0 OID 0)
--- Dependencies: 1532
--- Name: system_menu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE system_menu_id_seq OWNED BY system_menus.id;
-
-
---
--- TOC entry 1895 (class 0 OID 0)
--- Dependencies: 1532
--- Name: system_menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('system_menu_id_seq', 19, true);
-
-
---
--- TOC entry 1519 (class 1259 OID 25515)
+-- TOC entry 1532 (class 1259 OID 18540)
 -- Dependencies: 6
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -645,8 +235,418 @@ CREATE TABLE users (
 
 
 --
--- TOC entry 1533 (class 1259 OID 25544)
--- Dependencies: 1519 6
+-- TOC entry 1507 (class 1259 OID 18462)
+-- Dependencies: 1506 6
+-- Name: acos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE acos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1871 (class 0 OID 0)
+-- Dependencies: 1507
+-- Name: acos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE acos_id_seq OWNED BY acos.id;
+
+
+--
+-- TOC entry 1872 (class 0 OID 0)
+-- Dependencies: 1507
+-- Name: acos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('acos_id_seq', 1, false);
+
+
+--
+-- TOC entry 1510 (class 1259 OID 18479)
+-- Dependencies: 6 1509
+-- Name: aros_acos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE aros_acos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1873 (class 0 OID 0)
+-- Dependencies: 1510
+-- Name: aros_acos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE aros_acos_id_seq OWNED BY aros_acos.id;
+
+
+--
+-- TOC entry 1874 (class 0 OID 0)
+-- Dependencies: 1510
+-- Name: aros_acos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('aros_acos_id_seq', 1, false);
+
+
+--
+-- TOC entry 1511 (class 1259 OID 18481)
+-- Dependencies: 6 1508
+-- Name: aros_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE aros_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1875 (class 0 OID 0)
+-- Dependencies: 1511
+-- Name: aros_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE aros_id_seq OWNED BY aros.id;
+
+
+--
+-- TOC entry 1876 (class 0 OID 0)
+-- Dependencies: 1511
+-- Name: aros_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('aros_id_seq', 1, false);
+
+
+--
+-- TOC entry 1513 (class 1259 OID 18486)
+-- Dependencies: 6 1512
+-- Name: asset_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE asset_categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1877 (class 0 OID 0)
+-- Dependencies: 1513
+-- Name: asset_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE asset_categories_id_seq OWNED BY asset_categories.id;
+
+
+--
+-- TOC entry 1878 (class 0 OID 0)
+-- Dependencies: 1513
+-- Name: asset_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('asset_categories_id_seq', 1, false);
+
+
+--
+-- TOC entry 1515 (class 1259 OID 18491)
+-- Dependencies: 1514 6
+-- Name: asset_complaints_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE asset_complaints_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1879 (class 0 OID 0)
+-- Dependencies: 1515
+-- Name: asset_complaints_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE asset_complaints_id_seq OWNED BY asset_complaints.id;
+
+
+--
+-- TOC entry 1880 (class 0 OID 0)
+-- Dependencies: 1515
+-- Name: asset_complaints_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('asset_complaints_id_seq', 1, false);
+
+
+--
+-- TOC entry 1517 (class 1259 OID 18496)
+-- Dependencies: 6 1516
+-- Name: asset_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE asset_requests_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1881 (class 0 OID 0)
+-- Dependencies: 1517
+-- Name: asset_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE asset_requests_id_seq OWNED BY asset_requests.id;
+
+
+--
+-- TOC entry 1882 (class 0 OID 0)
+-- Dependencies: 1517
+-- Name: asset_requests_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('asset_requests_id_seq', 1, false);
+
+
+--
+-- TOC entry 1519 (class 1259 OID 18504)
+-- Dependencies: 6 1518
+-- Name: assets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE assets_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1883 (class 0 OID 0)
+-- Dependencies: 1519
+-- Name: assets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE assets_id_seq OWNED BY assets.id;
+
+
+--
+-- TOC entry 1884 (class 0 OID 0)
+-- Dependencies: 1519
+-- Name: assets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('assets_id_seq', 1, false);
+
+
+--
+-- TOC entry 1521 (class 1259 OID 18509)
+-- Dependencies: 6 1520
+-- Name: branches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE branches_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1885 (class 0 OID 0)
+-- Dependencies: 1521
+-- Name: branches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE branches_id_seq OWNED BY branches.id;
+
+
+--
+-- TOC entry 1886 (class 0 OID 0)
+-- Dependencies: 1521
+-- Name: branches_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('branches_id_seq', 9, true);
+
+
+--
+-- TOC entry 1523 (class 1259 OID 18514)
+-- Dependencies: 1522 6
+-- Name: divisions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE divisions_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1887 (class 0 OID 0)
+-- Dependencies: 1523
+-- Name: divisions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE divisions_id_seq OWNED BY divisions.id;
+
+
+--
+-- TOC entry 1888 (class 0 OID 0)
+-- Dependencies: 1523
+-- Name: divisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('divisions_id_seq', 10, true);
+
+
+--
+-- TOC entry 1525 (class 1259 OID 18523)
+-- Dependencies: 6 1524
+-- Name: employees_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE employees_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1889 (class 0 OID 0)
+-- Dependencies: 1525
+-- Name: employees_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE employees_id_seq OWNED BY employees.id;
+
+
+--
+-- TOC entry 1890 (class 0 OID 0)
+-- Dependencies: 1525
+-- Name: employees_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('employees_id_seq', 15, true);
+
+
+--
+-- TOC entry 1527 (class 1259 OID 18528)
+-- Dependencies: 6 1526
+-- Name: locations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE locations_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1891 (class 0 OID 0)
+-- Dependencies: 1527
+-- Name: locations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
+
+
+--
+-- TOC entry 1892 (class 0 OID 0)
+-- Dependencies: 1527
+-- Name: locations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('locations_id_seq', 4, true);
+
+
+--
+-- TOC entry 1529 (class 1259 OID 18533)
+-- Dependencies: 6 1528
+-- Name: suppliers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE suppliers_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1893 (class 0 OID 0)
+-- Dependencies: 1529
+-- Name: suppliers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE suppliers_id_seq OWNED BY suppliers.id;
+
+
+--
+-- TOC entry 1894 (class 0 OID 0)
+-- Dependencies: 1529
+-- Name: suppliers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('suppliers_id_seq', 1, true);
+
+
+--
+-- TOC entry 1531 (class 1259 OID 18538)
+-- Dependencies: 6 1530
+-- Name: system_menu_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE system_menu_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 1895 (class 0 OID 0)
+-- Dependencies: 1531
+-- Name: system_menu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE system_menu_id_seq OWNED BY system_menus.id;
+
+
+--
+-- TOC entry 1896 (class 0 OID 0)
+-- Dependencies: 1531
+-- Name: system_menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('system_menu_id_seq', 19, true);
+
+
+--
+-- TOC entry 1533 (class 1259 OID 18543)
+-- Dependencies: 6 1532
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -658,7 +658,7 @@ CREATE SEQUENCE users_id_seq
 
 
 --
--- TOC entry 1896 (class 0 OID 0)
+-- TOC entry 1897 (class 0 OID 0)
 -- Dependencies: 1533
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -667,7 +667,7 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- TOC entry 1897 (class 0 OID 0)
+-- TOC entry 1898 (class 0 OID 0)
 -- Dependencies: 1533
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -676,8 +676,8 @@ SELECT pg_catalog.setval('users_id_seq', 1, true);
 
 
 --
--- TOC entry 1802 (class 2604 OID 25546)
--- Dependencies: 1520 1506
+-- TOC entry 1802 (class 2604 OID 18545)
+-- Dependencies: 1507 1506
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -685,8 +685,8 @@ ALTER TABLE acos ALTER COLUMN id SET DEFAULT nextval('acos_id_seq'::regclass);
 
 
 --
--- TOC entry 1805 (class 2604 OID 25547)
--- Dependencies: 1522 1507
+-- TOC entry 1805 (class 2604 OID 18546)
+-- Dependencies: 1511 1508
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -694,8 +694,8 @@ ALTER TABLE aros ALTER COLUMN id SET DEFAULT nextval('aros_id_seq'::regclass);
 
 
 --
--- TOC entry 1810 (class 2604 OID 25548)
--- Dependencies: 1521 1508
+-- TOC entry 1810 (class 2604 OID 18547)
+-- Dependencies: 1510 1509
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -703,8 +703,8 @@ ALTER TABLE aros_acos ALTER COLUMN id SET DEFAULT nextval('aros_acos_id_seq'::re
 
 
 --
--- TOC entry 1811 (class 2604 OID 25549)
--- Dependencies: 1523 1509
+-- TOC entry 1811 (class 2604 OID 18548)
+-- Dependencies: 1513 1512
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -712,8 +712,8 @@ ALTER TABLE asset_categories ALTER COLUMN id SET DEFAULT nextval('asset_categori
 
 
 --
--- TOC entry 1812 (class 2604 OID 25550)
--- Dependencies: 1524 1510
+-- TOC entry 1812 (class 2604 OID 18549)
+-- Dependencies: 1515 1514
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -721,8 +721,8 @@ ALTER TABLE asset_complaints ALTER COLUMN id SET DEFAULT nextval('asset_complain
 
 
 --
--- TOC entry 1813 (class 2604 OID 25551)
--- Dependencies: 1525 1511
+-- TOC entry 1813 (class 2604 OID 18550)
+-- Dependencies: 1517 1516
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -730,8 +730,8 @@ ALTER TABLE asset_requests ALTER COLUMN id SET DEFAULT nextval('asset_requests_i
 
 
 --
--- TOC entry 1814 (class 2604 OID 25552)
--- Dependencies: 1526 1512
+-- TOC entry 1814 (class 2604 OID 18551)
+-- Dependencies: 1519 1518
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -739,8 +739,8 @@ ALTER TABLE assets ALTER COLUMN id SET DEFAULT nextval('assets_id_seq'::regclass
 
 
 --
--- TOC entry 1815 (class 2604 OID 25553)
--- Dependencies: 1527 1513
+-- TOC entry 1815 (class 2604 OID 18552)
+-- Dependencies: 1521 1520
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -748,8 +748,8 @@ ALTER TABLE branches ALTER COLUMN id SET DEFAULT nextval('branches_id_seq'::regc
 
 
 --
--- TOC entry 1816 (class 2604 OID 25554)
--- Dependencies: 1528 1514
+-- TOC entry 1816 (class 2604 OID 18553)
+-- Dependencies: 1523 1522
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -757,8 +757,8 @@ ALTER TABLE divisions ALTER COLUMN id SET DEFAULT nextval('divisions_id_seq'::re
 
 
 --
--- TOC entry 1818 (class 2604 OID 25555)
--- Dependencies: 1529 1515
+-- TOC entry 1818 (class 2604 OID 18554)
+-- Dependencies: 1525 1524
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -766,8 +766,8 @@ ALTER TABLE employees ALTER COLUMN id SET DEFAULT nextval('employees_id_seq'::re
 
 
 --
--- TOC entry 1819 (class 2604 OID 25556)
--- Dependencies: 1530 1516
+-- TOC entry 1819 (class 2604 OID 18555)
+-- Dependencies: 1527 1526
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -775,8 +775,8 @@ ALTER TABLE locations ALTER COLUMN id SET DEFAULT nextval('locations_id_seq'::re
 
 
 --
--- TOC entry 1820 (class 2604 OID 25557)
--- Dependencies: 1531 1517
+-- TOC entry 1820 (class 2604 OID 18556)
+-- Dependencies: 1529 1528
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -784,8 +784,8 @@ ALTER TABLE suppliers ALTER COLUMN id SET DEFAULT nextval('suppliers_id_seq'::re
 
 
 --
--- TOC entry 1821 (class 2604 OID 25558)
--- Dependencies: 1532 1518
+-- TOC entry 1821 (class 2604 OID 18557)
+-- Dependencies: 1531 1530
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -793,8 +793,8 @@ ALTER TABLE system_menus ALTER COLUMN id SET DEFAULT nextval('system_menu_id_seq
 
 
 --
--- TOC entry 1822 (class 2604 OID 25559)
--- Dependencies: 1533 1519
+-- TOC entry 1822 (class 2604 OID 18558)
+-- Dependencies: 1533 1532
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -802,7 +802,7 @@ ALTER TABLE users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- TOC entry 1852 (class 0 OID 25455)
+-- TOC entry 1852 (class 0 OID 18454)
 -- Dependencies: 1506
 -- Data for Name: acos; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -812,8 +812,8 @@ COPY acos (id, parent_id, model, foreign_key, alias, lft, rght) FROM stdin;
 
 
 --
--- TOC entry 1853 (class 0 OID 25463)
--- Dependencies: 1507
+-- TOC entry 1853 (class 0 OID 18464)
+-- Dependencies: 1508
 -- Data for Name: aros; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -822,8 +822,8 @@ COPY aros (id, parent_id, model, foreign_key, alias, lft, rght) FROM stdin;
 
 
 --
--- TOC entry 1854 (class 0 OID 25471)
--- Dependencies: 1508
+-- TOC entry 1854 (class 0 OID 18472)
+-- Dependencies: 1509
 -- Data for Name: aros_acos; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -832,8 +832,8 @@ COPY aros_acos (id, aro_id, aco_id, _create, _read, _update, _delete) FROM stdin
 
 
 --
--- TOC entry 1855 (class 0 OID 25478)
--- Dependencies: 1509
+-- TOC entry 1855 (class 0 OID 18483)
+-- Dependencies: 1512
 -- Data for Name: asset_categories; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -842,8 +842,8 @@ COPY asset_categories (id, category_code, name, description) FROM stdin;
 
 
 --
--- TOC entry 1856 (class 0 OID 25481)
--- Dependencies: 1510
+-- TOC entry 1856 (class 0 OID 18488)
+-- Dependencies: 1514
 -- Data for Name: asset_complaints; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -852,8 +852,8 @@ COPY asset_complaints (id) FROM stdin;
 
 
 --
--- TOC entry 1857 (class 0 OID 25484)
--- Dependencies: 1511
+-- TOC entry 1857 (class 0 OID 18493)
+-- Dependencies: 1516
 -- Data for Name: asset_requests; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -862,8 +862,8 @@ COPY asset_requests (id) FROM stdin;
 
 
 --
--- TOC entry 1858 (class 0 OID 25487)
--- Dependencies: 1512
+-- TOC entry 1858 (class 0 OID 18498)
+-- Dependencies: 1518
 -- Data for Name: assets; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -872,21 +872,21 @@ COPY assets (id, asset_code, short_name, description, supplier_id, purchase_pric
 
 
 --
--- TOC entry 1859 (class 0 OID 25493)
--- Dependencies: 1513
+-- TOC entry 1859 (class 0 OID 18506)
+-- Dependencies: 1520
 -- Data for Name: branches; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY branches (id, branch_code, description, record_status) FROM stdin;
 1	STG	St. George, Utah	A
 2	CMB	Colombo, Sri Lanka	A
-3	TKY	Tokyo, Japan	A
+3	TKY	Tokyo, Japan JP	A
 \.
 
 
 --
--- TOC entry 1860 (class 0 OID 25496)
--- Dependencies: 1514
+-- TOC entry 1860 (class 0 OID 18511)
+-- Dependencies: 1522
 -- Data for Name: divisions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -899,8 +899,8 @@ COPY divisions (id, division_code, description, record_status) FROM stdin;
 
 
 --
--- TOC entry 1861 (class 0 OID 25499)
--- Dependencies: 1515
+-- TOC entry 1861 (class 0 OID 18516)
+-- Dependencies: 1524
 -- Data for Name: employees; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -927,8 +927,8 @@ COPY employees (id, employee_id, full_name, name_with_initials, date_of_birth, g
 
 
 --
--- TOC entry 1862 (class 0 OID 25506)
--- Dependencies: 1516
+-- TOC entry 1862 (class 0 OID 18525)
+-- Dependencies: 1526
 -- Data for Name: locations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -941,18 +941,19 @@ COPY locations (id, location_code, description, branch_id, record_status) FROM s
 
 
 --
--- TOC entry 1863 (class 0 OID 25509)
--- Dependencies: 1517
+-- TOC entry 1863 (class 0 OID 18530)
+-- Dependencies: 1528
 -- Data for Name: suppliers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY suppliers (id, supplier_code, description, address, contact_number, email) FROM stdin;
+COPY suppliers (id, supplier_code, description, address, contact_number, email, record_status) FROM stdin;
+1	DAMRO	Official furniture supplier	Main street Battaramulla	0112345678	bt@damro.lk	A
 \.
 
 
 --
--- TOC entry 1864 (class 0 OID 25512)
--- Dependencies: 1518
+-- TOC entry 1864 (class 0 OID 18535)
+-- Dependencies: 1530
 -- Data for Name: system_menus; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -981,8 +982,8 @@ COPY system_menus (id, parent_id, title, description, program_name, "order") FRO
 
 
 --
--- TOC entry 1865 (class 0 OID 25515)
--- Dependencies: 1519
+-- TOC entry 1865 (class 0 OID 18540)
+-- Dependencies: 1532
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -992,7 +993,7 @@ COPY users (id, username, password) FROM stdin;
 
 
 --
--- TOC entry 1824 (class 2606 OID 25561)
+-- TOC entry 1824 (class 2606 OID 18560)
 -- Dependencies: 1506 1506
 -- Name: acos_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
@@ -1002,8 +1003,8 @@ ALTER TABLE ONLY acos
 
 
 --
--- TOC entry 1829 (class 2606 OID 25563)
--- Dependencies: 1508 1508
+-- TOC entry 1829 (class 2606 OID 18562)
+-- Dependencies: 1509 1509
 -- Name: aros_acos_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1012,8 +1013,8 @@ ALTER TABLE ONLY aros_acos
 
 
 --
--- TOC entry 1826 (class 2606 OID 25565)
--- Dependencies: 1507 1507
+-- TOC entry 1826 (class 2606 OID 18564)
+-- Dependencies: 1508 1508
 -- Name: aros_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1022,8 +1023,8 @@ ALTER TABLE ONLY aros
 
 
 --
--- TOC entry 1831 (class 2606 OID 25567)
--- Dependencies: 1509 1509
+-- TOC entry 1831 (class 2606 OID 18566)
+-- Dependencies: 1512 1512
 -- Name: asset_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1032,8 +1033,8 @@ ALTER TABLE ONLY asset_categories
 
 
 --
--- TOC entry 1833 (class 2606 OID 25569)
--- Dependencies: 1510 1510
+-- TOC entry 1833 (class 2606 OID 18568)
+-- Dependencies: 1514 1514
 -- Name: asset_complaints_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1042,8 +1043,8 @@ ALTER TABLE ONLY asset_complaints
 
 
 --
--- TOC entry 1835 (class 2606 OID 25571)
--- Dependencies: 1511 1511
+-- TOC entry 1835 (class 2606 OID 18570)
+-- Dependencies: 1516 1516
 -- Name: asset_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1052,8 +1053,8 @@ ALTER TABLE ONLY asset_requests
 
 
 --
--- TOC entry 1837 (class 2606 OID 25573)
--- Dependencies: 1512 1512
+-- TOC entry 1837 (class 2606 OID 18572)
+-- Dependencies: 1518 1518
 -- Name: assets_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1062,8 +1063,8 @@ ALTER TABLE ONLY assets
 
 
 --
--- TOC entry 1839 (class 2606 OID 25575)
--- Dependencies: 1513 1513
+-- TOC entry 1839 (class 2606 OID 18574)
+-- Dependencies: 1520 1520
 -- Name: branches_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1072,8 +1073,8 @@ ALTER TABLE ONLY branches
 
 
 --
--- TOC entry 1841 (class 2606 OID 25577)
--- Dependencies: 1514 1514
+-- TOC entry 1841 (class 2606 OID 18576)
+-- Dependencies: 1522 1522
 -- Name: divisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1082,8 +1083,8 @@ ALTER TABLE ONLY divisions
 
 
 --
--- TOC entry 1843 (class 2606 OID 25579)
--- Dependencies: 1515 1515
+-- TOC entry 1843 (class 2606 OID 18578)
+-- Dependencies: 1524 1524
 -- Name: employees_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1092,8 +1093,8 @@ ALTER TABLE ONLY employees
 
 
 --
--- TOC entry 1845 (class 2606 OID 25581)
--- Dependencies: 1516 1516
+-- TOC entry 1845 (class 2606 OID 18580)
+-- Dependencies: 1526 1526
 -- Name: locations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1102,8 +1103,8 @@ ALTER TABLE ONLY locations
 
 
 --
--- TOC entry 1847 (class 2606 OID 25583)
--- Dependencies: 1517 1517
+-- TOC entry 1847 (class 2606 OID 18582)
+-- Dependencies: 1528 1528
 -- Name: suppliers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1112,8 +1113,8 @@ ALTER TABLE ONLY suppliers
 
 
 --
--- TOC entry 1849 (class 2606 OID 25585)
--- Dependencies: 1518 1518
+-- TOC entry 1849 (class 2606 OID 18584)
+-- Dependencies: 1530 1530
 -- Name: system_menu_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1122,8 +1123,8 @@ ALTER TABLE ONLY system_menus
 
 
 --
--- TOC entry 1851 (class 2606 OID 25587)
--- Dependencies: 1519 1519
+-- TOC entry 1851 (class 2606 OID 18586)
+-- Dependencies: 1532 1532
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1132,8 +1133,8 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 1827 (class 1259 OID 25588)
--- Dependencies: 1508 1508
+-- TOC entry 1827 (class 1259 OID 18587)
+-- Dependencies: 1509 1509
 -- Name: aro_aco_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1141,7 +1142,7 @@ CREATE UNIQUE INDEX aro_aco_key ON aros_acos USING btree (aro_id, aco_id);
 
 
 --
--- TOC entry 1869 (class 0 OID 0)
+-- TOC entry 1870 (class 0 OID 0)
 -- Dependencies: 6
 -- Name: public; Type: ACL; Schema: -; Owner: -
 --
@@ -1152,7 +1153,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2009-10-12 14:02:52 IST
+-- Completed on 2009-10-14 04:41:03 IST
 
 --
 -- PostgreSQL database dump complete
