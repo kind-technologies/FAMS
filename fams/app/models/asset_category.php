@@ -2,21 +2,23 @@
 class AssetCategory extends AppModel {
 
 	var $name = 'AssetCategory';
-/*
-	function get_branches_for_json() {
-		$branches = $this->findAll(null, null, 'Branch.id ASC');
-		$branches_data = array();
 
-		foreach($branches as $branch) {
+	function get_asset_categories_for_json() {
+		$asset_categories = $this->findAll(array('record_status'=>'A'), 
+												null, 'AssetCategory.id ASC');
+		$asset_categories_data = array();
 
-			$branches_data[] = array($branch['Branch']['id'], 
-									$branch['Branch']['branch_code'], 
-									$branch['Branch']['description'] );
+		foreach($asset_categories as $asset_category) {
+
+			$asset_categories_data[] = array($asset_category['AssetCategory']['id'], 
+									$asset_category['AssetCategory']['category_code'], 
+									$asset_category['AssetCategory']['name'], 
+									$asset_category['AssetCategory']['description'] );
 			
 		}
 		
-		return $branches_data;
+		return $asset_categories_data;
 	}
-*/
+
 }
 ?>
