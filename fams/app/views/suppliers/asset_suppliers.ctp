@@ -90,7 +90,7 @@ Ext.onReady(function(){
         deferredRender: false,
         defaults:{autoHeight: true},
         items:[
-            {contentEl:'tab1', title: 'Company Branches'}
+            {contentEl:'tab1', title: 'Supplier Details'}
         ],
         viewConfig: {
 			forceFit: true,
