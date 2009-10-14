@@ -83,7 +83,7 @@ Ext.onReady(function(){
         deferredRender: false,
         defaults:{autoHeight: true},
         items:[
-            {contentEl:'tab1', title: 'Company Locations'}
+            {contentEl:'tab1', title: 'Location Details'}
         ],
         viewConfig: {
 			forceFit: true,
