@@ -15,11 +15,11 @@ class SuppliersController extends AppController {
 	}
 	
 	// Action to Add/Edit/Delete branch records via Ajax
-/*	function asset_suppliers_update() {
+	function asset_suppliers_update() {
 		Configure::write('debug', 0);
 		
 		$this->layout = 'ajax';
-		
+/*	
 		$record_id = $this->params['form']['id'];
 		$form_action = $this->params['form']['action'];
 			
@@ -54,9 +54,9 @@ class SuppliersController extends AppController {
 		// JSON object is created in view file accordingly
 		$branch_data = $this->Branch->get_branches_for_json();
 		$this->set('branch_data', $branch_data);
-		
+*/	
 	}
-*/
+
 
 }
 ?>
