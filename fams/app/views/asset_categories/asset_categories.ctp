@@ -137,7 +137,7 @@ Ext.onReady(function(){
 
 	category_description = new Ext.form.TextArea({
     			id: 'txt_category_description',
-    			width: 600,
+    			width: 400,
     			disabled: true,
     		    renderTo: 'cnt_category_description',
     		    allowBlank:false
@@ -301,12 +301,12 @@ Ext.onReady(function(){
     <div id="tab1" align="center"> 
 					<table border="0"  >
 						<tr>
-							<td width="100px">Branch Code</td>
+							<td width="150px">Category Code</td>
 							<td width="5px">:</td>
 							<td colspan="4" id="cnt_category_code"><!-- category code --></td>
 						</tr>
 						<tr>
-							<td valign="top">Description</td>
+							<td valign="top">Category Name</td>
 							<td valign="top" width="5px">:</td>
 							<td colspan="4" id="cnt_category_name"><!-- category name --></td>
 						</tr>
