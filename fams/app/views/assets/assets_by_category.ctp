@@ -3,22 +3,16 @@
 
 <script type="text/javascript" language="javascript">
 var btn_popup_ast_cat = null;
-var btn_popup_asset = null;
 
 var ast_cat_name = null;
-var asset_name = null;
 
 var ast_cat_id = null;
-var asset_id = null;
 
 var win_ast_cat;
-var win_ast;
 
 var grid_asset_cat_data_store = null;
-var grid_asset_cat = null;
 
 var grid_asset_data_store = null;
-var grid_asset = null;
 
 
 Ext.onReady(function(){
@@ -37,7 +31,7 @@ Ext.onReady(function(){
         fields: [
            {name: 'ast_cat_id', type: 'int'},
            {name: 'ast_cat_code'},
-           {name: 'ast_cat_desc'}
+           {name: 'ast_cat_name'}
 	 	]
     });
     
@@ -48,7 +42,7 @@ Ext.onReady(function(){
 						columns: [
 						   /* {header: 'Price', width: 75, sortable: true, renderer: 'usMoney', dataIndex: 'ast_cat_id'},*/
 							{header: 'Category Code', width: 100, sortable: true, dataIndex: 'ast_cat_code'},
-							{header: 'Description', width: 310, sortable: true, dataIndex: 'ast_cat_desc'}
+							{header: 'Description', width: 310, sortable: true, dataIndex: 'ast_cat_name'}
 						],
 					   /* stripeRows: true,
 						autoExpandColumn: 'company',*/
@@ -59,44 +53,23 @@ Ext.onReady(function(){
 						stateful: true,
 						stateId: 'grid'   */     
 					});
-    
-	// Data grid for Asset Browser
+					
+    grid_asset_cat.on('rowdblclick', function(sm, row_index, r) {
+					/*
+					category_code.setValue(r.data['category_code']);
+					category_name.setValue(r.data['category_name']);
+					category_description.setValue(r.data['category_description']);
 
-	var myData2 = [
-        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
-        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
-        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
-        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
-        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
-        [5, 'FFF', 'FFFFFFFFFFFFFFFF']
-    ];
-    
-    var store2 = new Ext.data.ArrayStore({
-        fields: [
-           {name: 'ast_cat_id', type: 'int'},
-           {name: 'ast_cat_code'},
-           {name: 'ast_cat_desc'}
-	 	]
-    });
-    
-	store2.loadData(myData2);
+					rec_id.setValue(r.data['rec_id'], true);
+					current_row_index = row_index;
+					*/
+					var record = grid_asset_cat.getStore().getAt(row_index);
+					var callref = record.get('ast_cat_name');
 
-    grid_asset = new Ext.grid.GridPanel({
-						store: store2,
-						columns: [
-						   /* {header: 'Price', width: 75, sortable: true, renderer: 'usMoney', dataIndex: 'ast_cat_id'},*/
-							{header: 'Category Code', width: 100, sortable: true, dataIndex: 'ast_cat_code'},
-							{header: 'Description', width: 310, sortable: true, dataIndex: 'ast_cat_desc'}
-						],
-					   /* stripeRows: true,
-						autoExpandColumn: 'company',*/
-						height: 350,
-						width: 420/*,
-						title: 'Asset Categories',
-						// config options for stateful behavior
-						stateful: true,
-						stateId: 'grid'   */     
-					});
+					ast_cat_name.setValue(callref);
+					win_ast_cat.hide(this);
+					//alert('hi');
+				});
 
 });
 
@@ -113,20 +86,7 @@ Ext.onReady(function(){
 				allowBlank:false,
 				value: 'Computer'
     		});
-/* 
-    asset_name = new Ext.form.TextField({
-				id: 'asset_name',
-				validateOnBlur: false,
-				invalidText: 'The value in this field is invalid',
-				//maxLength : 5,
-				width: 300,
-				disabled: false,
-				renderTo: 'cnt_asset',
-				msgTarget: 'under',
-				allowBlank:false,
-				value: 'HP Laser D1560'
-    		});
-*/
+
     btn_popup_ast_cat = new Ext.Button({
 							text: '',
 							id: 'btn_popup_ast_cat',
@@ -134,16 +94,7 @@ Ext.onReady(function(){
 							minWidth: 50,
 							renderTo: 'cnt_asset_cat_btn'
 						});
-/*
-    btn_popup_asset = new Ext.Button({
-							text: '',
-							id: 'btn_popup_asset',
-							icon: '/img/data_browser_view.png',
-							minWidth: 50,
-							renderTo: 'cnt_asset_btn'
-						});
 	
-*/	
 	
 	btn_popup_ast_cat.on('click', function() {
         // create the window on the first click and reuse on subsequent clicks
@@ -161,24 +112,7 @@ Ext.onReady(function(){
         }
         win_ast_cat.show(this);
     });
- /*   
-	btn_popup_asset.on('click', function() {
-        // create the window on the first click and reuse on subsequent clicks
-        if(!win_ast){
-            win_ast = new Ext.Window({
-                applyTo:'cnt_asst_browser',
-                layout:'fit',
-                width:450,
-                height:200,
-                closeAction:'hide',
-                plain: true,
-				title: 'Asset Browser',
-                items: grid_asset
-            });
-        }
-        win_ast.show(this);
-    });
-   */ 
+
 
 });
 
