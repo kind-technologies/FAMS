@@ -164,6 +164,8 @@ Ext.onReady(function(){
     			maxLength : 50,
     			disabled: true,
     		    renderTo: 'cnt_email',
+    		    vtype:'email',
+				vtypeText:"The from field should be an email address in the format of user@domain.com",
     		    allowBlank:false
     });
 
