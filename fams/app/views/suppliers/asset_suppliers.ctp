@@ -215,19 +215,19 @@ Ext.onReady(function(){
 		btn_add.setDisabled(true);
 		btn_edit.setDisabled(true);
 		btn_delete.setDisabled(true);
-/*		
+		
 		Ext.MessageBox.confirm("FAMS", "Do you want to delete this record?", 
 				function(btn){
 					if(btn == "yes") {
 						ajaxClass.request({
-									url: '/org_setup/branch_update',
+									url: '/suppliers/asset_suppliers_update',
 									params: { 
 										id: rec_id.getValue(),
 										action: action.getValue()
 									},
 									callback : function(options, success, response) { 
 										obj = Ext.util.JSON.decode(response.responseText);
-										grid_data_store.loadData(obj.branch_data);
+										grid_data_store.loadData(obj.suppliers_data);
 										display_message("Record deleted successfully");
 										cancel();
 										grid.getSelectionModel().selectFirstRow();
@@ -239,28 +239,31 @@ Ext.onReady(function(){
 					}
 					
 				});
-*/
+
 	}
 
 	function save() {
 
 		// Validate fields before submit
-/*		if(!is_form_valid()) {
+		if(!is_form_valid()) {
 			Ext.MessageBox.alert("FAMS", "Please check the values you have entered.");
 			return false;
 		}
 
 		ajaxClass.request({
-				   url: '/org_setup/branch_update',
+				   url: '/suppliers/asset_suppliers_update',
 				   params: { 
-				   			branch_code: branch_code.getValue(), 
-				   			branch_description: branch_description.getValue(),
+				   			supplier_code: supplier_code.getValue(), 
+				   			description: description.getValue(),
+				   			address: address.getValue(),
+				   			contact_number: contact_number.getValue(),
+				   			email: email.getValue(),
 				   			id: rec_id.getValue(),
 				   			action: action.getValue()
 		   			},
 				   callback : function(options, success, response) { 
 				   				obj = Ext.util.JSON.decode(response.responseText);
-				   				grid_data_store.loadData(obj.branch_data);
+				   				grid_data_store.loadData(obj.suppliers_data);
 
 				   				display_message("Record saved successfully");
 				   				
@@ -277,7 +280,7 @@ Ext.onReady(function(){
 								}
 		   			}
 				});
-*/		
+		
 	}
 	
 	function cancel() {
