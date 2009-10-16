@@ -127,7 +127,7 @@ Ext.onReady(function(){
     			id: 'txt_category_name',
     			validateOnBlur: true,
     			invalidText: 'The value in this field is invalid',
-    			maxLength : 5,
+    			maxLength : 20,
     			width: 200,
     			disabled: true,
     		    renderTo: 'cnt_category_name',
@@ -191,7 +191,7 @@ Ext.onReady(function(){
 	}
 
 	function del() {
-/*		action.setValue('__d');
+		action.setValue('__d');
 		btn_add.setDisabled(true);
 		btn_edit.setDisabled(true);
 		btn_delete.setDisabled(true);
@@ -200,14 +200,14 @@ Ext.onReady(function(){
 				function(btn){
 					if(btn == "yes") {
 						ajaxClass.request({
-									url: '/org_setup/branch_update',
+									url: '/asset_categories/asset_category_update',
 									params: { 
 										id: rec_id.getValue(),
 										action: action.getValue()
 									},
 									callback : function(options, success, response) { 
 										obj = Ext.util.JSON.decode(response.responseText);
-										grid_data_store.loadData(obj.branch_data);
+										grid_data_store.loadData(obj.asset_categories_data);
 										display_message("Record deleted successfully");
 										cancel();
 										grid.getSelectionModel().selectFirstRow();
@@ -219,11 +219,11 @@ Ext.onReady(function(){
 					}
 					
 				});
-*/
+
 	}
 
 	function save() {
-/*
+
 		// Validate fields before submit
 		if(!is_form_valid()) {
 			Ext.MessageBox.alert("FAMS", "Please check the values you have entered.");
@@ -231,16 +231,17 @@ Ext.onReady(function(){
 		}
 
 		ajaxClass.request({
-				   url: '/org_setup/branch_update',
+				   url: '/asset_categories/asset_category_update',
 				   params: { 
-				   			branch_code: branch_code.getValue(), 
-				   			branch_description: branch_description.getValue(),
+				   			category_code: category_code.getValue(), 
+				   			category_name: category_name.getValue(),
+				   			category_description: category_description.getValue(),
 				   			id: rec_id.getValue(),
 				   			action: action.getValue()
 		   			},
 				   callback : function(options, success, response) { 
 				   				obj = Ext.util.JSON.decode(response.responseText);
-				   				grid_data_store.loadData(obj.branch_data);
+				   				grid_data_store.loadData(obj.asset_categories_data);
 
 				   				display_message("Record saved successfully");
 				   				
@@ -257,7 +258,7 @@ Ext.onReady(function(){
 								}
 		   			}
 				});
-*/		
+	
 	}
 	
 	function cancel() {
@@ -270,16 +271,18 @@ Ext.onReady(function(){
 	
 	// Clear all text fields and error messages
 	function clear() {
-		branch_code.setValue(''); branch_code.clearInvalid();
-		branch_description.setValue(''); branch_description.clearInvalid();
+		category_code.setValue(''); category_code.clearInvalid();
+		category_name.setValue(''); category_name.clearInvalid();
+		category_description.setValue(''); category_description.clearInvalid();
 
 		rec_id.setValue('');
 		action.setValue('');
 	}
 
 	function disable_fields(bool) {
-		branch_code.setDisabled(bool);
-		branch_description.setDisabled(bool);
+		category_code.setDisabled(bool);
+		category_name.setDisabled(bool);
+		category_description.setDisabled(bool);
 	}
 	
 	function display_message(text) {
@@ -290,8 +293,9 @@ Ext.onReady(function(){
 	
 	function is_form_valid() {
 		
-		return (branch_code.validate() &&
-					branch_description.validate() );
+		return (category_code.validate() &&
+					category_name.validate() &&
+					category_description.validate() );
 
 	}
 </script>
@@ -300,6 +304,9 @@ Ext.onReady(function(){
 <div id="fields_div" style="margin-top:5px">
     <div id="tab1" align="center"> 
 					<table border="0"  >
+						<tr>
+							<td width="150px" style="height:40px" colspan="3">&nbsp;</td>
+						</tr>
 						<tr>
 							<td width="150px">Category Code</td>
 							<td width="5px">:</td>
