@@ -133,7 +133,8 @@ Ext.onReady(function(){
 
 	description = new Ext.form.TextArea({
     			id: 'txt_description',
-    			width: 600,
+    			width: 500,
+    			maxLength : 150,
     			disabled: true,
     		    renderTo: 'cnt_description',
     		    allowBlank:false
@@ -141,7 +142,8 @@ Ext.onReady(function(){
 
 	address = new Ext.form.TextField({
     			id: 'txt_address',
-    			width: 600,
+    			width: 500,
+    			maxLength : 200,
     			disabled: true,
     		    renderTo: 'cnt_address',
     		    allowBlank:false
@@ -149,15 +151,17 @@ Ext.onReady(function(){
 
 	contact_number = new Ext.form.TextField({
     			id: 'txt_contact_number',
-    			width: 600,
+    			width: 300,
+    			maxLength : 20,
     			disabled: true,
     		    renderTo: 'cnt_contact_number',
     		    allowBlank:false
     });
     
-    	email = new Ext.form.TextField({
+    email = new Ext.form.TextField({
     			id: 'txt_email',
-    			width: 600,
+    			width: 300,
+    			maxLength : 50,
     			disabled: true,
     		    renderTo: 'cnt_email',
     		    allowBlank:false
@@ -334,7 +338,10 @@ Ext.onReady(function(){
     <div id="tab1" align="center"> 
 			<table border="0"  >
 				<tr>
-					<td width="100px">Supplier Code</td>
+					<td style="height:20px">&nbsp;</td>
+				</tr>				
+				<tr>
+					<td width="150px">Supplier Code</td>
 					<td width="5px">:</td>
 					<td colspan="4" id="cnt_supplier_code"><!-- supplier code --></td>
 				</tr>
