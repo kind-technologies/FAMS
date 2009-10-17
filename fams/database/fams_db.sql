@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Started on 2009-10-17 20:29:41 IST
+-- Started on 2009-10-18 00:04:54 IST
 
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = off;
@@ -105,7 +105,7 @@ CREATE TABLE asset_requests (
 
 
 --
--- TOC entry 1533 (class 1259 OID 18736)
+-- TOC entry 1533 (class 1259 OID 18747)
 -- Dependencies: 6
 -- Name: assets; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
@@ -123,6 +123,7 @@ CREATE TABLE assets (
     salvage_value numeric,
     date_in_use date,
     assign_type character(1),
+    photo character varying(50),
     record_status character(1)
 );
 
@@ -431,12 +432,13 @@ SELECT pg_catalog.setval('asset_requests_id_seq', 1, false);
 
 
 --
--- TOC entry 1532 (class 1259 OID 18734)
+-- TOC entry 1532 (class 1259 OID 18745)
 -- Dependencies: 1533 6
 -- Name: assets_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE assets_id_seq
+    START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -458,7 +460,7 @@ ALTER SEQUENCE assets_id_seq OWNED BY assets.id;
 -- Name: assets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('assets_id_seq', 1, true);
+SELECT pg_catalog.setval('assets_id_seq', 1, false);
 
 
 --
@@ -733,7 +735,7 @@ ALTER TABLE asset_requests ALTER COLUMN id SET DEFAULT nextval('asset_requests_i
 
 
 --
--- TOC entry 1822 (class 2604 OID 18739)
+-- TOC entry 1822 (class 2604 OID 18750)
 -- Dependencies: 1532 1533 1533
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
@@ -866,13 +868,12 @@ COPY asset_requests (id) FROM stdin;
 
 
 --
--- TOC entry 1865 (class 0 OID 18736)
+-- TOC entry 1865 (class 0 OID 18747)
 -- Dependencies: 1533
 -- Data for Name: assets; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY assets (id, asset_code, short_name, description, asset_category_id, supplier_id, purchase_price, purchase_date, lifespan, salvage_value, date_in_use, assign_type, record_status) FROM stdin;
-1	CMP00001	AMD Athlon 2000+ 	Personal Computer	1	1	300.00	2007-10-25	36	10	\N	\N	A
+COPY assets (id, asset_code, short_name, description, asset_category_id, supplier_id, purchase_price, purchase_date, lifespan, salvage_value, date_in_use, assign_type, photo, record_status) FROM stdin;
 \.
 
 
@@ -885,7 +886,7 @@ COPY assets (id, asset_code, short_name, description, asset_category_id, supplie
 COPY branches (id, branch_code, description, record_status) FROM stdin;
 1	STG	St. George, Utah	A
 2	CMB	Colombo, Sri Lanka	A
-3	TKY	Tokyo, Japan JP	A
+3	TKY	Tokyo, Japan JP.	A
 \.
 
 
@@ -918,7 +919,6 @@ COPY employees (id, employee_id, full_name, name_with_initials, date_of_birth, g
 11	00010	Abigail Cluff	A Cluff	1991-07-19	F	keerthi.bandara@laknipayum.com	Main Street, St George, Utah USA	0123456789	1	1	\N	D
 2	00002	Nuwan Chaturanga	MN Chaturanga	1981-05-23	M	nuwan.chaturanga@laknipayum.com	Pitipana, Balangoda.	94714567567	2	2	\N	A
 6	00006	Nishan Pradeep	N Pradeep	1974-08-15	M	keerthi.bandara@laknipayum.com	Battaramulla	94716833516	2	1	\N	A
-5	00005	Dihan Praneeth	D Praneeth	1965-09-12	M	keerthi.bandara@laknipayum.com	Minasota	94716833516	1	1	\N	A
 7	00007	Nishchala Kodithuwakku	N Kodithuwakku	1983-05-13	F	keerthi.bandara@laknipayum.com	\N	94716833516	2	2	\N	D
 3	00003	James Cluff	J Cluff	1955-03-30	M	james.cluff@laknipayum.com	St. George, Utah, USA	01716833516	1	1	\N	A
 12	00011	Mali Duruge	M Duruge	2009-07-08	F	keerthi.bandara@laknipayum.com	Thalahena North,	7101223123	2	2	\N	D
@@ -928,6 +928,7 @@ COPY employees (id, employee_id, full_name, name_with_initials, date_of_birth, g
 1	00001	Chaminda Keerthi Bandara	MMCK Bandara	1981-04-11	M	keerthi.bandara@laknipayum.com	113/4, Kithulawila Uyana, Kiriwattuduwa	0716833516	2	2	c4ca4238a0b923820dcc509a6f75849b-4.png	A
 19	00018	Marasi Paala	M Paala	2009-08-03	M	marasi.paala@gmail.com	Maradaana	6935824710	2	2		D
 18	00017	Malkanthi Perera	M Perera	2009-08-19	F	m.perera@yahoo.com	Katharagama	6547891230	2	2		D
+5	00005	Dihan Praneeth Duruge	D Praneeth	1965-09-12	M	keerthi.bandara@laknipayum.com	Minasota	94716833516	1	1	\N	A
 \.
 
 
@@ -1058,7 +1059,7 @@ ALTER TABLE ONLY asset_requests
 
 
 --
--- TOC entry 1851 (class 2606 OID 18744)
+-- TOC entry 1851 (class 2606 OID 18755)
 -- Dependencies: 1533 1533
 -- Name: assets_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
@@ -1158,7 +1159,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2009-10-17 20:29:41 IST
+-- Completed on 2009-10-18 00:04:54 IST
 
 --
 -- PostgreSQL database dump complete
