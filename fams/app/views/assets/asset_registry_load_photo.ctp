@@ -1,7 +1,7 @@
 <?php 
-if($emp_photo != 'NO') { 
+if($asset_photo != 'NO') { 
 ?>
-	<img src="/img/employee_imgs/<?=$emp_photo?>" width="180px" height="180px" />
+	<img src="/img/asset_imgs/<?=$asset_photo?>" width="180px" height="180px" />
 <?php 
 } else {
 ?>

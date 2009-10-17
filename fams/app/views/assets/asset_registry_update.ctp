@@ -3,7 +3,7 @@
 $response = array(
 				'status' => 'OK',
 				'message' => 'No ERROR',
-				'employee_data' => $employee_data/*,
+				'assets_data' => $assets_data /*,
 				'params' => $params*/
 			);
 

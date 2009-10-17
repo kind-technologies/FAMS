@@ -152,7 +152,7 @@ Ext.onReady(function(){
     			id: 'txt_ast_asset_code',
     			validateOnBlur: true,
     			invalidText: 'The value in this field is invalid',
-    			maxLength : 5,
+    			maxLength : 10,
     			width: 200,
     			disabled: true,
     		    renderTo: 'cnt_ast_asset_code',
@@ -302,39 +302,39 @@ Ext.onReady(function(){
 	}
 
 	function del() {
-/*		action.setValue('__d');
+		action.setValue('__d');
 		btn_add.setDisabled(true);
 		btn_edit.setDisabled(true);
 		btn_delete.setDisabled(true);
 		
 		Ext.MessageBox.confirm("FAMS", "Do you want to delete this record?", 
-									function(btn){
-										if(btn == "yes") {
-											ajaxClass.request({
-														url: '/employees/emplayee_update',
-														params: { 
-															id: rec_id.getValue(),
-															action: action.getValue()
-														},
-														callback : function(options, success, response) { 
-															obj = Ext.util.JSON.decode(response.responseText);
-															grid_data_store.loadData(obj.employee_data);
-															display_message("Record deleted successfully");
-															cancel();
-															grid.getSelectionModel().selectFirstRow();
-														}
-												});
-										} else {
-											cancel();
-											grid.getSelectionModel().selectRow(current_row_index);
-										}
-										
-									});
-*/
+				function(btn){
+					if(btn == "yes") {
+						ajaxClass.request({
+									url: '/assets/asset_registry_update',
+									params: { 
+										id: rec_id.getValue(),
+										action: action.getValue()
+									},
+									callback : function(options, success, response) { 
+										obj = Ext.util.JSON.decode(response.responseText);
+										grid_data_store.loadData(obj.assets_data);
+										display_message("Record deleted successfully");
+										cancel();
+										grid.getSelectionModel().selectFirstRow();
+									}
+							});
+					} else {
+						cancel();
+						grid.getSelectionModel().selectRow(current_row_index);
+					}
+					
+				});
+
 	}
 
 	function save() {
-/*
+
 		// Validate fields before submit
 		if(!is_form_valid()) {
 			Ext.MessageBox.alert("FAMS", "Please check the values you have entered.");
@@ -342,24 +342,23 @@ Ext.onReady(function(){
 		}
 
 		ajaxClass.request({
-				   url: '/employees/emplayee_update',
+				   url: '/assets/asset_registry_update',
 				   params: { 
-				   			employee_id: emp_id.getValue(), 
-				   			full_name: emp_full_name.getValue(),
-				   			name_with_initials: emp_name_with_init.getValue(),
-				   			date_of_birth: emp_dob.getValue().format('Y-m-d'),
-				   			gender: (emp_gender.items.get(0).checked) ? 'M' : 'F',
-				   			email: emp_email.getValue(),
-				   			address: emp_address.getValue(),
-				   			contact_number: emp_phone.getValue(),
-				   			branch_id: emp_branch.getValue(),
-				   			division_id: emp_division.getValue(),
+				   			asset_code: ast_asset_code.getValue(), 
+				   			short_name: ast_short_name.getValue(),
+				   			description: ast_description.getValue(),
+				   			asset_category_id: ast_asset_category.getValue(),
+				   			supplier_id: ast_supplier.getValue(),
+				   			purchase_price: ast_purchase_price.getValue(),
+				   			purchase_date: ast_purchase_date.getValue().format('Y-m-d'),
+				   			lifespan: ast_lifespan.getValue(),
+				   			salvage_value: ast_salvage_value.getValue(),
 				   			id: rec_id.getValue(),
 				   			action: action.getValue()
 		   			},
 				   callback : function(options, success, response) { 
 				   				obj = Ext.util.JSON.decode(response.responseText);
-				   				grid_data_store.loadData(obj.employee_data);
+				   				grid_data_store.loadData(obj.assets_data);
 				   				display_message("Record saved successfully");
 				   				
 				   				act = action.getValue();
@@ -375,7 +374,7 @@ Ext.onReady(function(){
 								}
 		   			}
 				});
-*/		
+		
 	}
 	
 	function cancel() {
