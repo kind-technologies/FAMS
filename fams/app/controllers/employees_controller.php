@@ -79,7 +79,7 @@ class EmployeesController extends AppController {
 	}
 	
 	function employee_upload_photo() {
-		//Configure::write('debug', 0);
+		Configure::write('debug', 0);
 		$this->layout = 'ajax';
 		
 		if ((($_FILES['photo']['type'] == 'image/gif') ||
@@ -141,7 +141,7 @@ class EmployeesController extends AppController {
 	}
 	
 	function employee_load_photo() {
-		//Configure::write('debug', 0);
+		Configure::write('debug', 0);
 		$this->layout = 'ajax';
 
 		$emp_id = $this->params['form']['id'];
