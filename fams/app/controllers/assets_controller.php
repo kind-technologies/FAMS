@@ -32,7 +32,7 @@ class AssetsController extends AppController {
 
 	// Action to Add/Edit/Delete employee records via Ajax
 	function asset_registry_update() {
-/*		Configure::write('debug', 0);
+		Configure::write('debug', 0);
 		
 		$this->layout = 'ajax';
 		
@@ -40,60 +40,59 @@ class AssetsController extends AppController {
 		$form_action = $this->params['form']['action'];
 			
 		if($form_action == '__a' || $form_action == '__e') {
-			$this->data['Employee']['employee_id'] = 
-												$this->params['form']['employee_id'];
-			$this->data['Employee']['full_name'] = 
-												$this->params['form']['full_name'];
-			$this->data['Employee']['name_with_initials'] = 
-												$this->params['form']['name_with_initials'];
-			$this->data['Employee']['date_of_birth'] = 
-												$this->params['form']['date_of_birth'];
+			$this->data['Asset']['asset_code'] = 
+												$this->params['form']['asset_code'];
+			$this->data['Asset']['short_name'] = 
+												$this->params['form']['short_name'];
+			$this->data['Asset']['description'] = 
+												$this->params['form']['description'];
 		
-			$this->data['Employee']['gender'] = 	$this->params['form']['gender'];
+			$this->data['Asset']['asset_category_id'] = 	$this->params['form']['asset_category_id'];
 		
-			$this->data['Employee']['email'] = 
-												$this->params['form']['email'];
-			$this->data['Employee']['address'] = 
-												$this->params['form']['address'];
-			$this->data['Employee']['contact_number'] = 
-												$this->params['form']['contact_number'];
-			$this->data['Employee']['branch_id'] = 
-												$this->params['form']['branch_id'];
-			$this->data['Employee']['division_id'] = 
-												$this->params['form']['division_id'];
+			$this->data['Asset']['supplier_id'] = 
+												$this->params['form']['supplier_id'];
+			$this->data['Asset']['purchase_price'] = 
+												$this->params['form']['purchase_price'];
+			$this->data['Asset']['purchase_date'] = 
+												$this->params['form']['purchase_date'];
+			$this->data['Asset']['lifespan'] = 
+												$this->params['form']['lifespan'];
+			$this->data['Asset']['salvage_value'] = 
+												$this->params['form']['salvage_value'];
 
-			$this->data['Employee']['photo'] = '';
-			$this->data['Employee']['record_status'] = 'A'; // Record in Active status
+			$this->data['Asset']['photo'] = NULL;
+			$this->data['Asset']['record_status'] = 'A'; // Record in Active status
 			
 								
 			if($form_action == '__a') { // If request is to ADD a new record
 			
-				$this->Employee->create();
-				$this->Employee->save($this->data);
+				$this->Asset->create();
+				$this->Asset->save($this->data);
 			
 			} elseif($form_action == '__e') { // If request is to EDIT a record		
 			
-				$this->data['Employee']['id'] = $record_id;
-				$this->Employee->save($this->data);
+				$this->data['Asset']['id'] = $record_id;
+				$this->Asset->save($this->data);
 			
 			}
 		} elseif($form_action == '__d') { // If request is to DELETE a record
-			$this->data['Employee']['id'] = $record_id;
-			$this->data['Employee']['record_status'] = 'D'; // Record in Deleted status
-			$this->Employee->save($this->data);	
+			$this->data['Asset']['id'] = $record_id;
+			$this->data['Asset']['record_status'] = 'D'; // Record in Deleted status
+			$this->Asset->save($this->data);	
 		}
 		
 		//$this->set('params', $record_id . $form_action);
 
 		// Set data for update data-grid.
 		// JSON object is created in view file accordingly
-		$emp_data = $this->Employee->get_employees_for_json();
-		$this->set('employee_data', $emp_data);
-*/		
+		$assets_data = $this->Asset->get_assets_for_json();
+		$this->set('assets_data', $assets_data);
+
+		
 	}
 	
 	function asset_registry_upload_photo() {
-/*		//Configure::write('debug', 0);
+		Configure::write('debug', 0);
 		$this->layout = 'ajax';
 		
 		if ((($_FILES['photo']['type'] == 'image/gif') ||
@@ -107,11 +106,11 @@ class AssetsController extends AppController {
 			} else {
 				
 				
-				$emp_id = $this->params['form']['hdn_upld_emp_id'];
-				$employee = $this->Employee->find(array('Employee.id'=>$emp_id));
+				$asset_id = $this->params['form']['hdn_upld_asset_id'];
+				$asset = $this->Asset->find(array('Asset.id'=>$asset_id));
 				
 				// Create unique file name
-				$file_name = md5($employee['Employee']['id']) . '-' . rand(0, 5);
+				$file_name = md5($asset['Asset']['id']) . '-' . rand(0, 5);
 				$extension = '';
 				
 				switch ($_FILES['photo']['type']) {
@@ -132,18 +131,18 @@ class AssetsController extends AppController {
 				$file_name .= $extension;
 				
 				// Get the existing file name, remove the file if exists
-				if($employee['Employee']['photo']) {
-					@unlink("img/employee_imgs/" . $employee['Employee']['photo']);
+				if($asset['Asset']['photo']) {
+					@unlink("img/asset_imgs/" . $asset['Asset']['photo']);
 				}
 
 				// Update the DB with new file name
-				$emp_data['Employee']['id'] = $emp_id;
-				$emp_data['Employee']['photo'] = $file_name;
-				$this->Employee->save($emp_data);
+				$asset_data['Asset']['id'] = $asset_id;
+				$asset_data['Asset']['photo'] = $file_name;
+				$this->Asset->save($asset_data);
 				
 				// Save the file
 				move_uploaded_file($_FILES["photo"]["tmp_name"],
-											"img/employee_imgs/" . $file_name);
+											"img/asset_imgs/" . $file_name);
 		
 			}
 		} else {
@@ -151,22 +150,22 @@ class AssetsController extends AppController {
 		}
 		
 		
-		$this->set('photo_name', json_encode($this->params['form']['hdn_upld_emp_id']));
-*/	}
+		$this->set('photo_name', json_encode($this->params['form']['hdn_upld_asset_id']));
+	}
 	
 	function asset_registry_load_photo() {
-/*		//Configure::write('debug', 0);
+		Configure::write('debug', 0);
 		$this->layout = 'ajax';
 
-		$emp_id = $this->params['form']['id'];
-		$employee = $this->Employee->find(array('Employee.id' => $emp_id));
+		$asset_id = $this->params['form']['id'];
+		$asset = $this->Asset->find(array('Asset.id' => $asset_id));
 		
-		if(isset($employee['Employee']['photo'])) {
-			$this->set('emp_photo', $employee['Employee']['photo']);
+		if(isset($asset['Asset']['photo'])) {
+			$this->set('asset_photo', $asset['Asset']['photo']);
 		} else {
-			$this->set('emp_photo', 'NO');
+			$this->set('asset_photo', 'NO');
 		}
-*/	}
+	}
 
 	//--> END SECTION FOR ASSET REGISTRY
 	

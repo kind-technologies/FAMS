@@ -48,7 +48,7 @@ class EmployeesController extends AppController {
 			$this->data['Employee']['division_id'] = 
 												$this->params['form']['division_id'];
 
-			$this->data['Employee']['photo'] = '';
+			$this->data['Employee']['photo'] = NULL;
 			$this->data['Employee']['record_status'] = 'A'; // Record in Active status
 			
 								
