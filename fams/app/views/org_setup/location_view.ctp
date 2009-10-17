@@ -19,7 +19,7 @@ Ext.onReady(function() {
 		{name: 'rec_id'},
 		{name: 'location_code'},
 		{name: 'location_description'},
-		{name: 'emp_branch_id'}
+		{name: 'location_branch_id'}
 	]);	
 	
 	
@@ -60,7 +60,7 @@ Ext.onReady(function() {
 	grid.getSelectionModel().on('rowselect', function(sm, row_index, r) {
 		location_code.setValue(r.data['location_code']);
 		location_description.setValue(r.data['location_description']);
-		location_branch.setValue(r.data['emp_branch_id'], true);
+		location_branch.setValue(r.data['location_branch_id'], true);
 
 		rec_id.setValue(r.data['rec_id'], true);
 		current_row_index = row_index;
