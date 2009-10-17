@@ -2,21 +2,34 @@
 class Asset extends AppModel {
 
 	var $name = 'Asset';
-/*
-	function get_branches_for_json() {
-		$branches = $this->findAll(null, null, 'Branch.id ASC');
-		$branches_data = array();
+	var $belongsTo = array(
+				'AssetCategory' => array('className' => 'AssetCategory'),
+				'Supplier' => array('className' => 'Supplier')
+			);
+			
+	function get_assets_for_json() {
+		$assets = $this->findAll(array('Asset.record_status'=>'A'), 
+										null, 'Asset.id ASC');
+		$assets_data = array();
 
-		foreach($branches as $branch) {
+		foreach($assets as $asset) {
 
-			$branches_data[] = array($branch['Branch']['id'], 
-									$branch['Branch']['branch_code'], 
-									$branch['Branch']['description'] );
+			$assets_data[] = array($asset['Asset']['id'], 
+									$asset['Asset']['asset_code'], 
+									$asset['Asset']['short_name'], 
+									$asset['Asset']['description'],
+									$asset['AssetCategory']['id'],
+									$asset['Supplier']['id'], 
+									$asset['Asset']['purchase_price'], 
+									date( 'm/d/Y', 
+										strtotime($asset['Asset']['purchase_date'])), 
+									$asset['Asset']['lifespan'], 
+									$asset['Asset']['salvage_value'] );
 			
 		}
 		
-		return $branches_data;
+		return $assets_data;
 	}
-*/
+
 }
 ?>
