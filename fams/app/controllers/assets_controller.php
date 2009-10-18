@@ -170,7 +170,7 @@ class AssetsController extends AppController {
 	//--> END SECTION FOR ASSET REGISTRY
 	
 	function asset_allocation() {
-
+		Configure::write('debug', 0);
 	}
 
 	function asset_allocation_update() {
