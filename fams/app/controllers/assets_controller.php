@@ -171,6 +171,11 @@ class AssetsController extends AppController {
 	
 	function asset_allocation() {
 		Configure::write('debug', 0);
+		
+		// Branch data for drop down list
+		$branch_data = $this->Branch->get_branches_for_json();
+		$this->set('branch_data', array('branch_data' => $branch_data));
+
 	}
 
 	function asset_allocation_update() {
