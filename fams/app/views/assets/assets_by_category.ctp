@@ -12,9 +12,6 @@ var win_ast_cat;
 
 var grid_asset_cat_data_store = null;
 
-var grid_asset_data_store = null;
-
-
 Ext.onReady(function(){
 
 	// Data grid for Asset Category Browser	
