@@ -306,6 +306,7 @@ Ext.onReady(function(){
 				renderTo: 'cnt_location_name',
 				msgTarget: 'under',
 				allowBlank:false,
+				style: 'margin:0px',
 				value: 'AMD Athlon 2000+'
     		});
 
@@ -314,7 +315,8 @@ Ext.onReady(function(){
 							id: 'btn_popup_location',
 							icon: '/img/data_browser_view.png',
 							minWidth: 50,
-							renderTo: 'cnt_location_btn'
+							renderTo: 'cnt_location_btn',
+							style: 'margin:0px'
 						});
 	
 	
@@ -333,6 +335,121 @@ Ext.onReady(function(){
             });
         }
         win_location.show(this);
+    });
+
+
+});
+
+</script>
+
+<script type="text/javascript" language="javascript">
+
+/* Responsible Person Browser Script*/
+
+var btn_popup_resp_person = null;
+var resp_person_name = null;
+var resp_person_id = null;
+var win_resp_person;
+var grid_resp_person_data_store = null;
+
+Ext.onReady(function(){
+
+	// Data grid for Asset Browser	
+	var myData = [
+        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
+        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
+        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
+        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
+        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
+        [5, 'FFF', 'FFFFFFFFFFFFFFFF'],
+        [6, 'FFF', 'FFFFFFFFFFFFFFFF'],
+        [7, 'FFF', 'FFFFFFFFFFFFFFFF']
+    ];
+    
+    var store = new Ext.data.ArrayStore({
+        fields: [
+           {name: 'resp_person_id', type: 'int'},
+           {name: 'resp_person_name'}
+	 	]
+    });
+    
+	store.loadData(myData);
+
+    grid_resp_person = new Ext.grid.GridPanel({
+						store: store,
+						columns: [
+							{header: 'Employee ID', width: 100, sortable: true, dataIndex: 'resp_person_id'},
+							{header: 'Name', width: 310, sortable: true, dataIndex: 'resp_person_name'}
+						],
+					   /* stripeRows: true,
+						autoExpandColumn: 'company',*/
+						height: 350,
+						width: 420/*,
+						title: 'Asset Categories',
+						// config options for stateful behavior
+						stateful: true,
+						stateId: 'grid'   */     
+					});
+					
+    grid_resp_person.on('rowdblclick', function(sm, row_index, r) {
+					/*
+					category_code.setValue(r.data['category_code']);
+					category_name.setValue(r.data['category_name']);
+					category_description.setValue(r.data['category_description']);
+
+					rec_id.setValue(r.data['rec_id'], true);
+					current_row_index = row_index;
+					*/
+					var record = grid_resp_person.getStore().getAt(row_index);
+					var callref = record.get('resp_person_name');
+
+					resp_person_name.setValue(callref);
+					win_resp_person.hide(this);
+					//alert('hi');
+				});
+
+});
+
+Ext.onReady(function(){
+    resp_person_name = new Ext.form.TextField({
+				id: 'resp_person_name',
+				validateOnBlur: true,
+				invalidText: 'The value in this field is invalid',
+				//maxLength : 5,
+				width: 300,
+				disabled: false,
+				renderTo: 'cnt_resp_person_name',
+				msgTarget: 'under',
+				allowBlank:false,
+				style: 'margin:0px',
+				value: 'AMD Athlon 2000+'
+    		});
+
+    btn_popup_resp_person = new Ext.Button({
+							text: '',
+							id: 'btn_popup_resp_person',
+							icon: '/img/data_browser_view.png',
+							minWidth: 50,
+							renderTo: 'cnt_resp_person_btn',
+							style: 'margin:0px'
+						});
+	
+	
+	btn_popup_resp_person.on('click', function() {
+        // create the window on the first click and reuse on subsequent clicks
+        if(!win_resp_person){
+            win_resp_person = new Ext.Window({
+                applyTo:'cnt_resp_person_browser',
+                layout:'fit',
+                width:450,
+                height:200,
+                closeAction:'hide',
+                plain: true,
+				title: 'Employee Browser',
+                items: grid_resp_person
+            });
+        }
+        win_resp_person.show(this);
     });
 
 
@@ -373,6 +490,7 @@ Ext.onReady(function(){
 var assign_to_opt = null;
 var status_div = null;
 var branch = null;
+var com_date_loc = null;
 
 Ext.onReady(function(){
 	assign_to_opt = new Ext.form.RadioGroup({
@@ -416,7 +534,16 @@ Ext.onReady(function(){
     		    renderTo: 'cnt_branch',
     		    allowBlank:false
     });
-   
+
+	com_date_loc = new Ext.form.DateField({
+    			id: 'dat_com_date_loc',
+    			width: 200,
+    			disabled: false,
+    			format: 'm/d/Y',
+    		    renderTo: 'cnt_com_date_loc',
+    		    allowBlank:false
+    });
+    
     status_div = Ext.get('status_div');
 });
 </script>
@@ -595,7 +722,10 @@ function clear() {
 			</table> <?php*/?>
 		</div> 
 		<div id="tab2">
-				<table border="1" width="100%">
+				<table border="0" width="100%">
+					<tr>
+						<td colspan="5" style="height:10px"></td>
+					</tr>
 					<tr>
 						<td width="10%">&nbsp;</td>
 						<td width="20%">Branch</td>
@@ -607,22 +737,22 @@ function clear() {
 						<td width="10%">&nbsp;</td>
 						<td width="10%">Location</td>
 						<td width="1%">:</td>
-						<td id="cnt_location_name"><!-- location container--></td>
-						<td id="cnt_location_btn">&nbsp;</td>
+						<td id="cnt_location_name" style="padding:0px;height:10px"><!-- location container--></td>
+						<td id="cnt_location_btn" style="padding:0px;height:10px"></td>
 					</tr>
 					<tr>
 						<td width="10%">&nbsp;</td>
 						<td width="10%">Responsible Person</td>
 						<td width="1%">:</td>
-						<td id="cnt_resp_person"><!-- person container--></td>
-						<td>&nbsp;</td>
+						<td id="cnt_resp_person_name" style="padding:0px;height:10px"><!-- person container--></td>
+						<td id="cnt_resp_person_btn" style="padding:0px;height:10px"></td>
 					</tr>
 					<tr>
 						<td width="10%">&nbsp;</td>
 						<td width="10%">Commencement Date</td>
 						<td width="1%">:</td>
 						<td id="cnt_com_date_loc"><!-- commencement date container--></td>
-						<td>&nbsp;</td>
+						<td></td>
 					</tr>
 				</table>
 		</div>
@@ -633,6 +763,6 @@ function clear() {
 <div id="cnt_asst_cat_browser" class="x-hidden"><!--asset category browser container--></div>
 <div id="cnt_asst_browser" class="x-hidden"><!--asset browser container--></div>
 <div id="cnt_location_browser" class="x-hidden"><!-- location browser container--></div>
-<div id="cnt_loc_person_browser" class="x-hidden"><!-- location person browser container --></div>
+<div id="cnt_resp_person_browser" class="x-hidden"><!-- location person browser container --></div>
 
 <?php echo $this->renderElement('command_buttons_mini'); ?>
