@@ -227,6 +227,120 @@ Ext.onReady(function(){
 </script>
 
 <script type="text/javascript" language="javascript">
+
+/* Location Browser Script*/
+
+var btn_popup_location = null;
+var location_name = null;
+var location_id = null;
+var win_location;
+var grid_location_data_store = null;
+
+Ext.onReady(function(){
+
+	// Data grid for Asset Browser	
+	var myData = [
+        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
+        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
+        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
+        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
+        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
+        [5, 'FFF', 'FFFFFFFFFFFFFFFF'],
+        [6, 'FFF', 'FFFFFFFFFFFFFFFF'],
+        [7, 'FFF', 'FFFFFFFFFFFFFFFF']
+    ];
+    
+    var store = new Ext.data.ArrayStore({
+        fields: [
+           {name: 'location_id', type: 'int'},
+           {name: 'location_code'},
+           {name: 'location_name'}
+	 	]
+    });
+    
+	store.loadData(myData);
+
+    grid_location = new Ext.grid.GridPanel({
+						store: store,
+						columns: [
+							{header: 'Location Code', width: 100, sortable: true, dataIndex: 'location_code'},
+							{header: 'Name', width: 310, sortable: true, dataIndex: 'location_name'}
+						],
+					   /* stripeRows: true,
+						autoExpandColumn: 'company',*/
+						height: 350,
+						width: 420/*,
+						title: 'Asset Categories',
+						// config options for stateful behavior
+						stateful: true,
+						stateId: 'grid'   */     
+					});
+					
+    grid_location.on('rowdblclick', function(sm, row_index, r) {
+					/*
+					category_code.setValue(r.data['category_code']);
+					category_name.setValue(r.data['category_name']);
+					category_description.setValue(r.data['category_description']);
+
+					rec_id.setValue(r.data['rec_id'], true);
+					current_row_index = row_index;
+					*/
+					var record = grid_location.getStore().getAt(row_index);
+					var callref = record.get('location_name');
+
+					location_name.setValue(callref);
+					win_location.hide(this);
+					//alert('hi');
+				});
+
+});
+
+Ext.onReady(function(){
+    location_name = new Ext.form.TextField({
+				id: 'location_name',
+				validateOnBlur: true,
+				invalidText: 'The value in this field is invalid',
+				//maxLength : 5,
+				width: 300,
+				disabled: false,
+				renderTo: 'cnt_location_name',
+				msgTarget: 'under',
+				allowBlank:false,
+				value: 'AMD Athlon 2000+'
+    		});
+
+    btn_popup_location = new Ext.Button({
+							text: '',
+							id: 'btn_popup_location',
+							icon: '/img/data_browser_view.png',
+							minWidth: 50,
+							renderTo: 'cnt_location_btn'
+						});
+	
+	
+	btn_popup_location.on('click', function() {
+        // create the window on the first click and reuse on subsequent clicks
+        if(!win_location){
+            win_location = new Ext.Window({
+                applyTo:'cnt_location_browser',
+                layout:'fit',
+                width:450,
+                height:200,
+                closeAction:'hide',
+                plain: true,
+				title: 'Location Browser',
+                items: grid_location
+            });
+        }
+        win_location.show(this);
+    });
+
+
+});
+
+</script>
+
+<script type="text/javascript" language="javascript">
 /*
  * Tab area
  */
@@ -242,7 +356,7 @@ Ext.onReady(function(){
         defaults:{autoHeight: true},
         items:[
             {contentEl:'tab1', title: 'Assign To a Person'},
-            {contentEl:'tab2', title: 'Assign To a Location', disabled: true}
+            {contentEl:'tab2', title: 'Assign To a Location', disabled: false}
         ],
         viewConfig: {
 			forceFit: true,
@@ -258,6 +372,7 @@ Ext.onReady(function(){
 <script>
 var assign_to_opt = null;
 var status_div = null;
+var branch = null;
 
 Ext.onReady(function(){
 	assign_to_opt = new Ext.form.RadioGroup({
@@ -280,7 +395,28 @@ Ext.onReady(function(){
             style: 'margin-top:5px',
     		    renderTo: 'cnt_opt_assign'
     });
-    
+
+	// Get the data for branch selection drop down list
+	branch_json = Ext.util.JSON.decode('<?php echo $javascript->object($branch_data); ?>');
+	
+	branch = new Ext.form.ComboBox({
+    			id: 'txt_branch',
+    			width: 200,
+    			disabled: false,
+    			editable: false,
+    			store: new Ext.data.SimpleStore({
+									fields:['bid', 'branch_code', 'description'],
+									data: branch_json.branch_data // Set branch data from json string
+									}),
+				valueField: 'bid',
+				displayField:'branch_code',
+				forceSelection: true,
+				mode: 'local',
+				triggerAction: 'all',
+    		    renderTo: 'cnt_branch',
+    		    allowBlank:false
+    });
+   
     status_div = Ext.get('status_div');
 });
 </script>
@@ -398,7 +534,7 @@ function clear() {
 		</table>
 	</div>
 </div>
-<div align="center" style="margin-top:5px;width:100%;">
+<div id="fields_div" align="center" style="margin-top:5px;width:100%;">
 	<div id="tab_div" align="center" style="margin-top:5px;width:700px;">
 		<div id="tab1">
 			<?php /*?><table border="0" width="100%">
@@ -459,20 +595,36 @@ function clear() {
 			</table> <?php*/?>
 		</div> 
 		<div id="tab2">
-					<?php /*?><table border="0" width="100%">
+				<table border="1" width="100%">
 					<tr>
-						<td width="10%" id="cnt_upload_button"><!--upload buton container--></td>
-						<td id="cnt_load_image"><!--load image buton container--></td>
+						<td width="10%">&nbsp;</td>
+						<td width="20%">Branch</td>
+						<td width="1%">:</td>
+						<td width="20%" id="cnt_branch"><!-- branch container--></td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center">
-						<!--employee image container-->
-							<div style="background-color:#c6d9f1;border:#d3e1f1 5px solid;width:180px;height:180px" id="cnt_emp_image">
-						
-							</div>
-						</td>
+						<td width="10%">&nbsp;</td>
+						<td width="10%">Location</td>
+						<td width="1%">:</td>
+						<td id="cnt_location_name"><!-- location container--></td>
+						<td id="cnt_location_btn">&nbsp;</td>
 					</tr>
-				</table><?php*/?>
+					<tr>
+						<td width="10%">&nbsp;</td>
+						<td width="10%">Responsible Person</td>
+						<td width="1%">:</td>
+						<td id="cnt_resp_person"><!-- person container--></td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td width="10%">&nbsp;</td>
+						<td width="10%">Commencement Date</td>
+						<td width="1%">:</td>
+						<td id="cnt_com_date_loc"><!-- commencement date container--></td>
+						<td>&nbsp;</td>
+					</tr>
+				</table>
 		</div>
 	</div>
 </div>
@@ -480,5 +632,7 @@ function clear() {
 <!-- Containers for popup windows -->
 <div id="cnt_asst_cat_browser" class="x-hidden"><!--asset category browser container--></div>
 <div id="cnt_asst_browser" class="x-hidden"><!--asset browser container--></div>
+<div id="cnt_location_browser" class="x-hidden"><!-- location browser container--></div>
+<div id="cnt_loc_person_browser" class="x-hidden"><!-- location person browser container --></div>
 
 <?php echo $this->renderElement('command_buttons_mini'); ?>
