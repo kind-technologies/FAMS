@@ -172,6 +172,10 @@ class AssetsController extends AppController {
 	function asset_allocation() {
 
 	}
+
+	function asset_allocation_update() {
+
+	}
 	
 	function asset_browser() {
 	
