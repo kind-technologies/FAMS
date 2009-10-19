@@ -228,6 +228,121 @@ Ext.onReady(function(){
 
 <script type="text/javascript" language="javascript">
 
+/* Employee Browser Script for first tab */
+
+var btn_popup_employee = null;
+var employee_name = null;
+var employee_id = null;
+var win_employee;
+var grid_employee_data_store = null;
+
+Ext.onReady(function(){
+
+	// Data grid for Asset Browser	
+	var myData = [
+        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
+        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
+        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
+        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
+        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
+        [5, 'FFF', 'FFFFFFFFFFFFFFFF'],
+        [6, 'FFF', 'FFFFFFFFFFFFFFFF'],
+        [7, 'FFF', 'FFFFFFFFFFFFFFFF']
+    ];
+    
+    var store = new Ext.data.ArrayStore({
+        fields: [
+           {name: 'employee_id', type: 'int'},
+           {name: 'employee_name'}
+	 	]
+    });
+    
+	store.loadData(myData);
+
+    grid_employee = new Ext.grid.GridPanel({
+						store: store,
+						columns: [
+							{header: 'Employee ID', width: 100, sortable: true, dataIndex: 'employee_id'},
+							{header: 'Name', width: 310, sortable: true, dataIndex: 'employee_name'}
+						],
+					   /* stripeRows: true,
+						autoExpandColumn: 'company',*/
+						height: 350,
+						width: 420/*,
+						title: 'Asset Categories',
+						// config options for stateful behavior
+						stateful: true,
+						stateId: 'grid'   */     
+					});
+					
+    grid_employee.on('rowdblclick', function(sm, row_index, r) {
+					/*
+					category_code.setValue(r.data['category_code']);
+					category_name.setValue(r.data['category_name']);
+					category_description.setValue(r.data['category_description']);
+
+					rec_id.setValue(r.data['rec_id'], true);
+					current_row_index = row_index;
+					*/
+					var record = grid_employee.getStore().getAt(row_index);
+					var callref = record.get('employee_name');
+
+					employee_name.setValue(callref);
+					win_employee.hide(this);
+					//alert('hi');
+				});
+
+});
+
+Ext.onReady(function(){
+    employee_name = new Ext.form.TextField({
+				id: 'employee_name',
+				validateOnBlur: true,
+				invalidText: 'The value in this field is invalid',
+				//maxLength : 5,
+				width: 300,
+				disabled: false,
+				renderTo: 'cnt_employee_name',
+				msgTarget: 'under',
+				allowBlank:false,
+				style: 'margin:0px',
+				value: 'AMD Athlon 2000+'
+    		});
+
+    btn_popup_employee = new Ext.Button({
+							text: '',
+							id: 'btn_popup_employee',
+							icon: '/img/data_browser_view.png',
+							minWidth: 50,
+							renderTo: 'cnt_employee_btn',
+							style: 'margin:0px'
+						});
+	
+	
+	btn_popup_employee.on('click', function() {
+        // create the window on the first click and reuse on subsequent clicks
+        if(!win_employee){
+            win_employee = new Ext.Window({
+                applyTo:'cnt_employee_browser',
+                layout:'fit',
+                width:450,
+                height:200,
+                closeAction:'hide',
+                plain: true,
+				title: 'Employee Browser',
+                items: grid_employee
+            });
+        }
+        win_employee.show(this);
+    });
+
+
+});
+
+</script>
+
+<script type="text/javascript" language="javascript">
+
 /* Location Browser Script*/
 
 var btn_popup_location = null;
@@ -306,7 +421,7 @@ Ext.onReady(function(){
 				renderTo: 'cnt_location_name',
 				msgTarget: 'under',
 				allowBlank:false,
-				style: 'margin:0px',
+				style: 'margin:1px',
 				value: 'AMD Athlon 2000+'
     		});
 
@@ -421,7 +536,7 @@ Ext.onReady(function(){
 				renderTo: 'cnt_resp_person_name',
 				msgTarget: 'under',
 				allowBlank:false,
-				style: 'margin:0px',
+				style: 'margin:1px;',
 				value: 'AMD Athlon 2000+'
     		});
 
@@ -490,7 +605,9 @@ Ext.onReady(function(){
 var assign_to_opt = null;
 var status_div = null;
 var branch = null;
+var com_date_person = null;
 var com_date_loc = null;
+
 
 Ext.onReady(function(){
 	assign_to_opt = new Ext.form.RadioGroup({
@@ -532,6 +649,15 @@ Ext.onReady(function(){
 				mode: 'local',
 				triggerAction: 'all',
     		    renderTo: 'cnt_branch',
+    		    allowBlank:false
+    });
+
+	com_date_person = new Ext.form.DateField({
+    			id: 'dat_com_date_person',
+    			width: 200,
+    			disabled: false,
+    			format: 'm/d/Y',
+    		    renderTo: 'cnt_com_date_person',
     		    allowBlank:false
     });
 
@@ -635,7 +761,14 @@ function clear() {
 
 <div id="fields_div">
     <div align="center" style="padding: 10px 0px 10px 0px;">
-		<table border="0" bgcolor="#ffffff" style="margin-top:50px;border:#8db2e3 2px solid;width:700px;">
+		<table border="0" bgcolor="#ffffff" style="font-weight:bold;color:#15428b;margin-top:5px;border:#8db2e3 2px solid;width:700px;">
+			<tr>
+				<td align="center">Allocating Assets</td>
+			</tr>
+		</table>
+	</div>
+    <div align="center" style="padding: 10px 0px 10px 0px;">
+		<table border="0" bgcolor="#ffffff" style="margin-top:5px;border:#8db2e3 2px solid;width:700px;">
 			<tr>
 				<td width="50px">&nbsp;</td>
 				<td width="150px"> Asset Category	</td>
@@ -664,62 +797,25 @@ function clear() {
 <div id="fields_div" align="center" style="margin-top:5px;width:100%;">
 	<div id="tab_div" align="center" style="margin-top:5px;width:700px;">
 		<div id="tab1">
-			<?php /*?><table border="0" width="100%">
-				<tr>
-					<td width="150px">Employee ID</td>
-					<td width="5px">:</td>
-					<td colspan="4" id="cnt_emp_id"><!-- employee id (ext gen.) --></td>
-				</tr>
-				<tr>
-					<td>Full Name</td>
-					<td width="5px">:</td>
-					<td colspan="4" id="cnt_full_name"><!-- full name (ext gen.) --></td>
-				</tr>
-				<tr>
-					<td>Name with Initials</td>
-					<td width="5px">:</td>
-					<td colspan="4" id="cnt_name_with_init"><!-- name with init (ext gen.) --></td>
-				</tr>
-				<tr>
-					<td>Date of Birth</td>
-					<td width="5px">:</td>
-					<td id='cnt_dob'><!-- date of birth (ext gen.) --></td>
-					<td width="80px">Gender</td>
-					<td width="5px">:</td>
-					<td id="cnt_gender" valign="middle"><!-- gender (ext gen.) --></td>
-				</tr>
-				<tr>
-					<td>Email</td>
-					<td width="5px">:</td>
-					<td colspan="4" id="cnt_email"><!-- email (ext gen.) --></td>
-				</tr>
-				<tr>
-					<td>Address</td>
-					<td width="5px">:</td>
-					<td colspan="4" id="cnt_address"><!-- address (ext gen.) --></td>
-				</tr>			
-				<tr>
-					<td>Contact Number</td>
-					<td width="5px">:</td>
-					<td colspan="4" id="cnt_phone"><!-- contact number (ext gen.) --></td>
-				</tr>
-				<tr>
-					<td>Branch</td>
-					<td width="5px">:</td>
-					<td id="cnt_branch"><!-- branch (ext gen.) --></td>
-					<td>Division</td>
-					<td>:</td>
-					<td id="cnt_division"><!-- divsion (ext gen.) --></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td width="5px"></td>
-					<td id="cnt_hdn_rec_id"><!-- hidden field employee record id (ext gen.) --></td>
-					<td></td>
-					<td></td>
-					<td id="cnt_hdn_action"><!-- hidden field action (ext gen.) --></td>
-				</tr>
-			</table> <?php*/?>
+				<table border="0" width="100%">
+					<tr>
+						<td colspan="5" style="height:30px"></td>
+					</tr>
+					<tr>
+						<td width="10%">&nbsp;</td>
+						<td width="22%">Responsible Person</td>
+						<td width="1%">:</td>
+						<td width="20%" id="cnt_employee_name" style="padding:0px;height:10px"><!-- person container--></td>
+						<td id="cnt_employee_btn" style="padding:0px;height:10px"></td>
+					</tr>
+					<tr>
+						<td width="10%">&nbsp;</td>
+						<td width="10%">Commencement Date</td>
+						<td width="1%">:</td>
+						<td id="cnt_com_date_person"><!-- commencement date container--></td>
+						<td></td>
+					</tr>
+				</table>
 		</div> 
 		<div id="tab2">
 				<table border="0" width="100%">
@@ -728,29 +824,29 @@ function clear() {
 					</tr>
 					<tr>
 						<td width="10%">&nbsp;</td>
-						<td width="20%">Branch</td>
+						<td width="22%">Branch</td>
 						<td width="1%">:</td>
 						<td width="20%" id="cnt_branch"><!-- branch container--></td>
 						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<td width="10%">&nbsp;</td>
-						<td width="10%">Location</td>
-						<td width="1%">:</td>
-						<td id="cnt_location_name" style="padding:0px;height:10px"><!-- location container--></td>
+						<td>Location</td>
+						<td>:</td>
+						<td id="cnt_location_name" style="padding:2px;height:10px"><!-- location container--></td>
 						<td id="cnt_location_btn" style="padding:0px;height:10px"></td>
 					</tr>
 					<tr>
 						<td width="10%">&nbsp;</td>
-						<td width="10%">Responsible Person</td>
-						<td width="1%">:</td>
-						<td id="cnt_resp_person_name" style="padding:0px;height:10px"><!-- person container--></td>
+						<td>Responsible Person</td>
+						<td>:</td>
+						<td id="cnt_resp_person_name" style="padding:2px;height:10px"><!-- person container--></td>
 						<td id="cnt_resp_person_btn" style="padding:0px;height:10px"></td>
 					</tr>
 					<tr>
 						<td width="10%">&nbsp;</td>
-						<td width="10%">Commencement Date</td>
-						<td width="1%">:</td>
+						<td>Commencement Date</td>
+						<td>:</td>
 						<td id="cnt_com_date_loc"><!-- commencement date container--></td>
 						<td></td>
 					</tr>
@@ -762,6 +858,7 @@ function clear() {
 <!-- Containers for popup windows -->
 <div id="cnt_asst_cat_browser" class="x-hidden"><!--asset category browser container--></div>
 <div id="cnt_asst_browser" class="x-hidden"><!--asset browser container--></div>
+<div id="cnt_employee_browser" class="x-hidden"><!-- employee browser container --></div>
 <div id="cnt_location_browser" class="x-hidden"><!-- location browser container--></div>
 <div id="cnt_resp_person_browser" class="x-hidden"><!-- location person browser container --></div>
 
