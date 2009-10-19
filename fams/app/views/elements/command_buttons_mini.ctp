@@ -9,8 +9,8 @@
 	padding: 2px; 
 	width: 310px; 
 	background-color:#ffffff;
-	margin-right:150px;
-	margin-top:40px;
+	margin-right:100px;
+	margin-top:30px;
 }
 </style>
 
