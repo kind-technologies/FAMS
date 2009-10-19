@@ -31,5 +31,27 @@ class Asset extends AppModel {
 		return $assets_data;
 	}
 
+	function get_assets_for_json_mini($conditions = null) {
+		
+		if($conditions == null) {
+			$conditions = array('Asset.record_status'=>'A');
+		} else {
+			$conditions['Asset.record_status'] = 'A';
+		}
+
+		$assets = $this->findAll($conditions, null, 'Asset.id ASC');
+		$assets_data = array();
+
+		foreach($assets as $asset) {
+
+			$assets_data[] = array($asset['Asset']['id'], 
+									$asset['Asset']['asset_code'], 
+									$asset['Asset']['short_name'] );
+			
+		}
+		
+		return $assets_data;
+	}
+	
 }
 ?>

@@ -37,5 +37,21 @@ class Employee extends AppModel {
 		return $emp_data;
 	
 	}
+	
+	function get_employees_for_json_mini() {
+		$employees = $this->findAll(array('Employee.record_status'=>'A'), 
+												null, 'Employee.id ASC');
+		$emp_data = array();
+
+		foreach($employees as $employee) {
+
+			$emp_data[] = array($employee['Employee']['id'],
+									$employee['Employee']['employee_id'], 
+									$employee['Employee']['name_with_initials'] );
+		}
+		
+		return $emp_data;
+	
+	}
 }
 ?>

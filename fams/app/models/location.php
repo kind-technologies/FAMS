@@ -23,5 +23,28 @@ class Location extends AppModel {
 		
 		return $locations_data;
 	}
+	
+	function get_locations_for_json_mini($conditions = null) {
+	
+		if($conditions == null) {
+			$conditions = array('Location.record_status'=>'A');
+		} else {
+			$conditions['Location.record_status'] = 'A';
+		}
+	
+		$locations = $this->findAll($conditions, null, 'Location.id ASC');
+		$locations_data = array();
+
+		foreach($locations as $location) {
+
+			$locations_data[] = array($location['Location']['id'], 
+									$location['Location']['location_code'], 
+									$location['Location']['description']);
+			
+		}
+		
+		return $locations_data;
+	}
+
 }
 ?>
