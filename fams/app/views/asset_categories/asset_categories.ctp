@@ -13,8 +13,6 @@ var tabs = null;
 
 Ext.onReady(function() {
 	
-	// Sample data set, replaced with data from DB
-	
 	var categoriesReader = new Ext.data.ArrayReader({}, [
 		{name: 'rec_id'},
 		{name: 'category_code'},
