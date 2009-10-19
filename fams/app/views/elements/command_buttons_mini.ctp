@@ -63,7 +63,7 @@ Ext.onReady(function(){
 		id: 'save_button',
 		icon: '/img/save.png',
 		iconCls: 'btn_img',
-		disabled: false,
+		disabled: true,
 		renderTo: save_
 	});
 	
