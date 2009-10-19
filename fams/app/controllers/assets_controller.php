@@ -5,7 +5,7 @@ class AssetsController extends AppController {
 	var $components = array('Auth');
 	var $helpers = array('Html', 'Form', 'Javascript');
 	var $uses = array('Asset', 'AssetCategory', 'Supplier', 'Employee', 
-										'Branch', 'Division');
+										'Branch', 'Division', 'Location');
 	
 	
 	//--> SECTION FOR ASSET REGISTRY
@@ -169,19 +169,59 @@ class AssetsController extends AppController {
 
 	//--> END SECTION FOR ASSET REGISTRY
 	
+	//--> SECTION FOR ASSET ALLOCATION
+
 	function asset_allocation() {
 		Configure::write('debug', 0);
+		
+		// Pickup asset categories for category browser grid
+		$asset_categories_data = 
+							$this->AssetCategory->get_asset_categories_for_json();
+		$this->set('asset_categories_data', 
+				array('asset_categories_data' => $asset_categories_data));
 		
 		// Branch data for drop down list
 		$branch_data = $this->Branch->get_branches_for_json();
 		$this->set('branch_data', array('branch_data' => $branch_data));
+		
+		// Employee data for common browser
+		$emp_data = $this->Employee->get_employees_for_json_mini();
+		$this->set('employee_data', array('employee_data' => $emp_data));
+	}
 
+	function asset_allocation_browsers() {
+		Configure::write('debug', 1);
+		$this->layout = 'ajax';
+
+		$request_type = $this->params['form']['request_type'];
+		$type_id = $this->params['form']['type_id'];
+
+		// If type is asset browser : A
+		if($request_type == 'A') {
+			$conditions = array('Asset.asset_category_id' => $type_id);
+			$asset_data = $this->Asset->get_assets_for_json_mini($conditions);
+			$this->set('grid_data', $asset_data);
+			$this->set('request_type', $request_type);
+			
+
+		}
+		
+		// If type is location browser : L
+		if($request_type == 'L') {
+			$conditions = array('Location.branch_id' => $type_id);
+			$location_data = $this->Location->get_locations_for_json_mini($conditions);
+			$this->set('grid_data', $location_data);
+			$this->set('request_type', $request_type);
+		}
+		
 	}
 
 	function asset_allocation_update() {
 
 	}
-	
+
+	//--> END SECTION FOR ASSET ALLOCATION	
+
 	function asset_browser() {
 	
 	}
