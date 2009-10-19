@@ -8,77 +8,55 @@ var btn_popup_ast_cat = null;
 var ast_cat_name = null;
 var ast_cat_id = null;
 var win_ast_cat;
-var grid_asset_cat_data_store = null;
+var asset_cat_data_store = null;
 
 Ext.onReady(function(){
 
-	// Data grid for Asset Category Browser	
-	var myData = [
-        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
-        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
-        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
-        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
-        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
-        [5, 'FFF', 'FFFFFFFFFFFFFFFF']
-    ];
+	var categoriesReader = new Ext.data.ArrayReader({}, [
+		{name: 'rec_id'},
+		{name: 'category_code'},
+		{name: 'category_name'},
+		{name: 'category_description'}
+	]);	
     
-    var store = new Ext.data.ArrayStore({
-        fields: [
-           {name: 'ast_cat_id', type: 'int'},
-           {name: 'ast_cat_code'},
-           {name: 'ast_cat_name'}
-	 	]
-    });
-    
-	store.loadData(myData);
+	asset_cat_data_store =  new Ext.data.Store({
+				reader: categoriesReader
+			});
+
+	asset_categories_json = Ext.util.JSON.decode('<?php echo $javascript->object($asset_categories_data); ?>');
+	asset_cat_data_store.loadData(asset_categories_json.asset_categories_data);
 
     grid_asset_cat = new Ext.grid.GridPanel({
-						store: store,
+						store: asset_cat_data_store,
 						columns: [
-							{header: 'Category Code', width: 100, sortable: true, dataIndex: 'ast_cat_code'},
-							{header: 'Description', width: 310, sortable: true, dataIndex: 'ast_cat_name'}
+							{header: 'Category Code', width: 100, sortable: true, dataIndex: 'category_code'},
+							{header: 'Category Name', width: 310, sortable: true, dataIndex: 'category_name'}
 						],
-					   /* stripeRows: true,
-						autoExpandColumn: 'company',*/
 						height: 350,
-						width: 420/*,
-						title: 'Asset Categories',
-						// config options for stateful behavior
-						stateful: true,
-						stateId: 'grid'   */     
+						width: 420
 					});
 					
     grid_asset_cat.on('rowdblclick', function(sm, row_index, r) {
-					/*
-					category_code.setValue(r.data['category_code']);
-					category_name.setValue(r.data['category_name']);
-					category_description.setValue(r.data['category_description']);
-
-					rec_id.setValue(r.data['rec_id'], true);
-					current_row_index = row_index;
-					*/
-					var record = grid_asset_cat.getStore().getAt(row_index);
-					var callref = record.get('ast_cat_name');
-
-					ast_cat_name.setValue(callref);
+					record = grid_asset_cat.getStore().getAt(row_index);
+					cat_name = record.get('category_name');
+					ast_cat_id = record.get('rec_id');
+					
+					ast_cat_name.setValue(cat_name);
+					
 					win_ast_cat.hide(this);
-					//alert('hi');
+
+					btn_popup_ast.setDisabled(false);
 				});
 
-});
-
-Ext.onReady(function(){
     ast_cat_name = new Ext.form.TextField({
 				id: 'ast_cat_name',
 				validateOnBlur: true,
 				invalidText: 'The value in this field is invalid',
-				//maxLength : 5,
 				width: 300,
-				disabled: false,
+				disabled: true,
 				renderTo: 'cnt_asset_cat',
 				msgTarget: 'under',
-				allowBlank:false,
-				value: 'Computer'
+				allowBlank:false
     		});
 
     btn_popup_ast_cat = new Ext.Button({
@@ -120,84 +98,60 @@ var btn_popup_ast = null;
 var ast_name = null;
 var ast_id = null;
 var win_ast;
-var grid_asset_data_store = null;
+var asset_data_store = null;
 
 Ext.onReady(function(){
 
-	// Data grid for Asset Browser	
-	var myData = [
-        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
-        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
-        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
-        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
-        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
-        [5, 'FFF', 'FFFFFFFFFFFFFFFF'],
-        [6, 'FFF', 'FFFFFFFFFFFFFFFF'],
-        [7, 'FFF', 'FFFFFFFFFFFFFFFF']
-    ];
+	var assetsReader = new Ext.data.ArrayReader({}, [
+		{name: 'rec_id'},
+		{name: 'ast_code'},
+		{name: 'ast_name'}
+	]);	
     
-    var store = new Ext.data.ArrayStore({
-        fields: [
-           {name: 'ast_id', type: 'int'},
-           {name: 'ast_code'},
-           {name: 'ast_name'}
-	 	]
-    });
-    
-	store.loadData(myData);
-
+	asset_data_store =  new Ext.data.Store({
+				reader: assetsReader
+			});
+			
     grid_asset = new Ext.grid.GridPanel({
-						store: store,
+						store: asset_data_store,
 						columns: [
 							{header: 'Asset Code', width: 100, sortable: true, dataIndex: 'ast_code'},
 							{header: 'Short Name', width: 310, sortable: true, dataIndex: 'ast_name'}
 						],
-					   /* stripeRows: true,
-						autoExpandColumn: 'company',*/
 						height: 350,
-						width: 420/*,
-						title: 'Asset Categories',
-						// config options for stateful behavior
-						stateful: true,
-						stateId: 'grid'   */     
+						width: 420     
 					});
 					
     grid_asset.on('rowdblclick', function(sm, row_index, r) {
-					/*
-					category_code.setValue(r.data['category_code']);
-					category_name.setValue(r.data['category_name']);
-					category_description.setValue(r.data['category_description']);
+					
+					record = grid_asset.getStore().getAt(row_index);
+					asset_name = record.get('ast_name');
 
-					rec_id.setValue(r.data['rec_id'], true);
-					current_row_index = row_index;
-					*/
-					var record = grid_asset.getStore().getAt(row_index);
-					var callref = record.get('ast_name');
-
-					ast_name.setValue(callref);
+					ast_name.setValue(asset_name);
+					ast_id = record.get('rec_id');
+					
 					win_ast.hide(this);
-					//alert('hi');
+					
+					assign_to_opt.setDisabled(false);
+					btn_popup_employee.setDisabled(false);
+					com_date_person.setDisabled(false);
 				});
 
-});
-
-Ext.onReady(function(){
     ast_name = new Ext.form.TextField({
 				id: 'ast_name',
 				validateOnBlur: true,
 				invalidText: 'The value in this field is invalid',
-				//maxLength : 5,
 				width: 300,
-				disabled: false,
+				disabled: true,
 				renderTo: 'cnt_asset',
 				msgTarget: 'under',
-				allowBlank:false,
-				value: 'AMD Athlon 2000+'
+				allowBlank:false
     		});
 
     btn_popup_ast = new Ext.Button({
 							text: '',
 							id: 'btn_popup_ast',
+							disabled: true,
 							icon: '/img/data_browser_view.png',
 							minWidth: 50,
 							renderTo: 'cnt_asset_btn'
@@ -205,6 +159,7 @@ Ext.onReady(function(){
 	
 	
 	btn_popup_ast.on('click', function() {
+	
         // create the window on the first click and reuse on subsequent clicks
         if(!win_ast){
             win_ast = new Ext.Window({
@@ -218,9 +173,11 @@ Ext.onReady(function(){
                 items: grid_asset
             });
         }
-        win_ast.show(this);
-    });
 
+		// Load data for grid before popup the browser
+		get_data_for_browser('A', ast_cat_id, asset_data_store);
+        
+    });
 
 });
 
@@ -234,79 +191,56 @@ var btn_popup_employee = null;
 var employee_name = null;
 var employee_id = null;
 var win_employee;
-var grid_employee_data_store = null;
+var employee_data_store = null;
 
 Ext.onReady(function(){
 
-	// Data grid for Asset Browser	
-	var myData = [
-        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
-        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
-        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
-        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
-        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
-        [5, 'FFF', 'FFFFFFFFFFFFFFFF'],
-        [6, 'FFF', 'FFFFFFFFFFFFFFFF'],
-        [7, 'FFF', 'FFFFFFFFFFFFFFFF']
-    ];
+
+	var employeesReader = new Ext.data.ArrayReader({}, [
+		{name: 'rec_id'},
+		{name: 'employee_id'},
+		{name: 'employee_name'}
+	]);	
     
-    var store = new Ext.data.ArrayStore({
-        fields: [
-           {name: 'employee_id', type: 'int'},
-           {name: 'employee_name'}
-	 	]
-    });
-    
-	store.loadData(myData);
+	employee_data_store =  new Ext.data.Store({
+				reader: employeesReader
+			});
+
+	employees_json = Ext.util.JSON.decode('<?php echo $javascript->object($employee_data); ?>');
+	employee_data_store.loadData(employees_json.employee_data);
 
     grid_employee = new Ext.grid.GridPanel({
-						store: store,
+						store: employee_data_store,
 						columns: [
 							{header: 'Employee ID', width: 100, sortable: true, dataIndex: 'employee_id'},
 							{header: 'Name', width: 310, sortable: true, dataIndex: 'employee_name'}
 						],
-					   /* stripeRows: true,
-						autoExpandColumn: 'company',*/
 						height: 350,
-						width: 420/*,
-						title: 'Asset Categories',
-						// config options for stateful behavior
-						stateful: true,
-						stateId: 'grid'   */     
+						width: 420
 					});
 					
     grid_employee.on('rowdblclick', function(sm, row_index, r) {
-					/*
-					category_code.setValue(r.data['category_code']);
-					category_name.setValue(r.data['category_name']);
-					category_description.setValue(r.data['category_description']);
+					record = grid_employee.getStore().getAt(row_index);
+					emp_name = record.get('employee_name');
 
-					rec_id.setValue(r.data['rec_id'], true);
-					current_row_index = row_index;
-					*/
-					var record = grid_employee.getStore().getAt(row_index);
-					var callref = record.get('employee_name');
-
-					employee_name.setValue(callref);
+					employee_name.setValue(emp_name);
+					employee_id = record.get('rec_id');
+					
 					win_employee.hide(this);
-					//alert('hi');
 				});
 
-});
-
-Ext.onReady(function(){
     employee_name = new Ext.form.TextField({
 				id: 'employee_name',
 				validateOnBlur: true,
 				invalidText: 'The value in this field is invalid',
 				//maxLength : 5,
 				width: 300,
-				disabled: false,
+				disabled: true,
 				renderTo: 'cnt_employee_name',
+				disabled: true,
 				msgTarget: 'under',
 				allowBlank:false,
-				style: 'margin:0px',
-				value: 'AMD Athlon 2000+'
+				style: 'margin:0px'
     		});
 
     btn_popup_employee = new Ext.Button({
@@ -349,85 +283,58 @@ var btn_popup_location = null;
 var location_name = null;
 var location_id = null;
 var win_location;
-var grid_location_data_store = null;
+var location_data_store = null;
 
 Ext.onReady(function(){
 
-	// Data grid for Asset Browser	
-	var myData = [
-        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
-        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
-        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
-        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
-        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
-        [5, 'FFF', 'FFFFFFFFFFFFFFFF'],
-        [6, 'FFF', 'FFFFFFFFFFFFFFFF'],
-        [7, 'FFF', 'FFFFFFFFFFFFFFFF']
-    ];
+	var locationsReader = new Ext.data.ArrayReader({}, [
+		{name: 'rec_id'},
+		{name: 'location_code'},
+		{name: 'location_name'}
+	]);	
     
-    var store = new Ext.data.ArrayStore({
-        fields: [
-           {name: 'location_id', type: 'int'},
-           {name: 'location_code'},
-           {name: 'location_name'}
-	 	]
-    });
-    
-	store.loadData(myData);
+	location_data_store =  new Ext.data.Store({
+				reader: locationsReader
+			});
 
     grid_location = new Ext.grid.GridPanel({
-						store: store,
+						store: location_data_store,
 						columns: [
 							{header: 'Location Code', width: 100, sortable: true, dataIndex: 'location_code'},
 							{header: 'Name', width: 310, sortable: true, dataIndex: 'location_name'}
 						],
-					   /* stripeRows: true,
-						autoExpandColumn: 'company',*/
+
 						height: 350,
-						width: 420/*,
-						title: 'Asset Categories',
-						// config options for stateful behavior
-						stateful: true,
-						stateId: 'grid'   */     
+						width: 420
 					});
 					
     grid_location.on('rowdblclick', function(sm, row_index, r) {
-					/*
-					category_code.setValue(r.data['category_code']);
-					category_name.setValue(r.data['category_name']);
-					category_description.setValue(r.data['category_description']);
+					record = grid_location.getStore().getAt(row_index);
+					loc_name = record.get('location_name');
 
-					rec_id.setValue(r.data['rec_id'], true);
-					current_row_index = row_index;
-					*/
-					var record = grid_location.getStore().getAt(row_index);
-					var callref = record.get('location_name');
-
-					location_name.setValue(callref);
+					location_name.setValue(loc_name);
+					location_id = record.get('rec_id');
+					
 					win_location.hide(this);
-					//alert('hi');
 				});
 
-});
 
-Ext.onReady(function(){
     location_name = new Ext.form.TextField({
 				id: 'location_name',
 				validateOnBlur: true,
 				invalidText: 'The value in this field is invalid',
-				//maxLength : 5,
 				width: 300,
-				disabled: false,
+				disabled: true,
 				renderTo: 'cnt_location_name',
 				msgTarget: 'under',
 				allowBlank:false,
-				style: 'margin:1px',
-				value: 'AMD Athlon 2000+'
+				style: 'margin:1px'
     		});
 
     btn_popup_location = new Ext.Button({
 							text: '',
 							id: 'btn_popup_location',
+							disabled: true,
 							icon: '/img/data_browser_view.png',
 							minWidth: 50,
 							renderTo: 'cnt_location_btn',
@@ -436,6 +343,7 @@ Ext.onReady(function(){
 	
 	
 	btn_popup_location.on('click', function() {
+        
         // create the window on the first click and reuse on subsequent clicks
         if(!win_location){
             win_location = new Ext.Window({
@@ -449,7 +357,10 @@ Ext.onReady(function(){
                 items: grid_location
             });
         }
-        win_location.show(this);
+        
+        // Load data for grid before popup the browser
+		get_data_for_browser('L', branch.getValue(), location_data_store);
+        //win_location.show(this);
     });
 
 
@@ -465,79 +376,53 @@ var btn_popup_resp_person = null;
 var resp_person_name = null;
 var resp_person_id = null;
 var win_resp_person;
-var grid_resp_person_data_store = null;
+var resp_person_data_store = null;
 
 Ext.onReady(function(){
 
-	// Data grid for Asset Browser	
-	var myData = [
-        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
-        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
-        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
-        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
-        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
-        [5, 'FFF', 'FFFFFFFFFFFFFFFF'],
-        [6, 'FFF', 'FFFFFFFFFFFFFFFF'],
-        [7, 'FFF', 'FFFFFFFFFFFFFFFF']
-    ];
+	var resp_personReader = new Ext.data.ArrayReader({}, [
+		{name: 'rec_id'},
+		{name: 'resp_person_id'},
+		{name: 'resp_person_name'}
+	]);	
     
-    var store = new Ext.data.ArrayStore({
-        fields: [
-           {name: 'resp_person_id', type: 'int'},
-           {name: 'resp_person_name'}
-	 	]
-    });
-    
-	store.loadData(myData);
+	resp_person_data_store =  new Ext.data.Store({
+				reader: resp_personReader
+			});
+
+	resp_person_json = Ext.util.JSON.decode('<?php echo $javascript->object($employee_data); ?>');
+	resp_person_data_store.loadData(employees_json.employee_data);
 
     grid_resp_person = new Ext.grid.GridPanel({
-						store: store,
+						store: resp_person_data_store,
 						columns: [
 							{header: 'Employee ID', width: 100, sortable: true, dataIndex: 'resp_person_id'},
 							{header: 'Name', width: 310, sortable: true, dataIndex: 'resp_person_name'}
 						],
-					   /* stripeRows: true,
-						autoExpandColumn: 'company',*/
 						height: 350,
-						width: 420/*,
-						title: 'Asset Categories',
-						// config options for stateful behavior
-						stateful: true,
-						stateId: 'grid'   */     
+						width: 420  
 					});
 					
     grid_resp_person.on('rowdblclick', function(sm, row_index, r) {
-					/*
-					category_code.setValue(r.data['category_code']);
-					category_name.setValue(r.data['category_name']);
-					category_description.setValue(r.data['category_description']);
+					record = grid_resp_person.getStore().getAt(row_index);
+					p_name = record.get('resp_person_name');
 
-					rec_id.setValue(r.data['rec_id'], true);
-					current_row_index = row_index;
-					*/
-					var record = grid_resp_person.getStore().getAt(row_index);
-					var callref = record.get('resp_person_name');
-
-					resp_person_name.setValue(callref);
+					resp_person_name.setValue(p_name);
+					resp_person_id = record.get('rec_id');
+					
 					win_resp_person.hide(this);
-					//alert('hi');
 				});
 
-});
-
-Ext.onReady(function(){
     resp_person_name = new Ext.form.TextField({
 				id: 'resp_person_name',
 				validateOnBlur: true,
 				invalidText: 'The value in this field is invalid',
-				//maxLength : 5,
 				width: 300,
-				disabled: false,
+				disabled: true,
 				renderTo: 'cnt_resp_person_name',
 				msgTarget: 'under',
 				allowBlank:false,
-				style: 'margin:1px;',
-				value: 'AMD Athlon 2000+'
+				style: 'margin:1px;'
     		});
 
     btn_popup_resp_person = new Ext.Button({
@@ -546,9 +431,9 @@ Ext.onReady(function(){
 							icon: '/img/data_browser_view.png',
 							minWidth: 50,
 							renderTo: 'cnt_resp_person_btn',
+							disabled: true,
 							style: 'margin:0px'
 						});
-	
 	
 	btn_popup_resp_person.on('click', function() {
         // create the window on the first click and reuse on subsequent clicks
@@ -587,8 +472,8 @@ Ext.onReady(function(){
         deferredRender: false,
         defaults:{autoHeight: true},
         items:[
-            {contentEl:'tab1', title: 'Assign To a Person'},
-            {contentEl:'tab2', title: 'Assign To a Location', disabled: false}
+            {contentEl: 'tab1', id: 'tab1', title: 'Assign To a Person', disabled: false},
+            {contentEl: 'tab2', id: 'tab2', title: 'Assign To a Location', disabled: true}
         ],
         viewConfig: {
 			forceFit: true,
@@ -613,22 +498,35 @@ Ext.onReady(function(){
 	assign_to_opt = new Ext.form.RadioGroup({
     			id: 'rdg_assign_to',
     			width: 150,
-    			disabled: false,
+    			disabled: true,
     			items: [{
                         checked: true,
                         id: 'opt_person',
                         boxLabel: 'Person',
                         name: 'rdo_assign_to',
+                        handler: function(checkbox, checked) { 
+                        			if(checked) {
+                        				tabs.setActiveTab('tab1');
+                        				tabs.getItem('tab1').enable();
+                        				tabs.getItem('tab2').disable();                        			}
+                        		}, 
                         inputValue: 'P'
                     },{
-                    		checked: false,
-                    		id: 'opt_location',
+                    	checked: false,
+                    	id: 'opt_location',
+                        handler: function(checkbox, checked) { 
+                        			if(checked) {
+                        				tabs.setActiveTab('tab2');
+                        				tabs.getItem('tab2').enable();
+                        				tabs.getItem('tab1').disable();
+                        			}
+                        		}, 
                         boxLabel: 'Location',
                         name: 'rdo_assign_to',
                         inputValue: 'L'
                     }],
             style: 'margin-top:5px',
-    		    renderTo: 'cnt_opt_assign'
+    		renderTo: 'cnt_opt_assign'
     });
 
 	// Get the data for branch selection drop down list
@@ -652,23 +550,39 @@ Ext.onReady(function(){
     		    allowBlank:false
     });
 
+	branch.on('select', function() {
+					btn_popup_location.enable();
+					btn_popup_resp_person.enable();
+					com_date_loc.enable();
+				});
+
 	com_date_person = new Ext.form.DateField({
     			id: 'dat_com_date_person',
     			width: 200,
-    			disabled: false,
+    			editable: false,
+    			disabled: true,
     			format: 'm/d/Y',
     		    renderTo: 'cnt_com_date_person',
     		    allowBlank:false
     });
 
+	com_date_person.on('select', function(){
+		btn_save.enable();
+	});
+
 	com_date_loc = new Ext.form.DateField({
     			id: 'dat_com_date_loc',
     			width: 200,
-    			disabled: false,
+    			editable: false,
+    			disabled: true,
     			format: 'm/d/Y',
     		    renderTo: 'cnt_com_date_loc',
     		    allowBlank:false
     });
+
+	com_date_loc.on('select', function(){
+		btn_save.enable();
+	});
     
     status_div = Ext.get('status_div');
 });
@@ -755,6 +669,27 @@ function clear() {
 	tabs.setActiveTab(0);
 */
 }
+
+function get_data_for_browser(request_type, type_id, grid_data_store) {
+	ajaxClass.request({
+			   url: '/assets/asset_allocation_browsers',
+			   params: { 
+			   			request_type: request_type,
+			   			type_id: type_id
+	   			},
+			   callback : function(options, success, response) { 
+			   				obj = Ext.util.JSON.decode(response.responseText);
+			   				grid_data_store.loadData(obj.grid_data);
+			   				
+			   				// If request is for asset browser
+			   				if(obj.request_type == 'A') {
+			   					win_ast.show();
+			   				}else if(obj.request_type == 'L') {
+			   					win_location.show();
+			   				}
+	   			}
+			});
+}
 </script>
 
 <div id="status_div"></div>
@@ -803,7 +738,7 @@ function clear() {
 					</tr>
 					<tr>
 						<td width="10%">&nbsp;</td>
-						<td width="22%">Responsible Person</td>
+						<td width="22%">Asset Custodian</td>
 						<td width="1%">:</td>
 						<td width="20%" id="cnt_employee_name" style="padding:0px;height:10px"><!-- person container--></td>
 						<td id="cnt_employee_btn" style="padding:0px;height:10px"></td>
