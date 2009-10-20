@@ -201,11 +201,16 @@ function get_data_for_browser(request_type, type_id, grid_data_store) {
 			});
 }
 </script>
+<!-- Containers for popup windows -->
+<div id="cnt_asst_cat_browser" class="x-hidden"><!--asset category browser container--></div>
+<div id="cnt_asst_browser" class="x-hidden"><!--asset browser container--></div>
+<!-- End containers for popup windows -->
+
 <div id="fields_div">
     <div align="center" style="padding: 10px 0px 0px 0px;">
 		<table border="0" bgcolor="#ffffff" style="font-weight:bold;color:#15428b;margin-top:5px;border:#8db2e3 2px solid;width:700px;">
 			<tr>
-				<td align="center">Allocating Assets</td>
+				<td align="center">Depreciation Report</td>
 			</tr>
 		</table>
 	</div>
@@ -229,24 +234,73 @@ function get_data_for_browser(request_type, type_id, grid_data_store) {
 </div>
 <div id="fields_div">
     <div align="center" style="padding: 5px 0px 10px 0px;">
-		<table border="2" bgcolor="#ffffff" style="border:#8db2e3 2px solid;width:700px;">
+		<table border="0" bgcolor="#ffffff" style="border:#8db2e3 2px solid;width:700px;">
+			<tr>
+				<td style="height:10px"></td>
+			</tr>
 			<tr>
 				<td width="50px">&nbsp;</td>
-				<td width="150px"></td>
-				<td width="300px"><!--asset category name container--></td>
-				<td><!--asset category load button container--></td>
+				<td width="150px">Asset Code</td>
+				<td width="2px">:</td>
+				<td width="300px" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+				<td>&nbsp;</td>
 			</tr>
 			<tr>
 				<td width="50px">&nbsp;</td>
 				<td width="150px"> Asset </td>
-				<td width="300px"><!--asset name container--></td>
-				<td><!--asset load button container--></td>
+				<td width="2px">:</td>
+				<td width="300px" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+				<td>&nbsp;</td>
 			</tr>
-
+			<tr>
+				<td width="50px">&nbsp;</td>
+				<td width="150px"> Depreciation as At </td>
+				<td width="2px">:</td>
+				<td width="300px" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5">
+					<table width="100%">
+						<tr align="center">
+							<td>Commencement Date</td>
+							<td>Original Cost ($)</td>
+							<td>Deprec. Amount ($)</td>
+							<td>Net Book Value ($)</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+							<td style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+							<td style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+							<td style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+					<table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="5">&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="50px">&nbsp;</td>
+				<td width="150px">Lifespan</td>
+				<td width="2px">:</td>
+				<td width="300px" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="50px">&nbsp;</td>
+				<td width="150px"> Depreciation as At </td>
+				<td width="2px">:</td>
+				<td width="300px" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
 		</table>
 	</div>
 </div>
-<!-- Containers for popup windows -->
-<div id="cnt_asst_cat_browser" class="x-hidden"><!--asset category browser container--></div>
-<div id="cnt_asst_browser" class="x-hidden"><!--asset browser container--></div>
+
 
