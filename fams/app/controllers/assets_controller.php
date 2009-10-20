@@ -202,8 +202,6 @@ class AssetsController extends AppController {
 			$asset_data = $this->Asset->get_assets_for_json_mini($conditions);
 			$this->set('grid_data', $asset_data);
 			$this->set('request_type', $request_type);
-			
-
 		}
 		
 		// If type is location browser : L
