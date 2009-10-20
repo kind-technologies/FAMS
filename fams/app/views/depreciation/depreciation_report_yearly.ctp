@@ -232,7 +232,7 @@ function get_data_for_browser(request_type, type_id, grid_data_store) {
 		</table>
 	</div>
 </div>
-<div id="fields_div">
+<div id="fields_div" style="margin-top: 20px">
     <div align="center" style="padding: 5px 0px 10px 0px;">
 		<table border="0" bgcolor="#ffffff" style="border:#8db2e3 2px solid;width:700px;">
 			<tr>
