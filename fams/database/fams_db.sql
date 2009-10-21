@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Started on 2009-10-19 05:07:09 IST
+-- Started on 2009-10-21 06:44:57 IST
 
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = off;
@@ -121,10 +121,12 @@ CREATE TABLE assets (
     purchase_date date,
     lifespan integer,
     salvage_value numeric,
-    date_in_use date,
     assign_type character(1),
     photo character varying(50),
-    record_status character(1)
+    record_status character(1),
+    custodian_id integer,
+    location_id integer,
+    commencement_date date
 );
 
 
@@ -438,7 +440,6 @@ SELECT pg_catalog.setval('asset_requests_id_seq', 1, false);
 --
 
 CREATE SEQUENCE assets_id_seq
-    START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -460,7 +461,7 @@ ALTER SEQUENCE assets_id_seq OWNED BY assets.id;
 -- Name: assets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('assets_id_seq', 1, false);
+SELECT pg_catalog.setval('assets_id_seq', 1, true);
 
 
 --
@@ -873,7 +874,8 @@ COPY asset_requests (id) FROM stdin;
 -- Data for Name: assets; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY assets (id, asset_code, short_name, description, asset_category_id, supplier_id, purchase_price, purchase_date, lifespan, salvage_value, date_in_use, assign_type, photo, record_status) FROM stdin;
+COPY assets (id, asset_code, short_name, description, asset_category_id, supplier_id, purchase_price, purchase_date, lifespan, salvage_value, assign_type, photo, record_status, custodian_id, location_id, commencement_date) FROM stdin;
+1	CMP00001	AMD Athlon 2000+	AMD Athlon 2000+	1	1	350	2006-10-12	48	15	L	\N	A	3	2	2009-10-30
 \.
 
 
@@ -1159,7 +1161,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2009-10-19 05:07:09 IST
+-- Completed on 2009-10-21 06:44:57 IST
 
 --
 -- PostgreSQL database dump complete
