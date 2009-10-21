@@ -215,6 +215,40 @@ class AssetsController extends AppController {
 	}
 
 	function asset_allocation_update() {
+		Configure::write('debug', 0);
+		
+		$this->layout = 'ajax';
+		
+		$record_id = $this->params['form']['asset_id'];
+		$assign_type = $this->params['form']['assign_type'];
+			
+		if($assign_type == 'P' || $assign_type == 'L') {
+			
+			$this->data['Asset']['id'] = $record_id;
+			
+			$this->data['Asset']['custodian_id'] = 
+												$this->params['form']['person_id'];
+			$this->data['Asset']['commencement_date'] = 
+												$this->params['form']['commencement_date'];
+								
+			if($assign_type == 'P') { // If assign to a person
+				$this->data['Asset']['assign_type'] = 'P';
+			} elseif($assign_type == 'L') { // If assign to a location		
+				$this->data['Asset']['assign_type'] = 'L';			
+				$this->data['Asset']['location_id'] = 
+												$this->params['form']['location_id'];
+			}
+			
+			$this->Asset->save($this->data);
+
+		}
+		
+		$this->set('params', $this->data['Asset']['location_id']);
+
+		// Set data for update data-grid.
+		// JSON object is created in view file accordingly
+		$assets_data = $this->Asset->get_assets_for_json();
+		$this->set('assets_data', $assets_data);
 
 	}
 
