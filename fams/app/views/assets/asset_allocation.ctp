@@ -504,30 +504,33 @@ Ext.onReady(function(){
                         id: 'opt_person',
                         boxLabel: 'Person',
                         name: 'rdo_assign_to',
-                        handler: function(checkbox, checked) { 
-                        			if(checked) {
-                        				tabs.setActiveTab('tab1');
-                        				tabs.getItem('tab1').enable();
-                        				tabs.getItem('tab2').disable();                        			}
-                        		}, 
                         inputValue: 'P'
                     },{
                     	checked: false,
                     	id: 'opt_location',
-                        handler: function(checkbox, checked) { 
-                        			if(checked) {
-                        				tabs.setActiveTab('tab2');
-                        				tabs.getItem('tab2').enable();
-                        				tabs.getItem('tab1').disable();
-                        			}
-                        		}, 
-                        boxLabel: 'Location',
+                     boxLabel: 'Location',
                         name: 'rdo_assign_to',
                         inputValue: 'L'
                     }],
             style: 'margin-top:5px',
     		renderTo: 'cnt_opt_assign'
     });
+
+	assign_to_opt.items.get(0).on("check", function(self, checked) {
+		if(checked) {
+			tabs.setActiveTab('tab1');
+			tabs.getItem('tab1').enable();
+			tabs.getItem('tab2').disable();                        			
+		}
+	});
+
+	assign_to_opt.items.get(1).on("check", function(self, checked) {
+		if(checked) {
+			tabs.setActiveTab('tab2');
+			tabs.getItem('tab2').enable();
+			tabs.getItem('tab1').disable();
+		}
+	});
 
 	// Get the data for branch selection drop down list
 	branch_json = Ext.util.JSON.decode('<?php echo $javascript->object($branch_data); ?>');
@@ -590,84 +593,123 @@ Ext.onReady(function(){
 
 <script>
 function save() {
+	parameters = null;
+
+	asn_opt = (assign_to_opt.items.get(0).checked) ? 'P' : 'L';
+	
+
+	// If assign to person
+	if(asn_opt == 'P') {
+		// Validate values
 /*
-	// Validate fields before submit
-	if(!is_form_valid()) {
-		Ext.MessageBox.alert("FAMS", "Please check the values you have entered.");
-		return false;
+		if(!is_form_valid()) {
+			Ext.MessageBox.alert("FAMS", "Please check the values you have entered.");
+			return false;
+		}
+*/		
+		parameters = {
+				assign_type: 'P',
+				asset_id: ast_id,
+				person_id: employee_id,
+				commencement_date: com_date_person.getValue().format('Y-m-d')
+			};
+	}
+	// If assign to location
+	if(asn_opt == 'L') {
+		// Validate values
+/*
+		if(!is_form_valid()) {
+			Ext.MessageBox.alert("FAMS", "Please check the values you have entered.");
+			return false;
+		}
+*/		
+		parameters = {
+				assign_type: 'L',
+				asset_id: ast_id,
+				location_id: location_id,
+				person_id: resp_person_id,
+				commencement_date: com_date_loc.getValue().format('Y-m-d')
+			};
 	}
 
 	ajaxClass.request({
-			   url: '/assets/asset_registry_update',
-			   params: { 
-			   			asset_code: ast_asset_code.getValue(), 
-			   			short_name: ast_short_name.getValue(),
-			   			description: ast_description.getValue(),
-			   			asset_category_id: ast_asset_category.getValue(),
-			   			supplier_id: ast_supplier.getValue(),
-			   			purchase_price: ast_purchase_price.getValue(),
-			   			purchase_date: ast_purchase_date.getValue().format('Y-m-d'),
-			   			lifespan: ast_lifespan.getValue(),
-			   			salvage_value: ast_salvage_value.getValue(),
-			   			id: rec_id.getValue(),
-			   			action: action.getValue()
-	   			},
+			   url: '/assets/asset_allocation_update',
+			   params: parameters,
 			   callback : function(options, success, response) { 
 			   				obj = Ext.util.JSON.decode(response.responseText);
-			   				grid_data_store.loadData(obj.assets_data);
+			   				// grid_data_store.loadData(obj.assets_data);
+			   				alert(response.responseText);
 			   				display_message("Record saved successfully");
-			   				
-			   				act = action.getValue();
-			   														
+  														
 			   				cancel();
-			   				
-			   				if(act == '__e') {
-								grid.getSelectionModel().selectRow(current_row_index);
-							} else if(act == '__a') {
-								grid.getSelectionModel().selectLastRow();
-								idx = grid.store.indexOf(grid.getSelectionModel().getSelected());
-								grid.getView().focusRow(idx);
-							}
 	   			}
 			});
-*/	
+	
 }
 function cancel() {
 	clear();
-/*
-	grid.getSelectionModel().deselectRow(current_row_index);
+
 	disable_fields(true);
-	grid.setDisabled(false);
-*/
 }
 
 // Clear all text fields and error messages
 function clear() {
-/*	ast_asset_code.setValue(''); ast_asset_code.clearInvalid();
-	
-	ast_short_name.setValue(''); ast_short_name.clearInvalid();
-	
-	ast_description.setValue(''); ast_description.clearInvalid();
-	
-	ast_asset_category.setValue(''); ast_asset_category.clearInvalid();
-	
-	ast_supplier.setValue(''); ast_supplier.clearInvalid();
-	
-	ast_purchase_price.setValue(''); ast_purchase_price.clearInvalid();
-	
-	ast_purchase_date.setValue(''); ast_purchase_date.clearInvalid();
-	
-	ast_lifespan.setValue(''); ast_lifespan.clearInvalid();
-	
-	ast_salvage_value.setValue(''); ast_salvage_value.clearInvalid();
 
-	rec_id.setValue('');
-	action.setValue('');
+	ast_cat_name.setValue(''); ast_cat_name.clearInvalid();
+	ast_cat_id = '';
+
+	ast_name.setValue(''); ast_name.clearInvalid();
+	ast_id = '';
 	
-	document.getElementById('cnt_asset_image').innerHTML = '';
+	employee_name.setValue(''); employee_name.clearInvalid();
+	employee_id = '';
+	
+	location_name.setValue(''); location_name.clearInvalid();
+	location_id = '';
+	
+	resp_person_name.setValue(''); resp_person_name.clearInvalid();
+	resp_person_id = '';
+
+	com_date_person.setValue(''); com_date_person.clearInvalid();
+	com_date_loc.setValue(''); com_date_loc.clearInvalid();
+
 	tabs.items.get(1).setDisabled(true);
 	tabs.setActiveTab(0);
-*/
+
+	assign_to_opt.items.get(0).setValue(true);
+	assign_to_opt.items.get(1).setValue(false);
+
+}
+function disable_fields(bool) {
+	btn_popup_ast.setDisabled(bool);
+	btn_popup_employee.setDisabled(bool);
+	btn_popup_location.setDisabled(bool);
+	btn_popup_resp_person.setDisabled(bool);
+	
+	com_date_person.setDisabled(bool);
+	com_date_loc.setDisabled(bool);
+	
+	assign_to_opt.setDisabled(bool);
+}
+
+function display_message(text) {
+	status_div.highlight("ffffff");		
+	status_div.insertHtml("beforeEnd", text);
+	setTimeout("status_div.dom.innerHTML=''", 5000);
+}
+
+function is_form_valid() {
+	/*
+	return (ast_asset_code.validate() &&
+				ast_short_name.validate() &&
+				ast_description.validate() &&
+				ast_asset_category.validate() &&
+				ast_supplier.validate() &&
+				ast_purchase_price.validate() &&
+				ast_purchase_date.validate() &&
+				ast_lifespan.validate() &&
+				ast_salvage_value.validate() );
+	*/
 }
 
 function get_data_for_browser(request_type, type_id, grid_data_store) {
