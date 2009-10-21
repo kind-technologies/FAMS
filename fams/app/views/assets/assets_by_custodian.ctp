@@ -2,90 +2,90 @@
 
 
 <script type="text/javascript" language="javascript">
-var btn_popup_supplier = null;
-var supplier_name = null;
-var supplier_id = null;
-var win_supplier;
-var supplier_data_store = null;
+var btn_popup_custodian = null;
+var custodian_name = null;
+var custodian_id = null;
+var win_custodian;
+var custodian_data_store = null;
 
 Ext.onReady(function(){
 
-	var suppliersReader = new Ext.data.ArrayReader({}, [
+	var custodiansReader = new Ext.data.ArrayReader({}, [
 		{name: 'rec_id'},
-		{name: 'supplier_code'},
-		{name: 'supplier_name'}
+		{name: 'custodian_id'},
+		{name: 'custodian_name'}
 	]);	
     
-	supplier_data_store =  new Ext.data.Store({
-				reader: suppliersReader
+	custodian_data_store =  new Ext.data.Store({
+				reader: custodiansReader
 			});
 
-	supplier_json = Ext.util.JSON.decode('<?php echo $javascript->object($suppliers_data); ?>');
-	supplier_data_store.loadData(supplier_json.suppliers_data);
+	custodians_json = Ext.util.JSON.decode('<?php echo $javascript->object($employee_data); ?>');
+	custodian_data_store.loadData(custodians_json.employee_data);
 
-    grid_supplier = new Ext.grid.GridPanel({
-						store: supplier_data_store,
+    grid_custodian = new Ext.grid.GridPanel({
+						store: custodian_data_store,
 						columns: [
-							{header: 'Supplier Code', width: 100, sortable: true, dataIndex: 'supplier_code'},
-							{header: 'Supplier Name', width: 310, sortable: true, dataIndex: 'supplier_name'}
+							{header: 'Employee ID', width: 100, sortable: true, dataIndex: 'custodian_id'},
+							{header: 'Name', width: 310, sortable: true, dataIndex: 'custodian_name'}
 						],
 						height: 350,
 						width: 420
 					});
 					
-    grid_supplier.on('rowdblclick', function(sm, row_index, r) {
+    grid_custodian.on('rowdblclick', function(sm, row_index, r) {
 
-					record = grid_supplier.getStore().getAt(row_index);
+					record = grid_custodian.getStore().getAt(row_index);
 
-					splr_name = record.get('supplier_name');
-					supplier_id = record.get('rec_id');
+					cstdn_name = record.get('custodian_name');
+					custodian_id = record.get('rec_id');
 					
-					supplier_name.setValue(splr_name);
+					custodian_name.setValue(cstdn_name);
 					
-					win_supplier.hide(this);
+					win_custodian.hide(this);
 
-					document.getElementById('hdn_supplier_name').value = splr_name;
-					document.getElementById('hdn_supplier_id').value = supplier_id;
+					document.getElementById('hdn_custodian_name').value = cstdn_name;
+					document.getElementById('hdn_custodian_id').value = custodian_id;
 					
-					document.getElementById('frm_supplier').submit();
+					document.getElementById('frm_custodian').submit();
 				});
 
-    supplier_name = new Ext.form.TextField({
-				id: 'supplier_name',
+    custodian_name = new Ext.form.TextField({
+				id: 'custodian_name',
 				validateOnBlur: true,
 				invalidText: 'The value in this field is invalid',
 				width: 300,
 				disabled: true,
-				renderTo: 'cnt_supplier',
+				renderTo: 'cnt_custodian',
 				msgTarget: 'under',
 				allowBlank:false,
-				value: '<?php echo @$supplier_name; ?>'
+				value: '<?php echo @$custodian_name; ?>'
     		});
 
-    btn_popup_supplier = new Ext.Button({
+    btn_popup_custodian = new Ext.Button({
 							text: '',
-							id: 'btn_popup_supplier',
+							id: 'btn_popup_custodian',
 							icon: '/img/data_browser_view.png',
 							minWidth: 50,
-							renderTo: 'cnt_supplier_btn'
+							renderTo: 'cnt_custodian_btn'
 						});
 	
 	
-	btn_popup_supplier.on('click', function() {
+	btn_popup_custodian.on('click', function() {
         // create the window on the first click and reuse on subsequent clicks
-        if(!win_supplier){
-            win_supplier = new Ext.Window({
-                applyTo:'cnt_supplier_browser',
+        if(!win_custodian){
+            win_custodian = new Ext.Window({
+                applyTo:'cnt_custodian_browser',
                 layout:'fit',
                 width:450,
                 height:200,
                 closeAction:'hide',
                 plain: true,
-				title: 'Suppliers Browser',
-                items: grid_supplier
+				title: 'Employee Browser',
+                items: grid_custodian
             });
         }
-        win_supplier.show(this);
+        win_custodian.show(this);
     });
 
 
@@ -96,16 +96,16 @@ Ext.onReady(function(){
 
 <div id="fields_div">
     <div align="center" style="padding: 10px 0px 10px 0px;">
-    	<form id="frm_supplier" method="post" action="/assets/assets_by_supplier">
+    	<form id="frm_custodian" method="post" action="/assets/assets_by_custodian">
 			<table border="0" bgcolor="#ffffff" style="border:#8db2e3 2px solid;width:700px;">
 				<tr>
 					<td width="50px">
-						<input type="hidden" id="hdn_supplier_id" name="hdn_supplier_id">
-						<input type="hidden" id="hdn_supplier_name" name="hdn_supplier_name">
+						<input type="hidden" id="hdn_custodian_id" name="hdn_custodian_id">
+						<input type="hidden" id="hdn_custodian_name" name="hdn_custodian_name">
 					</td>
-					<td width="150px"> Supplier	</td>
-					<td id="cnt_supplier" width="300px"><!-- supplier name container--></td>
-					<td id="cnt_supplier_btn"><!-- supplier load button container--></td>
+					<td width="150px"> Custodian </td>
+					<td id="cnt_custodian" width="300px"><!-- custodian name container--></td>
+					<td id="cnt_custodian_btn"><!-- custodian load button container--></td>
 				</tr>
 			</table>
 		</form>
@@ -191,7 +191,7 @@ Ext.onReady(function(){
 		?>
 			<table border="0" bgcolor="#ffffff" style="border:#8db2e3 2px solid;width:700px;">
 				<tr>
-					<td width="150px" align="center"> Please select a supplier category.</td>
+					<td width="150px" align="center"> Please select an asset category.</td>
 				</tr>
 			</table>	
 		<?php
@@ -201,6 +201,6 @@ Ext.onReady(function(){
 	</div>
 </div>
 
-<div id="cnt_supplier_browser" class="x-hidden"><!-- supplier browser container--></div>
+<div id="cnt_custodian_browser" class="x-hidden"><!--asset category browser container--></div>
 
 
