@@ -4,7 +4,7 @@ class Supplier extends AppModel {
 	var $name = 'Supplier';
 
 	function get_suppliers_for_json() {
-		$suppliers = $this->findAll(array('record_status'=>'A'), 
+		$suppliers = $this->findAll(array('Supplier.record_status'=>'A'), 
 													null, 'Supplier.id ASC');
 		$suppliers_data = array();
 
@@ -23,7 +23,7 @@ class Supplier extends AppModel {
 	}
 
 	function get_suppliers_for_json_mini() {
-		$suppliers = $this->findAll(array('record_status'=>'A'), 
+		$suppliers = $this->findAll(array('Supplier.record_status'=>'A'), 
 													null, 'Supplier.id ASC');
 		$suppliers_data = array();
 
