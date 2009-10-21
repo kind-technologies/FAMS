@@ -66,6 +66,8 @@ class AssetsController extends AppController {
 								
 			if($form_action == '__a') { // If request is to ADD a new record
 			
+				$this->data['Asset']['asset_status'] = 'NEW';
+			
 				$this->Asset->create();
 				$this->Asset->save($this->data);
 			
@@ -254,20 +256,116 @@ class AssetsController extends AppController {
 
 	//--> END SECTION FOR ASSET ALLOCATION	
 
-	function asset_browser() {
-	
-	}
-	
 	function assets_by_category() {
-	
+		Configure::write('debug', 0);	
+
+		// Pickup asset categories for category browser grid
+		$asset_categories_data = 
+							$this->AssetCategory->get_asset_categories_for_json();
+		$this->set('asset_categories_data', 
+				array('asset_categories_data' => $asset_categories_data));
+
+		if(isset($this->params['form']['hdn_ast_cat_id'])) {
+			
+			$conditions = array('Asset.asset_category_id' => $this->params['form']['hdn_ast_cat_id']);
+			
+			$asset_list = $this->Asset->get_assets_for_json($conditions);
+			$this->set('asset_list', $asset_list);
+
+			$this->set('ast_cat_name', $this->params['form']['hdn_ast_cat_name']); // Report status : Data found
+			
+			if(sizeof($asset_list)) {
+				$this->set('rpt_status', 1); // Report status : Data found
+			} else {
+				$this->set('rpt_status', 2); // Report status : Data found
+			}
+						
+		} else {
+			$this->set('rpt_status', 0); // Report status : Initial page request		
+		}
 	}
 
 	function assets_by_location() {
-	
+		Configure::write('debug', 1);	
+
+		// Branch data for drop down list
+		$branch_data = $this->Branch->get_branches_for_json();
+		$this->set('branch_data', array('branch_data' => $branch_data));
+
+		if(isset($this->params['form']['hdn_ast_loc_id'])) {
+			
+			$conditions = array('Asset.location_id' => $this->params['form']['hdn_ast_loc_id']);
+			
+			$asset_list = $this->Asset->get_assets_for_json($conditions);
+			$this->set('asset_list', $asset_list);
+			
+			$this->set('branch_id', $this->params['form']['hdn_branch_id']); // Report status : Data found
+			$this->set('ast_loc_name', $this->params['form']['hdn_ast_loc_name']); // Report status : Data found
+
+			if(sizeof($asset_list)) {
+				$this->set('rpt_status', 1); // Report status : Data found
+			} else {
+				$this->set('rpt_status', 2); // Report status : Data found
+			}
+						
+		} else {
+			$this->set('rpt_status', 0); // Report status : Initial page request		
+		}
 	}
 
 	function assets_by_supplier() {
+		Configure::write('debug', 0);	
+
+		// Pickup asset categories for category browser grid
+		$suppliers_data = $this->Supplier->get_suppliers_for_json_mini();
+		$this->set('suppliers_data', array('suppliers_data' => $suppliers_data));
+
+		if(isset($this->params['form']['hdn_supplier_id'])) {
+			
+			$conditions = array('Asset.supplier_id' => $this->params['form']['hdn_supplier_id']);
+			
+			$asset_list = $this->Asset->get_assets_for_json($conditions);
+			$this->set('asset_list', $asset_list);
+
+			$this->set('supplier_name', $this->params['form']['hdn_supplier_name']); // Report status : Data found
+			
+			if(sizeof($asset_list)) {
+				$this->set('rpt_status', 1); // Report status : Data found
+			} else {
+				$this->set('rpt_status', 2); // Report status : Data found
+			}
+						
+		} else {
+			$this->set('rpt_status', 0); // Report status : Initial page request		
+		}	
+
+	}
 	
+	function assets_by_custodian() {
+		Configure::write('debug', 0);	
+
+		// Employee data for common browser
+		$emp_data = $this->Employee->get_employees_for_json_mini();
+		$this->set('employee_data', array('employee_data' => $emp_data));
+		
+		if(isset($this->params['form']['hdn_custodian_id'])) {
+			
+			$conditions = array('Asset.custodian_id' => $this->params['form']['hdn_custodian_id']);
+			
+			$asset_list = $this->Asset->get_assets_for_json($conditions);
+			$this->set('asset_list', $asset_list);
+
+			$this->set('custodian_name', $this->params['form']['hdn_custodian_name']); // Report status : Data found
+			
+			if(sizeof($asset_list)) {
+				$this->set('rpt_status', 1); // Report status : Data found
+			} else {
+				$this->set('rpt_status', 2); // Report status : Data found
+			}
+						
+		} else {
+			$this->set('rpt_status', 0); // Report status : Initial page request		
+		}
 	}
 	
 	function change_custodian() {
