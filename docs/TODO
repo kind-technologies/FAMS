@@ -1,23 +1,415 @@
-Create New Record
-	Client  Side
-		- Validations for add (for empty, date/email format)
-		- Prepare parameter list
-		- Pass ajax request
+<table>
+<!--data-->
+	<tr>
+		<td style="background-color:#ffffff">
+			00001
+		</td>
+		<td style="background-color:#ffffff">
+			AMD Athlon 2000+
+		</td>
+		<td style="background-color:#ffffff">
+			CMB/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			07/14/2006
+		</td>
+		<td style="background-color:#ffffff">
+			36000.00
+		</td>
+		<td style="background-color:#ffffff">
+			48
+		</td>
+		<td style="background-color:#ffffff">
+			4000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+	<tr>
+		<td style="background-color:#ffffff">
+			00002
+		</td>
+		<td style="background-color:#ffffff">
+			IBM Workstation (P IV)
+		</td>
+		<td style="background-color:#ffffff">
+			CMB/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			08/10/2007
+		</td>
+		<td style="background-color:#ffffff">
+			46000.00
+		</td>
+		<td style="background-color:#ffffff">
+			60
+		</td>
+		<td style="background-color:#ffffff">
+			5000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+	<tr>
+		<td style="background-color:#ffffff">
+			00003
+		</td>
+		<td style="background-color:#ffffff">
+			Apple Mac book (2.4GHz)
+		</td>
+		<td style="background-color:#ffffff">
+			STG/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			05/05/2007
+		</td>
+		<td style="background-color:#ffffff">
+			96000.00
+		</td>
+		<td style="background-color:#ffffff">
+			60
+		</td>
+		<td style="background-color:#ffffff">
+			5000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+	<tr>
+		<td style="background-color:#ffffff">
+			00004
+		</td>
+		<td style="background-color:#ffffff">
+			AMD Athlon (64 Bit)
+		</td>
+		<td style="background-color:#ffffff">
+			CMB/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			07/01/2006
+		</td>
+		<td style="background-color:#ffffff">
+			54000.00
+		</td>
+		<td style="background-color:#ffffff">
+			48
+		</td>
+		<td style="background-color:#ffffff">
+			4000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+	<tr>
+		<td style="background-color:#ffffff">
+			00005
+		</td>
+		<td style="background-color:#ffffff">
+			IBM PIII 1.8GHz
+		</td>
+		<td style="background-color:#ffffff">
+			CMB/HO
+		</td>
+		<td style="background-color:#ffffff">
+			Damaged
+		</td>
+		<td style="background-color:#ffffff">
+			05/12/2005
+		</td>
+		<td style="background-color:#ffffff">
+			32000.00
+		</td>
+		<td style="background-color:#ffffff">
+			36
+		</td>
+		<td style="background-color:#ffffff">
+			2000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+	<tr>
+		<td style="background-color:#ffffff">
+			00006
+		</td>
+		<td style="background-color:#ffffff">
+			Sony Vio Latop
+		</td>
+		<td style="background-color:#ffffff">
+			STG/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			06/14/2006
+		</td>
+		<td style="background-color:#ffffff">
+			85000.00
+		</td>
+		<td style="background-color:#ffffff">
+			48
+		</td>
+		<td style="background-color:#ffffff">
+			5000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+	<tr>
+		<td style="background-color:#ffffff">
+			00007
+		</td>
+		<td style="background-color:#ffffff">
+			Apple iMac 2.6GHz
+		</td>
+		<td style="background-color:#ffffff">
+			CMB/HO
+		</td>
+		<td style="background-color:#ffffff">
+			Pending
+		</td>
+		<td style="background-color:#ffffff">
+			06/15/2008
+		</td>
+		<td style="background-color:#ffffff">
+			86000.00
+		</td>
+		<td style="background-color:#ffffff">
+			60
+		</td>
+		<td style="background-color:#ffffff">
+			4000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+	<tr>
+		<td style="background-color:#ffffff">
+			00008
+		</td>
+		<td style="background-color:#ffffff">
+			PIV Assembled PC. 2.6GHz Core 2 Duo
+		</td>
+		<td style="background-color:#ffffff">
+			CMB/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			08/20/2007
+		</td>
+		<td style="background-color:#ffffff">
+			56000.00
+		</td>
+		<td style="background-color:#ffffff">
+			48
+		</td>
+		<td style="background-color:#ffffff">
+			4000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+	<tr>
+		<td style="background-color:#ffffff">
+			00009
+		</td>
+		<td style="background-color:#ffffff">
+			PIV Assembled PC. 3GHz Core 2 Duo
+		</td>
+		<td style="background-color:#ffffff">
+			CMB/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			07/14/2006
+		</td>
+		<td style="background-color:#ffffff">
+			36000.00
+		</td>
+		<td style="background-color:#ffffff">
+			48
+		</td>
+		<td style="background-color:#ffffff">
+			4000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+	<tr>
+		<td style="background-color:#ffffff">
+			00010
+		</td>
+		<td style="background-color:#ffffff">
+			Acer Extensa 5630 Notebook
+		</td>
+		<td style="background-color:#ffffff">
+			CMB/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			05/25/2009
+		</td>
+		<td style="background-color:#ffffff">
+			92000.00
+		</td>
+		<td style="background-color:#ffffff">
+			60
+		</td>
+		<td style="background-color:#ffffff">
+			5000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
 
-	Server Side
-		- Capture Params
-		- Validate (for empty, date/email format, field lengths)
+	<tr>
+		<td style="background-color:#ffffff">
+			00011
+		</td>
+		<td style="background-color:#ffffff">
+			HP Notebook.
+		</td>
+		<td style="background-color:#ffffff">
+			CMB/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			04/16/2009
+		</td>
+		<td style="background-color:#ffffff">
+			106000.00
+		</td>
+		<td style="background-color:#ffffff">
+			60
+		</td>
+		<td style="background-color:#ffffff">
+			5000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
 
-		-> IF valid
-			- Save data
-			- Display OK message
-			- Reload datagrid
-			- Clear and reset form
-		-> ELSE invalid
-			- Keep entered values in fields
-			- Display the error message
-			- Highlignt the field with errorneous data
+<tr>
+		<td style="background-color:#ffffff">
+			00012
+		</td>
+		<td style="background-color:#ffffff">
+			Dell 3GHz Core2 Duo
+		</td>
+		<td style="background-color:#ffffff">
+			STG/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			05/05/2008
+		</td>
+		<td style="background-color:#ffffff">
+			67000.00
+		</td>
+		<td style="background-color:#ffffff">
+			36
+		</td>
+		<td style="background-color:#ffffff">
+			4000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
 
+<tr>
+		<td style="background-color:#ffffff">
+			00013
+		</td>
+		<td style="background-color:#ffffff">
+			Sun Workstation (2.2GHz)
+		</td>
+		<td style="background-color:#ffffff">
+			STG/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			05/14/2006
+		</td>
+		<td style="background-color:#ffffff">
+			65000.00
+		</td>
+		<td style="background-color:#ffffff">
+			60
+		</td>
+		<td style="background-color:#ffffff">
+			3000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+
+<tr>
+		<td style="background-color:#ffffff">
+			00014
+		</td>
+		<td style="background-color:#ffffff">
+			Acer Aspire (2.4GHz) Core2 Duo
+		</td>
+		<td style="background-color:#ffffff">
+			CMB/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			03/23/2008
+		</td>
+		<td style="background-color:#ffffff">
+			86000.00
+		</td>
+		<td style="background-color:#ffffff">
+			48
+		</td>
+		<td style="background-color:#ffffff">
+			4000.00
+		</td>
+	</tr>
+	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+
+<tr>
+		<td style="background-color:#ffffff">
+			00015
+		</td>
+		<td style="background-color:#ffffff">
+			Assembled PC AMD AthlonXP
+		</td>
+		<td style="background-color:#ffffff">
+			CMB/HO
+		</td>
+		<td style="background-color:#ffffff">
+			In Use
+		</td>
+		<td style="background-color:#ffffff">
+			03/17/2006
+		</td>
+		<td style="background-color:#ffffff">
+			36000.00
+		</td>
+		<td style="background-color:#ffffff">
+			36
+		</td>
+		<td style="background-color:#ffffff">
+			2000.00
+		</td>
+	</tr>
+</table>
 
 
 
