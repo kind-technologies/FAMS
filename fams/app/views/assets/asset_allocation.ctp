@@ -637,8 +637,7 @@ function save() {
 			   params: parameters,
 			   callback : function(options, success, response) { 
 			   				obj = Ext.util.JSON.decode(response.responseText);
-			   				// grid_data_store.loadData(obj.assets_data);
-			   				alert(response.responseText);
+
 			   				display_message("Record saved successfully");
   														
 			   				cancel();
