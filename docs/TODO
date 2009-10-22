@@ -1,3 +1,10 @@
+<<<<<<< .mine
+Create New Record
+	Client  Side
+		- Validations for add (for empty, date/email format) - DONE
+		- Prepare parameter list - DONE
+		- Pass ajax request - DONE
+=======
 <table>
 <!--data-->
 	<tr>
@@ -270,7 +277,13 @@
 		</td>
 	</tr>
 	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+>>>>>>> .r236
 
+<<<<<<< .mine
+	Server Side
+		- Capture Params - DONE
+		- Validate (for empty, date/email format, field lengths)
+=======
 	<tr>
 		<td style="background-color:#ffffff">
 			00011
@@ -298,7 +311,20 @@
 		</td>
 	</tr>
 	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+>>>>>>> .r236
 
+<<<<<<< .mine
+		-> IF valid
+			- Save data
+			- Display OK message
+			- Reload datagrid
+			- Clear and reset form
+
+		-> ELSE invalid
+			- Keep entered values in fields
+			- Display the error message
+			- Highlignt the field with errorneous data
+=======
 <tr>
 		<td style="background-color:#ffffff">
 			00012
@@ -326,6 +352,7 @@
 		</td>
 	</tr>
 	<tr><td colspan="8" style="height:3px;background-color:#e4ebf6"></td></tr>
+>>>>>>> .r236
 
 <tr>
 		<td style="background-color:#ffffff">
