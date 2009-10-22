@@ -192,7 +192,7 @@ class AssetsController extends AppController {
 	}
 
 	function asset_allocation_browsers() {
-		Configure::write('debug', 1);
+		Configure::write('debug', 0);
 		$this->layout = 'ajax';
 
 		$request_type = $this->params['form']['request_type'];
@@ -369,11 +369,128 @@ class AssetsController extends AppController {
 	}
 	
 	function change_custodian() {
+		Configure::write('debug', 0);
+	
+		// Pickup asset categories for category browser grid
+		$asset_categories_data = 
+							$this->AssetCategory->get_asset_categories_for_json();
+		$this->set('asset_categories_data', 
+				array('asset_categories_data' => $asset_categories_data));
+		
+		// Employee data for common browser
+		$emp_data = $this->Employee->get_employees_for_json_mini();
+		$this->set('employee_data', array('employee_data' => $emp_data));
+	}
 
+	function change_custodian_update() {
+		Configure::write('debug', 0);
+		
+		$this->layout = 'ajax';
+		
+		$record_id = $this->params['form']['asset_id'];
+			
+		$this->data['Asset']['id'] = $record_id;
+		$this->data['Asset']['custodian_id'] = $this->params['form']['person_id'];
+			
+		$this->Asset->save($this->data);
+
+		// Set data for update data-grid.
+		// JSON object is created in view file accordingly
+		$assets_data = $this->Asset->get_assets_for_json();
+		$this->set('assets_data', $assets_data);
 	}
 
 	function change_location() {
+		Configure::write('debug', 0);
+	
+		// Pickup asset categories for category browser grid
+		$asset_categories_data = 
+							$this->AssetCategory->get_asset_categories_for_json();
+		$this->set('asset_categories_data', 
+				array('asset_categories_data' => $asset_categories_data));
+		
+		// Branch data for drop down list
+		$branch_data = $this->Branch->get_branches_for_json();
+		$this->set('branch_data', array('branch_data' => $branch_data));
+		
+		// Employee data for common browser
+		$emp_data = $this->Employee->get_employees_for_json_mini();
+		$this->set('employee_data', array('employee_data' => $emp_data));
 
+	}
+
+	function change_location_browsers() {
+		Configure::write('debug', 1);
+		$this->layout = 'ajax';
+
+		$request_type = $this->params['form']['request_type'];
+		$type_id = $this->params['form']['type_id'];
+
+		// If type is asset browser : A
+		if($request_type == 'A') {
+			$conditions = array('Asset.asset_category_id' => $type_id);
+			$asset_data = $this->Asset->get_assets_for_json_mini($conditions);
+			$this->set('grid_data', $asset_data);
+			$this->set('request_type', $request_type);
+		}
+		
+		// If type is location browser : L
+		if($request_type == 'L') {
+			$conditions = array('Location.branch_id' => $type_id);
+			$location_data = $this->Location->get_locations_for_json_mini($conditions);
+			$this->set('grid_data', $location_data);
+			$this->set('request_type', $request_type);
+		}
+		
+		// If type is asset data : D
+		if($request_type == 'D') {
+			$conditions = array('Asset.id' => $type_id);
+			
+			$assets = $this->Asset->findAll($conditions, null, 'Asset.id ASC', 4);
+
+			$assets_data = array();
+
+			foreach($assets as $asset) {
+
+				$branch = $this->Branch->find(array('Branch.id'=>$asset['Location']['branch_id']));
+
+				$custodian = $this->Employee->find(array('Employee.id'=>$asset['Asset']['custodian_id']));
+
+				$assets_data[] = array('id' => $asset['Asset']['id'], 
+										'custodian_id' => $custodian['Employee']['id'], 
+										'custodian' => $custodian['Employee']['name_with_initials'],
+										'branch_id' => $branch['Branch']['id'],
+										'branch' => $branch['Branch']['description'],
+										'location_id' => $asset['Location']['id'],
+										'location' => $asset['Location']['description']
+									);
+
+			}
+		
+			
+			$this->set('grid_data', $assets_data);
+			$this->set('request_type', $request_type);
+		}
+		
+	}
+
+	function change_location_update() {
+		Configure::write('debug', 0);
+		
+		$this->layout = 'ajax';
+		
+		$record_id = $this->params['form']['asset_id'];
+			
+		$this->data['Asset']['id'] = $record_id;
+		$this->data['Asset']['custodian_id'] = $this->params['form']['person_id'];
+		$this->data['Asset']['location_id'] = $this->params['form']['location_id'];
+			
+		$this->Asset->save($this->data);
+
+		// Set data for update data-grid.
+		// JSON object is created in view file accordingly
+		$assets_data = $this->Asset->get_assets_for_json();
+		$this->set('assets_data', $assets_data);
 	}
 
 	function disposals() {
