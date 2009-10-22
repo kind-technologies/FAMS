@@ -391,7 +391,7 @@ Ext.onReady(function(){
 			});
 
 	resp_person_json = Ext.util.JSON.decode('<?php echo $javascript->object($employee_data); ?>');
-	resp_person_data_store.loadData(employees_json.employee_data);
+	resp_person_data_store.loadData(resp_person_json.employee_data);
 
     grid_resp_person = new Ext.grid.GridPanel({
 						store: resp_person_data_store,
