@@ -27,12 +27,14 @@ function view_request() {
 					{
 						fieldLabel: 'From',
 						xtype: 'textfield',
-						name: 'to',
+						readOnly: true,
+						name: 'from',
 						anchor:'100%',  // anchor width by percentage
 						value: from_name
 					},{
 						fieldLabel: 'Subject',
 						xtype: 'textfield',
+						readOnly: true,
 						name: 'subject',
 						anchor: '100%',  // anchor width by percentage
 						value: subject
