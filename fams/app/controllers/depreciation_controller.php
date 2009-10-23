@@ -2,7 +2,7 @@
 class DepreciationController extends AppController {
 
 	var $name = 'Depreciation';
-	var $components = array('Auth');
+	var $components = array('Auth', 'Depreciation');
 	var $helpers = array('Html', 'Form', 'Javascript');
 	var $uses = array('Asset', 'AssetCategory');
 	
@@ -18,7 +18,7 @@ class DepreciationController extends AppController {
 	}
 
 	function depreciation_report_browsers() {
-		Configure::write('debug', 1);
+		Configure::write('debug', 0);
 		$this->layout = 'ajax';
 
 		$request_type = $this->params['form']['request_type'];
@@ -32,6 +32,44 @@ class DepreciationController extends AppController {
 			$this->set('request_type', $request_type);
 		}
 		
+		// If type is asset data : D
+		if($request_type == 'D') {
+
+			$conditions = array('Asset.id' => $type_id);
+			$fields = array('id', 'asset_code', 'short_name', 'description',
+							'purchase_price', 'purchase_date', 'lifespan', 
+							'salvage_value', 'commencement_date', 'asset_status'
+							);
+			
+			$asset = $this->Asset->find($conditions, $fields, 'Asset.id ASC', 4);
+
+			$asset_data = array();
+
+			$this->Depreciation->purchase_price = $asset['Asset']['purchase_price'];
+			$this->Depreciation->salvage_value = $asset['Asset']['salvage_value'];
+			$this->Depreciation->lifespan = $asset['Asset']['lifespan'];
+			$this->Depreciation->asset_commencement_year = date( 'Y', 
+									strtotime($asset['Asset']['commencement_date']));
+			
+			
+			$asset_data[] = array('id' => $asset['Asset']['id'], 
+					'asset_code' => $asset['Asset']['asset_code'], 
+					'asset_desc' => $asset['Asset']['description'],
+					'cur_date' => date('m/d/Y'),
+					'com_date' => date( 'm/d/Y', 
+									strtotime($asset['Asset']['commencement_date'])),
+					'anl_depr' => $this->Depreciation->get_annual_depreciation(),
+										
+					'org_cost' => $asset['Asset']['purchase_price'],
+					'cur_tot_depr' => $this->Depreciation->get_total_depreciation(),
+					'nbv' => $this->Depreciation->get_net_book_value(),
+					'lifespan' => $asset['Asset']['lifespan'],
+					'sal_val' => $asset['Asset']['salvage_value']
+				);
+
+			$this->set('grid_data', $asset_data);
+			$this->set('request_type', $request_type);
+		}
 	}
 	function depreciation_info() {
 
