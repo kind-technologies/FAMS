@@ -19,6 +19,7 @@ function fullscreen(url) {
 </head>
 <body>
 <div id="container">
+	<!--
   <div id="header">
     <div id="logo"> <img src="/img/web-site/company-logo.png" height="120px" alt="Logo" />
     </div>
@@ -36,6 +37,8 @@ function fullscreen(url) {
       <li><a href="#" class="lastmenu">Contact Us</a></li>
     </ul>
   </div>
+  	-->
+  <!--
   <div id="banner">
     <h1>ITCottage Research Center.</h1>
     <p>
@@ -46,7 +49,9 @@ function fullscreen(url) {
 	</p>
     <div class="more_button"><a href="#">Read more</a></div>
   </div>
-  <div id="services">
+  -->
+  <div style="padding-left:350px;padding-top:100px" id="services">
+    <!--
     <div class="service_box">
       <center>
         <img src="/img/web-site/fams.gif" alt="" />
@@ -55,7 +60,8 @@ function fullscreen(url) {
         <div class="more_button"><a href="#">Read more</a></div>
       </center>
     </div>
-    <div class="service_box">
+    -->
+    <div  class="service_box">
       <center>
         <img src="/img/web-site/vault128.png" alt="" />
         <h2>FAMS Demo</h2>
@@ -65,6 +71,7 @@ function fullscreen(url) {
         	</div>
       </center>
     </div>
+    <!--
     <div class="service_box">
       <center>
         <img src="/img/web-site/world128.png" alt="" />
@@ -73,9 +80,10 @@ function fullscreen(url) {
         <div class="more_button"><a href="#">Visit SF</a></div>
       </center>
     </div>
+    -->
   </div>
   <div id="newssection">
-    <h1>Latest News</h1>
+   <!-- <h1>Latest News</h1>
     <div class="newsbox">
       <h4>FAMS has begun</h4>
       <p>Development phase started for Fixed Asset Management System. <a href="#">more...</a> </p>
@@ -89,7 +97,9 @@ function fullscreen(url) {
       <p> Understand the concept behined FAMS. <a href="#">more...</a></p>
     </div>
     <div class="more_button"><a href="#">Read All News</a></div>
+    -->
   </div>
+  <!--
   <div id="light_blue_row">
     <div class="gallery">
       <h1>Featured Projects</h1>
@@ -98,14 +108,13 @@ function fullscreen(url) {
         When organization operates from different geographical locations this becomes more critical. 
         Find out <a href="#">more...</a> </p>
       </div>
-      <!--
       <div class="gp_row"> <img src="/img/web-site/building_150x70_02.gif" alt="" />
         <p>Praesent varius egestas velit. Donec a massa ut pede pulvinar vulputate. Aenean eget tortor eget ipsum aliquet porta. V <a href="#">more...</a> </p>
       </div>
       <div class="gp_row"> <img src="/img/web-site/building_150x70_01.gif" alt="" />
         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nunc quis sem nec tellus blandit tincidunt. Duis vitae velit sed dui malesuada dignissim. <a href="#">more...</a> </p>
       </div>
-      -->
+
       <div class="more_button"><a href="#">View All</a></div>
     </div>
     <div class="partners">
@@ -113,19 +122,22 @@ function fullscreen(url) {
       <div class="gp_row"> <img src="/img/web-site/technos.png" alt="" />
         <p>FAMS utilizes several well known Free and Open Source Software projects in its development. Checkout <a href="#">more...</a> </p> <br/><br/>
       </div>
-      <!--
+      
       <div class="gp_row"> <img src="/img/web-site/flashmo.gif" alt="" />
         <p>Nullam pede purus, tempor a, imperdiet in, porttitor at, nulla. Aliquam elit risus, volutpat quis, mattis ac, elementum eget, mauris. <a href="flashmo.com">more...</a> </p>
       </div>
       <div class="gp_row"> <img src="/img/web-site/webdesignmo.gif" alt="" />
         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nunc quis sem nec tellus blandit tincidunt. Duis vitae velit sed dui malesuada dignissim. <a href="webdesignmo.net"> more...</a> </p>
       </div>
-      -->
+      
       <div class="more_button"><a href="#">View All</a></div>
+      
     </div>
-  </div>
+  </div>-->
+  <!--
   <div id="footer"> <a href="#">Home</a> | <a href="#">Services</a> | <a href="#">Solutions</a> | <a href="#">Partners</a> | <a href="#">News</a> | <a href="#">Contact Us</a><br />
     Copyright &copy; 2009 <a href="#"><strong>ITCottage Sri Lanka</strong></a> </div>
+   -->
 </div>
 </body>
 </html>
