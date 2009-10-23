@@ -305,13 +305,6 @@ function get_data_for_browser(request_type, type_id, grid_data_store) {
 								document.getElementById('cnt_comm_date').innerHTML = obj.grid_data[0].com_date;
 								document.getElementById('cnt_acc_dep').innerHTML = obj.grid_data[0].cur_tot_depr;
 								document.getElementById('cnt_nbv').innerHTML = obj.grid_data[0].nbv;
-							//	document.getElementById('ast_com_date').innerHTML = obj.grid_data[0].com_date;
-							//	document.getElementById('ast_org_cost').innerHTML = obj.grid_data[0].org_cost;
-							//	document.getElementById('ast_cur_depr').innerHTML = obj.grid_data[0].cur_tot_depr;
-							//	document.getElementById('ast_nbv').innerHTML = obj.grid_data[0].nbv;
-							//	document.getElementById('ast_anl_depr').innerHTML = obj.grid_data[0].anl_depr;
-							//	document.getElementById('ast_lifespan').innerHTML = obj.grid_data[0].lifespan;
-							//	document.getElementById('ast_sal_val').innerHTML = obj.grid_data[0].sal_val;
 			   					graph_store.loadData(obj.grid_data[0].chart_data);
 			   				} else {
 			   					grid_data_store.loadData(obj.grid_data);
