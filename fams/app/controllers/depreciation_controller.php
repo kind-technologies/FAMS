@@ -14,7 +14,6 @@ class DepreciationController extends AppController {
 							$this->AssetCategory->get_asset_categories_for_json();
 		$this->set('asset_categories_data', 
 				array('asset_categories_data' => $asset_categories_data));
-
 	}
 
 	function depreciation_report_browsers() {
@@ -51,7 +50,8 @@ class DepreciationController extends AppController {
 			$this->Depreciation->asset_commencement_year = date( 'Y', 
 									strtotime($asset['Asset']['commencement_date']));
 			
-			
+			$this->Depreciation->asset_commencement_month = date( 'M', 
+									strtotime($asset['Asset']['commencement_date']));
 			$asset_data[] = array('id' => $asset['Asset']['id'], 
 					'asset_code' => $asset['Asset']['asset_code'], 
 					'asset_desc' => $asset['Asset']['description'],
@@ -67,12 +67,25 @@ class DepreciationController extends AppController {
 					'sal_val' => $asset['Asset']['salvage_value']
 				);
 
+			$asset_data[0]['chart_data'] = $this->Depreciation->get_depr_chart_data();
+
 			$this->set('grid_data', $asset_data);
 			$this->set('request_type', $request_type);
 		}
 	}
 	function depreciation_info() {
+		Configure::write('debug', 0);
+	
+		// Pickup asset categories for category browser grid
+		$asset_categories_data = 
+							$this->AssetCategory->get_asset_categories_for_json();
+		$this->set('asset_categories_data', 
+				array('asset_categories_data' => $asset_categories_data));
+		
 
+		$this->set('graph_data', 
+				array('graph_data' => $graph_data));
+				
 	}
 }
 ?>
