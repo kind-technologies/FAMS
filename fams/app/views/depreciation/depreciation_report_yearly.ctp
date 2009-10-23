@@ -131,6 +131,8 @@ Ext.onReady(function(){
 					ast_id = record.get('rec_id');
 					
 					win_ast.hide(this);
+					
+					get_data_for_browser('D', ast_id, null);
 				});
 
     ast_name = new Ext.form.TextField({
@@ -189,13 +191,26 @@ function get_data_for_browser(request_type, type_id, grid_data_store) {
 	   			},
 			   callback : function(options, success, response) { 
 			   				obj = Ext.util.JSON.decode(response.responseText);
-			   				grid_data_store.loadData(obj.grid_data);
+			   				
+			   							   				// If type is not an asset information request
+			   				if(obj.request_type == 'D') {
+								document.getElementById('ast_code').innerHTML = obj.grid_data[0].asset_code;
+								document.getElementById('ast_desc').innerHTML = obj.grid_data[0].asset_desc;
+								document.getElementById('ast_depr_at').innerHTML = obj.grid_data[0].cur_date;
+								document.getElementById('ast_com_date').innerHTML = obj.grid_data[0].com_date;
+								document.getElementById('ast_org_cost').innerHTML = obj.grid_data[0].org_cost;
+								document.getElementById('ast_cur_depr').innerHTML = obj.grid_data[0].cur_tot_depr;
+								document.getElementById('ast_nbv').innerHTML = obj.grid_data[0].nbv;
+								document.getElementById('ast_anl_depr').innerHTML = obj.grid_data[0].anl_depr;
+								document.getElementById('ast_lifespan').innerHTML = obj.grid_data[0].lifespan;
+								document.getElementById('ast_sal_val').innerHTML = obj.grid_data[0].sal_val;
+			   				} else {
+			   					grid_data_store.loadData(obj.grid_data);
+			   				}
 			   				
 			   				// If request is for asset browser
 			   				if(obj.request_type == 'A') {
 			   					win_ast.show();
-			   				}else if(obj.request_type == 'L') {
-			   					win_location.show();
 			   				}
 	   			}
 			});
@@ -242,21 +257,21 @@ function get_data_for_browser(request_type, type_id, grid_data_store) {
 				<td width="50px">&nbsp;</td>
 				<td width="150px">Asset Code</td>
 				<td width="2px">:</td>
-				<td width="300px" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+				<td width="300px" id="ast_code" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
 				<td width="50px">&nbsp;</td>
 				<td width="150px"> Asset </td>
 				<td width="2px">:</td>
-				<td width="300px" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+				<td width="300px" id="ast_desc" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
 				<td width="50px">&nbsp;</td>
 				<td width="150px"> Depreciation as At </td>
 				<td width="2px">:</td>
-				<td width="300px" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+				<td width="300px"  id="ast_depr_at" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
@@ -268,15 +283,15 @@ function get_data_for_browser(request_type, type_id, grid_data_store) {
 						<tr align="center">
 							<td>Commencement Date</td>
 							<td>Original Cost ($)</td>
-							<td>Deprec. Amount ($)</td>
+							<td>Cur. Deprec. Amount ($)</td>
 							<td>Net Book Value ($)</td>
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<td style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
-							<td style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
-							<td style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
-							<td style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+							<td align="center" id="ast_com_date" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+							<td align="center" id="ast_org_cost" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+							<td align="center" id="ast_cur_depr" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+							<td align="center" id="ast_nbv" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
 							<td>&nbsp;</td>
 						</tr>
 					<table>
@@ -287,17 +302,24 @@ function get_data_for_browser(request_type, type_id, grid_data_store) {
 			</tr>
 			<tr>
 				<td width="50px">&nbsp;</td>
-				<td width="150px">Lifespan</td>
+				<td width="150px">Anual Depreciation</td>
 				<td width="2px">:</td>
-				<td width="300px" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
-				<td>&nbsp;</td>
+				<td width="250px" id="ast_anl_depr" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+				<td>$&nbsp;</td>
 			</tr>
 			<tr>
 				<td width="50px">&nbsp;</td>
-				<td width="150px"> Depreciation as At </td>
+				<td width="150px">Lifespan</td>
 				<td width="2px">:</td>
-				<td width="300px" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
-				<td>&nbsp;</td>
+				<td width="250px" id="ast_lifespan" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+				<td>Months&nbsp;</td>
+			</tr>
+			<tr>
+				<td width="50px">&nbsp;</td>
+				<td width="150px"> Salvage Value </td>
+				<td width="2px">:</td>
+				<td width="250px" id="ast_sal_val" style="background-color: #d3e1f1;margin:2px">&nbsp;</td>
+				<td>$&nbsp;</td>
 			</tr>
 		</table>
 	</div>
