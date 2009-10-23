@@ -17,11 +17,6 @@ Ext.onReady(function(){
 				reader: graph_reader
 			});
 
-
-	//graph_json = Ext.util.JSON.decode('<?php echo $javascript->object($graph_data); ?>');
-	//graph_store.loadData(graph_json.graph_data);
-
-    // more complex with a custom look
     new Ext.Panel({
         iconCls:'chart',
         title: 'Depreciation Graph',
@@ -300,7 +295,7 @@ function get_data_for_browser(request_type, type_id, grid_data_store) {
 			   callback : function(options, success, response) { 
 			   				obj = Ext.util.JSON.decode(response.responseText);
 			   				
-			   							   				// If type is not an asset information request
+			   				// If type is not an asset information request
 			   				if(obj.request_type == 'D') {
 								document.getElementById('cnt_comm_date').innerHTML = obj.grid_data[0].com_date;
 								document.getElementById('cnt_acc_dep').innerHTML = obj.grid_data[0].cur_tot_depr;
