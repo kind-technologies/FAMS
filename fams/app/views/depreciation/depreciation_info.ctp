@@ -3,18 +3,23 @@
 <script type="text/javascript" language="javascript">
 Ext.chart.Chart.CHART_URL = "<?php echo $this->base ?>/js/ext-3.0.0/resources/charts.swf";
 
+var graph_store = null;
+
 Ext.onReady(function(){
 
-    var store = new Ext.data.JsonStore({
-        fields:['name', 'accumulate', 'depreciate'],
-        data: [
-            {name:'Jul 07', accumulate: 3000, depreciate: 17000},
-            {name:'Jul 08', accumulate: 6000, depreciate: 14000},
-            {name:'Jul 09', accumulate: 9000, depreciate: 11000},
-            {name:'Jul 10', accumulate: 12000, depreciate: 8000},
-            {name:'Jul 11', accumulate: 15000, depreciate: 5000}
-        ]
-    });
+	var graph_reader = new Ext.data.ArrayReader({}, [
+		{name: 'date_at'},
+		{name: 'accumulate'},
+		{name: 'depreciate'}
+	]);	
+    
+	graph_store =  new Ext.data.Store({
+				reader: graph_reader
+			});
+
+
+	//graph_json = Ext.util.JSON.decode('<?php echo $javascript->object($graph_data); ?>');
+	//graph_store.loadData(graph_json.graph_data);
 
     // more complex with a custom look
     new Ext.Panel({
@@ -28,18 +33,19 @@ Ext.onReady(function(){
 
         items: {
             xtype: 'columnchart',
-            store: store,
+            store: graph_store,
             url: Ext.chart.Chart.CHART_URL,
-            xField: 'name',
+            xField: 'date_at',
             yAxis: new Ext.chart.NumericAxis({
                 displayName: 'Accumulated Amt.',
-                labelRenderer : Ext.util.Format.numberRenderer('0,0')
+                labelRenderer : Ext.util.Format.numberRenderer('0,0.00')
             }),
             tipRenderer : function(chart, record, index, series){
                 if(series.yField == 'accumulate'){
-                    return Ext.util.Format.number(record.data.visits, '0,0') + ' visits in ' + record.data.name;
+                    return ' accumulated depreciation at ' + 
+                    			record.data.date_at + '(' + Ext.util.Format.number(record.data.accumulate, '0,0.00') + ')';
                 }else{
-                    return Ext.util.Format.number(record.data.views, '0,0') + ' page views in ' + record.data.name;
+                    return ' net book value at ' + record.data.date_at + '(' +Ext.util.Format.number(record.data.depreciate, '0,0.00') + ')';
                 }
             },
             chartStyle: {
@@ -103,129 +109,62 @@ Ext.onReady(function(){
 </script>
 
 <script type="text/javascript" language="javascript">
+
+/* Asset Category Browser Script*/
+
 var btn_popup_ast_cat = null;
-var btn_popup_asset = null;
-
 var ast_cat_name = null;
-var asset_name = null;
-
 var ast_cat_id = null;
-var asset_id = null;
-
 var win_ast_cat;
-var win_ast;
-
-var grid_asset_cat_data_store = null;
-var grid_asset_cat = null;
-
-var grid_asset_data_store = null;
-var grid_asset = null;
-
+var asset_cat_data_store = null;
 
 Ext.onReady(function(){
 
-	// Data grid for Asset Category Browser	
-	var myData = [
-        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
-        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
-        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
-        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
-        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
-        [5, 'FFF', 'FFFFFFFFFFFFFFFF']
-    ];
+	var categoriesReader = new Ext.data.ArrayReader({}, [
+		{name: 'rec_id'},
+		{name: 'category_code'},
+		{name: 'category_name'},
+		{name: 'category_description'}
+	]);	
     
-    var store = new Ext.data.ArrayStore({
-        fields: [
-           {name: 'ast_cat_id', type: 'int'},
-           {name: 'ast_cat_code'},
-           {name: 'ast_cat_desc'}
-	 	]
-    });
-    
-	store.loadData(myData);
+	asset_cat_data_store =  new Ext.data.Store({
+				reader: categoriesReader
+			});
+
+	asset_categories_json = Ext.util.JSON.decode('<?php echo $javascript->object($asset_categories_data); ?>');
+	asset_cat_data_store.loadData(asset_categories_json.asset_categories_data);
 
     grid_asset_cat = new Ext.grid.GridPanel({
-						store: store,
+						store: asset_cat_data_store,
 						columns: [
-						   /* {header: 'Price', width: 75, sortable: true, renderer: 'usMoney', dataIndex: 'ast_cat_id'},*/
-							{header: 'Category Code', width: 100, sortable: true, dataIndex: 'ast_cat_code'},
-							{header: 'Description', width: 310, sortable: true, dataIndex: 'ast_cat_desc'}
+							{header: 'Category Code', width: 100, sortable: true, dataIndex: 'category_code'},
+							{header: 'Category Name', width: 310, sortable: true, dataIndex: 'category_name'}
 						],
-					   /* stripeRows: true,
-						autoExpandColumn: 'company',*/
 						height: 350,
-						width: 420/*,
-						title: 'Asset Categories',
-						// config options for stateful behavior
-						stateful: true,
-						stateId: 'grid'   */     
+						width: 420
 					});
-    
-	// Data grid for Asset Browser
+					
+    grid_asset_cat.on('rowdblclick', function(sm, row_index, r) {
+					record = grid_asset_cat.getStore().getAt(row_index);
+					cat_name = record.get('category_name');
+					ast_cat_id = record.get('rec_id');
+					
+					ast_cat_name.setValue(cat_name);
+					
+					win_ast_cat.hide(this);
 
-	var myData2 = [
-        [0, 'AAA', 'AAAAAAAAAAAAAAAA'],
-        [1, 'BBB', 'BBBBBBBBBBBBBBBB'],
-        [2, 'CCC', 'CCCCCCCCCCCCCCCC'],
-        [3, 'DDD', 'DDDDDDDDDDDDDDDD'],
-        [4, 'EEE', 'EEEEEEEEEEEEEEEE'],
-        [5, 'FFF', 'FFFFFFFFFFFFFFFF']
-    ];
-    
-    var store2 = new Ext.data.ArrayStore({
-        fields: [
-           {name: 'ast_cat_id', type: 'int'},
-           {name: 'ast_cat_code'},
-           {name: 'ast_cat_desc'}
-	 	]
-    });
-    
-	store2.loadData(myData2);
+					btn_popup_ast.setDisabled(false);
+				});
 
-    grid_asset = new Ext.grid.GridPanel({
-						store: store2,
-						columns: [
-						   /* {header: 'Price', width: 75, sortable: true, renderer: 'usMoney', dataIndex: 'ast_cat_id'},*/
-							{header: 'Category Code', width: 100, sortable: true, dataIndex: 'ast_cat_code'},
-							{header: 'Description', width: 310, sortable: true, dataIndex: 'ast_cat_desc'}
-						],
-					   /* stripeRows: true,
-						autoExpandColumn: 'company',*/
-						height: 350,
-						width: 420/*,
-						title: 'Asset Categories',
-						// config options for stateful behavior
-						stateful: true,
-						stateId: 'grid'   */     
-					});
-
-});
-
-Ext.onReady(function(){
     ast_cat_name = new Ext.form.TextField({
 				id: 'ast_cat_name',
 				validateOnBlur: true,
 				invalidText: 'The value in this field is invalid',
-				//maxLength : 5,
 				width: 300,
-				disabled: false,
+				disabled: true,
 				renderTo: 'cnt_asset_cat',
 				msgTarget: 'under',
-				allowBlank:false,
-				value: 'Printer (Laser)'
-    		});
-    
-    asset_name = new Ext.form.TextField({
-				id: 'asset_name',
-				validateOnBlur: false,
-				invalidText: 'The value in this field is invalid',
-				//maxLength : 5,
-				width: 300,
-				disabled: false,
-				renderTo: 'cnt_asset',
-				msgTarget: 'under',
-				allowBlank:false,
-				value: 'HP Laser D1560'
+				allowBlank:false
     		});
 
     btn_popup_ast_cat = new Ext.Button({
@@ -235,15 +174,6 @@ Ext.onReady(function(){
 							minWidth: 50,
 							renderTo: 'cnt_asset_cat_btn'
 						});
-
-    btn_popup_asset = new Ext.Button({
-							text: '',
-							id: 'btn_popup_asset',
-							icon: '/img/data_browser_view.png',
-							minWidth: 50,
-							renderTo: 'cnt_asset_btn'
-						});
-	
 	
 	
 	btn_popup_ast_cat.on('click', function() {
@@ -262,8 +192,80 @@ Ext.onReady(function(){
         }
         win_ast_cat.show(this);
     });
+
+
+});
+
+</script>
+
+<script type="text/javascript" language="javascript">
+
+/* Asset Browser Script*/
+
+var btn_popup_ast = null;
+var ast_name = null;
+var ast_id = null;
+var win_ast;
+var asset_data_store = null;
+
+Ext.onReady(function(){
+
+	var assetsReader = new Ext.data.ArrayReader({}, [
+		{name: 'rec_id'},
+		{name: 'ast_code'},
+		{name: 'ast_name'}
+	]);	
     
-	btn_popup_asset.on('click', function() {
+	asset_data_store =  new Ext.data.Store({
+				reader: assetsReader
+			});
+			
+    grid_asset = new Ext.grid.GridPanel({
+						store: asset_data_store,
+						columns: [
+							{header: 'Asset Code', width: 100, sortable: true, dataIndex: 'ast_code'},
+							{header: 'Short Name', width: 310, sortable: true, dataIndex: 'ast_name'}
+						],
+						height: 350,
+						width: 420     
+					});
+					
+    grid_asset.on('rowdblclick', function(sm, row_index, r) {
+					
+					record = grid_asset.getStore().getAt(row_index);
+					asset_name = record.get('ast_name');
+
+					ast_name.setValue(asset_name);
+					ast_id = record.get('rec_id');
+					
+					win_ast.hide(this);
+					
+					get_data_for_browser('D', ast_id, null);
+				});
+
+    ast_name = new Ext.form.TextField({
+				id: 'ast_name',
+				validateOnBlur: true,
+				invalidText: 'The value in this field is invalid',
+				width: 300,
+				disabled: true,
+				renderTo: 'cnt_asset',
+				msgTarget: 'under',
+				allowBlank:false
+    		});
+
+    btn_popup_ast = new Ext.Button({
+							text: '',
+							id: 'btn_popup_ast',
+							disabled: true,
+							icon: '/img/data_browser_view.png',
+							minWidth: 50,
+							renderTo: 'cnt_asset_btn'
+						});
+	
+	
+	btn_popup_ast.on('click', function() {
+	
         // create the window on the first click and reuse on subsequent clicks
         if(!win_ast){
             win_ast = new Ext.Window({
@@ -277,13 +279,56 @@ Ext.onReady(function(){
                 items: grid_asset
             });
         }
-        win_ast.show(this);
+
+		// Load data for grid before popup the browser
+		get_data_for_browser('A', ast_cat_id, asset_data_store);
+        
     });
-    
 
 });
 
 </script>
+
+<script>
+function get_data_for_browser(request_type, type_id, grid_data_store) {
+	ajaxClass.request({
+			   url: '/depreciation/depreciation_report_browsers',
+			   params: { 
+			   			request_type: request_type,
+			   			type_id: type_id
+	   			},
+			   callback : function(options, success, response) { 
+			   				obj = Ext.util.JSON.decode(response.responseText);
+			   				
+			   							   				// If type is not an asset information request
+			   				if(obj.request_type == 'D') {
+								document.getElementById('cnt_comm_date').innerHTML = obj.grid_data[0].com_date;
+								document.getElementById('cnt_acc_dep').innerHTML = obj.grid_data[0].cur_tot_depr;
+								document.getElementById('cnt_nbv').innerHTML = obj.grid_data[0].nbv;
+							//	document.getElementById('ast_com_date').innerHTML = obj.grid_data[0].com_date;
+							//	document.getElementById('ast_org_cost').innerHTML = obj.grid_data[0].org_cost;
+							//	document.getElementById('ast_cur_depr').innerHTML = obj.grid_data[0].cur_tot_depr;
+							//	document.getElementById('ast_nbv').innerHTML = obj.grid_data[0].nbv;
+							//	document.getElementById('ast_anl_depr').innerHTML = obj.grid_data[0].anl_depr;
+							//	document.getElementById('ast_lifespan').innerHTML = obj.grid_data[0].lifespan;
+							//	document.getElementById('ast_sal_val').innerHTML = obj.grid_data[0].sal_val;
+			   					graph_store.loadData(obj.grid_data[0].chart_data);
+			   				} else {
+			   					grid_data_store.loadData(obj.grid_data);
+			   				}
+			   				
+			   				// If request is for asset browser
+			   				if(obj.request_type == 'A') {
+			   					win_ast.show();
+			   				}
+	   			}
+			});
+}
+</script>
+<!-- Containers for popup windows -->
+<div id="cnt_asst_cat_browser" class="x-hidden"><!--asset category browser container--></div>
+<div id="cnt_asst_browser" class="x-hidden"><!--asset browser container--></div>
+<!-- End containers for popup windows -->
 
 
 <div id="fields_div">
@@ -310,33 +355,32 @@ Ext.onReady(function(){
 		<table border="0" bgcolor="#ffffff" style="border:#8db2e3 2px solid;width:700px">
 			<tr>
 				<td width="30%">
-					Start Date
+					Commencement Date
 				</td>
-				<td style="background-color:#e4ebf6">
-					&nbsp;07/01/2007
+				<td id="cnt_comm_date" style="background-color:#e4ebf6">
+					
 				</td>
+				<td width="20%">&nbsp;</td>
 			</tr>
 			<tr>
 				<td>
 					Accumulated Depreciation
 				</td>
-				<td style="background-color:#e4ebf6">
-					&nbsp;9000.00
+				<td id="cnt_acc_dep" style="background-color:#e4ebf6">
+					
 				</td>
+				<td>$&nbsp;</td>
 			</tr>
 			<tr>
 				<td>
 					Current Book Value
 				</td>
-				<td style="background-color:#e4ebf6">
-					&nbsp;11000.00
+				<td id="cnt_nbv" style="background-color:#e4ebf6">
+					
 				</td>
+				<td>$&nbsp;</td>
 			</tr>
 		</table>
 	</div>
 </div>
-
-<div id="cnt_asst_cat_browser" class="x-hidden"><!--asset category browser container--></div>
-<div id="cnt_asst_browser" class="x-hidden"><!--asset browser container--></div>
-
 
