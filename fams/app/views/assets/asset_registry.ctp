@@ -162,7 +162,8 @@ Ext.onReady(function(){
 
 	ast_short_name = new Ext.form.TextField({
     			id: 'txt_ast_short_name',
-    			width: 600,
+    			width: 400,
+    			maxLength : 100,
     			disabled: true,
     		    renderTo: 'cnt_ast_short_name',
     		    allowBlank:false
@@ -171,7 +172,8 @@ Ext.onReady(function(){
     
 	ast_description = new Ext.form.TextField({
     			id: 'txt_ast_description',
-    			width: 200,
+    			width: 680,
+    			maxLength : 200,
     			disabled: true,
     		    renderTo: 'cnt_ast_description',
     		    allowBlank:false
@@ -593,12 +595,12 @@ Ext.onReady(function(){
 				<td>Asset Category</td>
 				<td width="5px">:</td>
 				<td id='cnt_ast_asset_category'><!-- asset category (ext gen.) --></td>
-				<td width="80px">Supplier</td>
+				<td width="120px">Supplier</td>
 				<td width="5px">:</td>
 				<td id="cnt_ast_supplier" valign="middle"><!-- Supplier (ext gen.) --></td>
 			</tr>
 			<tr>
-				<td>Purchase Price</td>
+				<td>Purchase Price ($)</td>
 				<td width="5px">:</td>
 				<td colspan="4" id="cnt_ast_purchase_price"><!-- purchase price (ext gen.) --></td>
 			</tr>
@@ -606,12 +608,12 @@ Ext.onReady(function(){
 				<td>Purchase Date</td>
 				<td width="5px">:</td>
 				<td id="cnt_ast_purchase_date"><!-- purchase date (ext gen.) --></td>
-				<td>Lifespan</td>
+				<td>Lifespan (Months)</td>
 				<td>:</td>
 				<td id="cnt_ast_lifespan"><!-- lifespan (ext gen.) --></td>
 			</tr>
 			<tr>
-				<td>Salvage Value</td>
+				<td>Salvage Value ($)</td>
 				<td width="5px">:</td>
 				<td colspan="4" id="cnt_ast_salvage_value"><!-- salvage value (ext gen.) --></td>
 			</tr>

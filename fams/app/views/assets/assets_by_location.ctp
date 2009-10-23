@@ -148,7 +148,7 @@ function get_data_for_browser(request_type, type_id, grid_data_store) {
 </script>
 
 
-<div id="fields_div">
+<div style="background-color:#d3e1f1" id="fields_div">
     <div align="center" style="padding: 10px 0px 10px 0px;">
     	<form id="frm_ast_loc" method="post" action="/assets/assets_by_location">
 			<table border="0" bgcolor="#ffffff" style="border:#8db2e3 2px solid;width:700px;">

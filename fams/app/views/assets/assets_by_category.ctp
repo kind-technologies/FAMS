@@ -95,7 +95,7 @@ Ext.onReady(function(){
 </script>
 
 
-<div id="fields_div">
+<div style="background-color:#d3e1f1" id="fields_div">
     <div align="center" style="padding: 10px 0px 10px 0px;">
     	<form id="frm_ast_cat" method="post" action="/assets/assets_by_category">
 			<table border="0" bgcolor="#ffffff" style="border:#8db2e3 2px solid;width:700px;">

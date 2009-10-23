@@ -176,7 +176,7 @@ Ext.onReady(function(){
         }
 
 		// Load data for grid before popup the browser
-		get_data_for_browser('A', ast_cat_id, asset_data_store);
+		get_data_for_browser('AP', ast_cat_id, asset_data_store);
         
     });
 
@@ -380,7 +380,7 @@ function get_data_for_browser(request_type, type_id, grid_data_store) {
 			   				}
 			   				
 			   				// If request is for asset browser
-			   				if(obj.request_type == 'A') {
+			   				if(obj.request_type == 'AP') {
 			   					win_ast.show();
 			   				}
 	   			}
