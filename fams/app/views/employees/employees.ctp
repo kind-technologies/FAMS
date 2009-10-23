@@ -262,6 +262,9 @@ Ext.onReady(function(){
     		    allowBlank:false
     });
 
+	// Get the data for branch selection drop down list
+	branch_json = Ext.util.JSON.decode('<?php echo $javascript->object($branch_data); ?>');
+
 	emp_branch = new Ext.form.ComboBox({
     			id: 'txt_branch',
     			width: 200,
@@ -269,7 +272,7 @@ Ext.onReady(function(){
     			editable: false,
     			store: new Ext.data.SimpleStore({
 									fields:['bid', 'branch_code'],
-									data: [['1', 'STG'], ['2', 'CMB']]
+									data: branch_json.branch_data // Set branch data from json string
 									}),
 				valueField: 'bid',
 				displayField:'branch_code',
@@ -280,6 +283,9 @@ Ext.onReady(function(){
     		    allowBlank:false
     });
 
+	// Get the data for branch selection drop down list
+	division_json = Ext.util.JSON.decode('<?php echo $javascript->object($division_data); ?>');
+
 	emp_division = new Ext.form.ComboBox({
     			id: 'txt_division',
     			width: 200,
@@ -288,7 +294,7 @@ Ext.onReady(function(){
     			lazyInit: false,
     			store: new Ext.data.SimpleStore({
 									fields:['id', 'division_code'],
-									data: [['1', 'MGT'], ['2', 'WEB']]
+									data: division_json.division_data // Set division data from json string
 								}),
 			displayField: 'division_code',
 			valueField: 'id',
