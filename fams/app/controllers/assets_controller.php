@@ -200,7 +200,8 @@ class AssetsController extends AppController {
 
 		// If type is asset browser : A
 		if($request_type == 'A') {
-			$conditions = array('Asset.asset_category_id' => $type_id);
+			$conditions = array('Asset.asset_category_id' => $type_id,
+								'Asset.assign_type' => NULL);
 			$asset_data = $this->Asset->get_assets_for_json_mini($conditions);
 			$this->set('grid_data', $asset_data);
 			$this->set('request_type', $request_type);
@@ -240,7 +241,9 @@ class AssetsController extends AppController {
 				$this->data['Asset']['location_id'] = 
 												$this->params['form']['location_id'];
 			}
-			
+
+			$this->data['Asset']['asset_status'] = 'ASN';
+
 			$this->Asset->save($this->data);
 
 		}
@@ -286,7 +289,7 @@ class AssetsController extends AppController {
 	}
 
 	function assets_by_location() {
-		Configure::write('debug', 1);	
+		Configure::write('debug', 0);	
 
 		// Branch data for drop down list
 		$branch_data = $this->Branch->get_branches_for_json();
@@ -426,9 +429,19 @@ class AssetsController extends AppController {
 		$request_type = $this->params['form']['request_type'];
 		$type_id = $this->params['form']['type_id'];
 
-		// If type is asset browser : A
-		if($request_type == 'A') {
-			$conditions = array('Asset.asset_category_id' => $type_id);
+		// If type is asset browser : P
+		if($request_type == 'AP') {
+			$conditions = array('Asset.asset_category_id' => $type_id,
+									'Asset.assign_type' => 'P');
+			$asset_data = $this->Asset->get_assets_for_json_mini($conditions);
+			$this->set('grid_data', $asset_data);
+			$this->set('request_type', $request_type);
+		}
+
+		// If type is asset browser : P
+		if($request_type == 'AL') {
+			$conditions = array('Asset.asset_category_id' => $type_id,
+									'Asset.assign_type' => 'L');
 			$asset_data = $this->Asset->get_assets_for_json_mini($conditions);
 			$this->set('grid_data', $asset_data);
 			$this->set('request_type', $request_type);

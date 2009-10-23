@@ -25,7 +25,9 @@ class DepreciationController extends AppController {
 
 		// If type is asset browser : A
 		if($request_type == 'A') {
-			$conditions = array('Asset.asset_category_id' => $type_id);
+			$conditions = array('Asset.asset_category_id' => $type_id,
+									'Asset.asset_status' => 'ASN');
+									
 			$asset_data = $this->Asset->get_assets_for_json_mini($conditions);
 			$this->set('grid_data', $asset_data);
 			$this->set('request_type', $request_type);

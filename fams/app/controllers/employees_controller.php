@@ -13,6 +13,14 @@ class EmployeesController extends AppController {
 
 		$emp_data = $this->Employee->get_employees_for_json();
 		$this->set('employee_data', array('employee_data' => $emp_data));
+
+		// Branch data for drop down list
+		$branch_data = $this->Branch->get_branches_for_json();
+		$this->set('branch_data', array('branch_data' => $branch_data));
+
+		// Division data for drop down list
+		$division_data = $this->Division->get_divisions_for_json();
+		$this->set('division_data', array('division_data' => $division_data));
 		
 	}
 

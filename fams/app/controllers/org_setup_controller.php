@@ -112,7 +112,7 @@ class OrgSetupController extends AppController {
 
 
 	function location_view() {
-		Configure::write('debug', 2);
+		Configure::write('debug', 0);
 
 		$locations_data = $this->Location->get_locations_for_json();
 		$this->set('locations_data', array('locations_data' => $locations_data));
