@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Fixed Asset Management System : Laknipayum LLC</title>
+    <title>Fixed Asset Management System : Powered by Internet Lab</title>
 	<?php echo $javascript->link('ext-3.0.0/adapter/ext/ext-base'); ?>
 	<?php echo $javascript->link('ext-3.0.0/ext-all-debug'); ?>
 	<?php echo $javascript->link('ext-3.0.0/src/util/Date'); ?>
