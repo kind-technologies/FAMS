@@ -3,7 +3,7 @@
 <head>
 <title>Internet Lab Creation :: FAMS - Fixed Asset Management System</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="/css/web-site/style.css" rel="stylesheet" type="text/css" />
+<link href="/css/web-site.css" rel="stylesheet" type="text/css" />
 
 <SCRIPT LANGUAGE="JavaScript">
 function fullscreen(url) {
