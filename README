@@ -1,7 +1,10 @@
 Fixed Asset Management System (Powered by http://www.internetlab.org)
 =============================
 
-Second Phase is going to be started.
-Focus on improving system security.
+Fixed Asset Mangement System (FAMS) is a web application to assist organizations in managing their fixed assets. 
+Via FAMS organization can perform all Fixed Assets related transactions and can obtain related transaction/managerial 
+reports as well.
+
+Second Phase is going to be started. Focus on improving system security.
 
 Repository moved to github
